@@ -11,7 +11,8 @@ config_version=5
 [application]
 
 config/name="MiniX"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="uid://iormak8pjan1"
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [dotnet]
