@@ -19,11 +19,12 @@ public partial class HexTileMap : Node2D
 	 }
 	 public override void _Process(double delta){
 	 }
-     public void GenerateTerrain(){
-          for(int x = 0; x < width; x++){
-		     for(int y = 0; y < height; y++){
+	 public void GenerateTerrain(){
+		  for(int x = 0; x < width; x++){
+			 for(int y = 0; y < height; y++){
 				baseLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));
+				borderLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));
 			}
 		}
-     }
+	 }
 }
