@@ -12,6 +12,11 @@ public partial class Camera : Camera2D
 	private float topBound = 0;
 	private float bottomBound = 1000;
 
+	// 缩放相关变量
+	private float zoom_speed = 0.1f;  // 缩放速度
+	private bool mouseWheelScrollingUp = false;    // 鼠标滚轮向上滚动标志
+	private bool mouseWheelScrollingDown = false;  // 鼠标滚轮向下滚动标志
+
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -52,6 +57,26 @@ public partial class Camera : Camera2D
 		{
 			// 向下移动相机
 			this.Position += new Vector2(0, velocity);
+		}
+
+		// 处理放大操作
+		// 检查是否按下放大键或鼠标滚轮向上滚动
+		if (Input.IsActionPressed("map_zoom_in") || mouseWheelScrollingUp)
+		{
+			// 检查是否未超过最大缩放限制（3倍）
+			if (this.Zoom < new Vector2(3f, 3f))
+				// 增加缩放值
+				this.Zoom += new Vector2(zoom_speed, zoom_speed);
+		}
+
+		// 处理缩小操作
+		// 检查是否按下缩小键或鼠标滚轮向下滚动
+		if (Input.IsActionPressed("map_zoom_out") || mouseWheelScrollingDown)
+		{
+			// 检查是否未超过最小缩放限制（0.1倍）
+			if (this.Zoom > new Vector2(0.1f, 0.1f))
+				// 减小缩放值
+				this.Zoom -= new Vector2(zoom_speed, zoom_speed);
 		}
 	}
 }
