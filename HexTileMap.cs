@@ -82,8 +82,29 @@ public partial class HexTileMap : Node2D
     /// 生成地形，创建基础的地图结构
     /// </summary>
     public void GenerateTerrain(){
-          // 遍历整个地图网格
-          for(int x = 0; x < width; x++){
+        // 创建多个噪声地图用于不同类型的地形生成
+        float[,] noiseMap = new float[width, height];      // 基础地形噪声图
+        float[,] forestMap = new float[width, height];     // 森林分布噪声图
+        float[,] desertMap = new float[width, height];     // 沙漠分布噪声图
+        float[,] mountainMap = new float[width, height];   // 山脉分布噪声图
+        
+        // 生成随机种子，确保每次生成的地图都不同
+        Random r = new Random();
+        int seed = r.Next(100000);
+
+        // 创建噪声生成器实例
+        FastNoiseLite noise = new FastNoiseLite();
+        noise.Seed = seed;                    // 设置噪声种子
+        noise.Frequency = 0.008f;            // 设置噪声频率（控制地形变化速度）
+        noise.FractalType = FastNoiseLite.FractalTypeEnum.FBM;  // 使用分形布朗运动
+        noise.FractalOctaves = 4;            // 设置分形八度（控制细节层次）
+        noise.FractalLacunarity = 2.25f;     // 设置分形间隙（控制频率变化）
+
+        // 用于记录噪声的最大值，用于后续归一化
+        float noiseMax = 0f;
+
+        // 遍历整个地图网格
+        for(int x = 0; x < width; x++){
                for(int y = 0; y < height; y++){
                     // 设置基础图层瓦片
                     baseLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));
