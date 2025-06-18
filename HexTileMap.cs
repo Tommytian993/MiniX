@@ -5,13 +5,14 @@ using System;
 /// 地形类型枚举，定义游戏中所有可能的地形
 /// </summary>
 public enum TerrainType{
-     Plains,        // 平原
-     Water,         // 水域
-     Desert,        // 沙漠
-     Mountain,      // 山脉
-     Ice,           // 冰原
-     ShallowWater,  // 浅水
-     Beach          // 海滩
+     PLAINS,         // 平原
+     WATER,          // 水域
+     DESERT,         // 沙漠
+     MOUNTAIN,       // 山脉
+     ICE,            // 冰原
+     SHALLOW_WATER,  // 浅水
+     BEACH,          // 海滩
+     FOREST          // 森林
 }
 
 /// <summary>
@@ -45,6 +46,9 @@ public partial class HexTileMap : Node2D
     // 地图数据字典，用于快速查找六边形数据
     Dictionary<Vector2I, Hex> mapData;
 
+    // 地形纹理映射字典，将地形类型映射到对应的瓦片坐标
+    Dictionary<TerrainType, Vector2I> terrainTextures;
+
     public override void _Ready()
 	{
 		// 获取三个图层的引用
@@ -54,6 +58,19 @@ public partial class HexTileMap : Node2D
         
         // 初始化地图数据字典
         mapData = new Dictionary<Vector2I, Hex>();
+        
+        // 初始化地形纹理映射
+        // 每个地形类型对应瓦片图集中的特定坐标
+        terrainTextures = new Dictionary<TerrainType, Vector2I>(){
+             {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
+             {TerrainType.WATER, new Vector2I(1, 0)},         // 水域：第0行第1列
+             {TerrainType.DESERT, new Vector2I(0, 1)},        // 沙漠：第1行第0列
+             {TerrainType.MOUNTAIN, new Vector2I(1, 1)},      // 山脉：第1行第1列
+             {TerrainType.SHALLOW_WATER, new Vector2I(1, 2)}, // 浅水：第2行第1列
+             {TerrainType.BEACH, new Vector2I(0, 2)},         // 海滩：第2行第0列
+             {TerrainType.FOREST, new Vector2I(1, 3)},        // 森林：第3行第1列
+             {TerrainType.ICE, new Vector2I(0, 3)},           // 冰原：第3行第0列
+        };
         
 		GenerateTerrain();  // 生成地形
 	}
