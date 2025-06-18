@@ -103,6 +103,16 @@ public partial class HexTileMap : Node2D
         // 用于记录噪声的最大值，用于后续归一化
         float noiseMax = 0f;
 
+        // 第一遍遍历：生成基础噪声地图并找到最大值
+        for(int x = 0; x < width; x++){
+             for(int y = 0; y < height; y++){
+                  // 获取当前位置的噪声值并取绝对值，确保值为正数
+                  noiseMap[x, y] = Mathf.Abs(noise.GetNoise2D(x, y));
+                  // 记录噪声的最大值，用于后续归一化处理
+                  if (noiseMap[x, y] > noiseMax) noiseMax = noiseMap[x, y];
+             }
+        }
+
         // 遍历整个地图网格
         for(int x = 0; x < width; x++){
                for(int y = 0; y < height; y++){
