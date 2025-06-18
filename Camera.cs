@@ -6,24 +6,31 @@ public partial class Camera : Camera2D
 	// 相机移动速度
 	private float velocity = 5.0f;
 	
-	// 相机移动边界
-	private float leftBound = 0;
-	private float rightBound = 1000;
-	private float topBound = 0;
-	private float bottomBound = 1000;
+	// 相机移动边界（动态计算）
+	private float leftBound, rightBound, topBound, bottomBound;
 
+    // 地图引用，用于获取地图尺寸和坐标转换
+    HexTileMap map;
+    
 	// 缩放相关变量
 	private float zoom_speed = 0.1f;  // 缩放速度
 	private bool mouseWheelScrollingUp = false;    // 鼠标滚轮向上滚动标志
 	private bool mouseWheelScrollingDown = false;  // 鼠标滚轮向下滚动标志
 
-	public override void _Process(double delta)
+	public override void _Ready()
 	{
-		base._Process(delta);
-		// 处理向上移动的即时响应
-		if(Input.IsActionJustPressed("ui_up")){
-			Position += new Vector2(0, -1);
-		}
+		// 获取地图节点的引用
+		map = GetNode<HexTileMap>("../HexTileMap");
+        
+        // 计算相机移动边界
+        // 左边界：地图左上角 + 100像素边距
+        leftBound = ToGlobal(map.MapToLocal(new Vector2I(0, 0))).X + 100;
+        // 右边界：地图右下角 - 100像素边距
+        rightBound = ToGlobal(map.MapToLocal(new Vector2I(map.width, map.height))).X - 100;
+        // 上边界：地图左上角 + 50像素边距
+        topBound = ToGlobal(map.MapToLocal(new Vector2I(0, 0))).Y + 50;
+        // 下边界：地图右下角 - 50像素边距
+        bottomBound = ToGlobal(map.MapToLocal(new Vector2I(map.width, map.height))).Y - 50;
 	}
 
 	public override void _PhysicsProcess(double delta){
