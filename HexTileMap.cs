@@ -104,17 +104,31 @@ public partial class HexTileMap : Node2D
         float noiseMax = 0f;
 
         // 第一遍遍历：生成基础噪声地图并找到最大值
-        for(int x = 0; x < width; x++){
+         for(int x = 0; x < width; x++){
              for(int y = 0; y < height; y++){
                   // 获取当前位置的噪声值并取绝对值，确保值为正数
                   noiseMap[x, y] = Mathf.Abs(noise.GetNoise2D(x, y));
                   // 记录噪声的最大值，用于后续归一化处理
                   if (noiseMap[x, y] > noiseMax) noiseMax = noiseMap[x, y];
              }
-        }
+         }
 
+        // 定义地形生成规则：根据噪声值范围确定地形类型
+        // 每个元组包含：(最小噪声值, 最大噪声值, 对应的地形类型)
+        List<(float Min, float Max, TerrainType type)> terrainGenValues = new List<(float Min, float Max, TerrainType type)>(){
+            // 水域：噪声值最低的区域（0 到 25% 的最大值）
+            (0, noiseMax / 10 * 2.5f, TerrainType.WATER),
+            // 浅水：噪声值较低的区域（25% 到 40% 的最大值）
+            (noiseMax / 10 * 2.5f, noiseMax / 10 * 4, TerrainType.SHALLOW_WATER),
+            // 海滩：噪声值中等的区域（40% 到 45% 的最大值）
+            (noiseMax / 10 * 4, noiseMax / 10 * 4.5f, TerrainType.BEACH),
+            // 平原：噪声值较高的区域（45% 到最大值）
+            (noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
+        };
+
+        
         // 遍历整个地图网格
-        for(int x = 0; x < width; x++){
+          for(int x = 0; x < width; x++){
                for(int y = 0; y < height; y++){
                     // 设置基础图层瓦片
                     baseLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));
