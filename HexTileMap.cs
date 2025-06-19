@@ -98,7 +98,7 @@ public partial class HexTileMap : Node2D
 		FastNoiseLite noise = new FastNoiseLite();
 		noise.Seed = seed;                    // 设置噪声种子
 		noise.Frequency = 0.008f;            // 设置噪声频率（控制地形变化速度）
-		noise.FractalType = FastNoiseLite.FractalTypeEnum.FBM;  // 使用分形布朗运动
+		noise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;  // 使用分形布朗运动
 		noise.FractalOctaves = 4;            // 设置分形八度（控制细节层次）
 		noise.FractalLacunarity = 2.25f;     // 设置分形间隙（控制频率变化）
 
