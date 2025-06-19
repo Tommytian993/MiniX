@@ -132,23 +132,22 @@ public partial class HexTileMap : Node2D
           // 用于记录沙漠噪声的最大值
           float desertNoiseMax = 0f;
 
-		// 第一遍遍历：生成基础噪声地图并找到最大值
-		 for(int x = 0; x < width; x++){
-			 for(int y = 0; y < height; y++){
-				// 获取当前位置的噪声值并取绝对值，确保值为正数
+		// 第一遍遍历：生成所有噪声地图并找到最大值
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				// 生成基础地形噪声并记录最大值
 				noiseMap[x, y] = Mathf.Abs(noise.GetNoise2D(x, y));
-				// 记录噪声的最大值，用于后续归一化处理
 				if (noiseMap[x, y] > noiseMax) noiseMax = noiseMap[x, y];
 
-                    // 生成沙漠噪声地图并记录最大值
-                    desertMap[x, y] = Math.Abs(desertNoise.GetNoise2D(x, y));
-                    if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x, y];
+				// 生成沙漠噪声并记录最大值
+				desertMap[x, y] = Math.Abs(desertNoise.GetNoise2D(x, y));
+				if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x, y];
 
-                    // 生成森林噪声地图并记录最大值
-                    forestMap[x, y] = Math.Abs(forestNoise.GetNoise2D(x, y));
-                    if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x, y];
-			 }
-		 }
+				// 生成森林噪声并记录最大值
+				forestMap[x, y] = Math.Abs(forestNoise.GetNoise2D(x, y));
+				if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x, y];
+			}
+		}
 
 		// 定义地形生成规则：根据噪声值范围确定地形类型
 		// 每个元组包含：(最小噪声值, 最大噪声值, 对应的地形类型)
@@ -161,7 +160,15 @@ public partial class HexTileMap : Node2D
 			(noiseMax / 10 * 4, noiseMax / 10 * 4.5f, TerrainType.BEACH),
 			// 平原：噪声值较高的区域（45% 到最大值）
 			(noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
+               
 		};
+
+    // Forest gen values
+    Vector2 forestGenValues = new Vector2(forestNoiseMax/10 * 7, forestNoiseMax + 0.05f);
+    // Desert gen values
+    Vector2 desertGenValues = new Vector2(desertNoiseMax/10 * 6, desertNoiseMax + 0.05f);
+    // Mountain gen values
+    Vector2 mountainGenValues = new Vector2(mountainNoiseMax/10 * 5.5f, mountainNoiseMax + 0.05f);
 
 		
 		// 遍历整个地图网格
