@@ -135,10 +135,18 @@ public partial class HexTileMap : Node2D
 		// 第一遍遍历：生成基础噪声地图并找到最大值
 		 for(int x = 0; x < width; x++){
 			 for(int y = 0; y < height; y++){
-				  // 获取当前位置的噪声值并取绝对值，确保值为正数
-				  noiseMap[x, y] = Mathf.Abs(noise.GetNoise2D(x, y));
-				  // 记录噪声的最大值，用于后续归一化处理
-				  if (noiseMap[x, y] > noiseMax) noiseMax = noiseMap[x, y];
+				// 获取当前位置的噪声值并取绝对值，确保值为正数
+				noiseMap[x, y] = Mathf.Abs(noise.GetNoise2D(x, y));
+				// 记录噪声的最大值，用于后续归一化处理
+				if (noiseMap[x, y] > noiseMax) noiseMax = noiseMap[x, y];
+
+                    // 生成沙漠噪声地图并记录最大值
+                    desertMap[x, y] = Math.Abs(desertNoise.GetNoise2D(x, y));
+                    if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x, y];
+
+                    // 生成森林噪声地图并记录最大值
+                    forestMap[x, y] = Math.Abs(forestNoise.GetNoise2D(x, y));
+                    if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x, y];
 			 }
 		 }
 
