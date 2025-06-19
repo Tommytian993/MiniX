@@ -157,10 +157,10 @@ public partial class HexTileMap : Node2D
 				if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x, y];
 
                             // Mountain
-        mountainMap[x, y] = Math.Abs(mountainNoise.GetNoise2D(x, y));
-        if (mountainMap[x, y] > mountainNoiseMax) mountainNoiseMax = mountainMap[x ,y];
-			}
-		}
+                    mountainMap[x, y] = Math.Abs(mountainNoise.GetNoise2D(x, y));
+                    if (mountainMap[x, y] > mountainNoiseMax) mountainNoiseMax = mountainMap[x ,y];
+               }
+          }
 
 		// 定义地形生成规则：根据噪声值范围确定地形类型
 		// 每个元组包含：(最小噪声值, 最大噪声值, 对应的地形类型)
@@ -195,6 +195,28 @@ public partial class HexTileMap : Node2D
 				  h.terrainType = terrainGenValues.First(range => noiseValue >= range.Min && noiseValue <= range.Max).type;
 				  // 将六边形数据存储到地图数据字典中
 				  mapData[new Vector2I(x, y)] = h;
+
+
+        if (desertMap[x, y] >= desertGenValues[0] &&
+          desertMap[x, y] <= desertGenValues[1] &&
+          h.terrainType == TerrainType.PLAINS)
+        {
+          h.terrainType = TerrainType.DESERT;
+        }
+
+        if (forestMap[x, y] >= forestGenValues[0] &&
+          forestMap[x, y] <= forestGenValues[1] &&
+          h.terrainType == TerrainType.PLAINS)
+        {
+          h.terrainType = TerrainType.FOREST;
+        }
+
+        if (mountainMap[x, y] >= mountainGenValues[0] &&
+          mountainMap[x, y] <= mountainGenValues[1] &&
+          h.terrainType == TerrainType.PLAINS)
+        {
+          h.terrainType = TerrainType.MOUNTAIN;
+        }
 				  
 				  // 设置基础图层瓦片，使用对应地形的纹理坐标
 				  baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
@@ -202,28 +224,29 @@ public partial class HexTileMap : Node2D
 				  borderLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));
 			 }
 		}
-	}
 
-         // Ice cap gen
-    int maxIce = 5;
-    for (int x = 0; x < width; x++)
-    {
-      // North pole
-      for (int y = 0; y < r.Next(maxIce) + 1; y++)
-      {
-        Hex h = mapData[new Vector2I(x, y)];
-        h.terrainType = TerrainType.ICE;
-        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
-      }
-      // South pole
-      for (int y = height - 1; y > height - 1 - r.Next(maxIce) - 1; y--)
-      {
-        Hex h = mapData[new Vector2I(x, y)];
-        h.terrainType = TerrainType.ICE;
-        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
-      }
-    }
-  }
+        // 先生成所有基础和叠加地形，最后再叠加极地冰盖，确保极地不会被其他地形覆盖
+        int maxIce = 5;
+        for (int x = 0; x < width; x++)
+        {
+            // 顶部冰原北极：在每一列的最上方随机生成1~maxIce行冰原
+            // 这样可以模拟北极圈的冰盖效果，每一列的冰原厚度是随机的，增加自然感
+            for (int y = 0; y < r.Next(maxIce) + 1; y++)
+            {
+                Hex h = mapData[new Vector2I(x, y)];
+                h.terrainType = TerrainType.ICE; // 强制设置为冰原
+                baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+            }
+            // 底部冰原南极：在每一列的最下方随机生成1~maxIce行冰原
+            // 同理，模拟南极圈的冰盖效果，保证南北两极都有冰原分布
+            for (int y = height - 1; y > height - 1 - r.Next(maxIce) - 1; y--)
+            {
+                Hex h = mapData[new Vector2I(x, y)];
+                h.terrainType = TerrainType.ICE; // 强制设置为冰原
+                baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+            }
+        }
+	}
 	 
 	/// <summary>
 	/// 将地图坐标转换为本地世界坐标
