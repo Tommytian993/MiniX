@@ -132,6 +132,15 @@ public partial class HexTileMap : Node2D
           // 用于记录沙漠噪声的最大值
           float desertNoiseMax = 0f;
 
+        // 创建山脉噪声生成器，使用不同的噪声类型和参数
+        FastNoiseLite mountainNoise = new FastNoiseLite();
+        mountainNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;         // 使用单形噪声，适合生成山脉的起伏感
+        mountainNoise.Seed = seed;                                             // 使用相同的种子，确保一致性
+        mountainNoise.Frequency = 0.02f;                                      // 较高频率，产生较多的山脉细节
+        mountainNoise.FractalType = FastNoiseLite.FractalTypeEnum.Ridged;     // 使用脊状分形，生成尖锐的山脉效果
+        mountainNoise.FractalLacunarity = 2f;                                 // 标准间隙值，产生均匀的细节分布
+        float mountainNoiseMax = 0f;
+
 		// 第一遍遍历：生成所有噪声地图并找到最大值
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -146,6 +155,10 @@ public partial class HexTileMap : Node2D
 				// 生成森林噪声并记录最大值
 				forestMap[x, y] = Math.Abs(forestNoise.GetNoise2D(x, y));
 				if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x, y];
+
+                            // Mountain
+        mountainMap[x, y] = Math.Abs(mountainNoise.GetNoise2D(x, y));
+        if (mountainMap[x, y] > mountainNoiseMax) mountainNoiseMax = mountainMap[x ,y];
 			}
 		}
 
