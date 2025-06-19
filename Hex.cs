@@ -1,6 +1,5 @@
 using Godot;
 
-
 /// <summary>
 /// 六边形瓦片类，存储单个六边形的所有数据
 /// </summary>
@@ -16,5 +15,12 @@ public class Hex
      public Hex(Vector2I coords)
      {
           this.coordinates = coords;
+     }
+
+
+     // 重写 ToString 方法，提供六边形的可读信息
+     public override string ToString()
+     {
+          return $"Coordinates: ({this.coordinates.X}, {this.coordinates.Y}). TerrainType: {this.terrainType})";
      }
 }
