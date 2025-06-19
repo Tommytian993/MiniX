@@ -183,26 +183,6 @@ public partial class HexTileMap : Node2D
 		// 山脉生成阈值：只有山脉噪声值大于该范围才会生成山脉
 		Vector2 mountainGenValues = new Vector2(mountainNoiseMax/10 * 5.5f, mountainNoiseMax + 0.05f);
 		
-
-
-    int maxIce = 5;
-    // 为每一列的顶部和底部随机生成冰原地形
-    for (int x = 0; x < width; x++)
-    {
-        // 顶部冰原北极：在每一列的最上方随机生成1~maxIce行冰原
-        for (int y = 0; y < r.Next(maxIce) + 1; y++)
-        {
-            Hex h = mapData[new Vector2I(x, y)];
-            h.terrainType = TerrainType.ICE;
-            baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
-        }
-        // 底部冰原南极：在每一列的最下方随机生成1~maxIce行冰原
-        for (int y = height - 1; y > height - 1 - r.Next(maxIce) - 1; y--)
-        {
-            Hex h = mapData[new Vector2I(x, y)];
-            h.terrainType = TerrainType.ICE;
-            baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
-        }
     }
 		// 遍历整个地图网格
 		for(int x = 0; x < width; x++){
@@ -223,6 +203,27 @@ public partial class HexTileMap : Node2D
 			 }
 		}
 	}
+
+         // Ice cap gen
+    int maxIce = 5;
+    for (int x = 0; x < width; x++)
+    {
+      // North pole
+      for (int y = 0; y < r.Next(maxIce) + 1; y++)
+      {
+        Hex h = mapData[new Vector2I(x, y)];
+        h.terrainType = TerrainType.ICE;
+        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+      }
+      // South pole
+      for (int y = height - 1; y > height - 1 - r.Next(maxIce) - 1; y--)
+      {
+        Hex h = mapData[new Vector2I(x, y)];
+        h.terrainType = TerrainType.ICE;
+        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+      }
+    }
+  }
 	 
 	/// <summary>
 	/// 将地图坐标转换为本地世界坐标
