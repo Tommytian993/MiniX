@@ -105,6 +105,33 @@ public partial class HexTileMap : Node2D
 		// 用于记录噪声的最大值，用于后续归一化
 		float noiseMax = 0f;
 
+          // 创建森林噪声生成器，使用不同的噪声类型和参数
+          FastNoiseLite forestNoise = new FastNoiseLite();
+          
+          // 配置森林噪声参数
+          forestNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.Cellular;  // 使用细胞噪声，产生更自然的森林分布
+          forestNoise.Seed = seed;                                       // 使用相同的种子，确保一致性
+          forestNoise.Frequency = 0.04f;                                 // 较高的频率，产生更密集的森林分布
+          forestNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;   // 使用分形布朗运动
+          forestNoise.FractalLacunarity = 2f;                            // 标准间隙值，产生均匀的细节分布
+          float forestNoiseMax = 0f;
+
+          // 用于记录森林噪声的最大值
+          float forestNoiseMax = 0f;
+
+          // 创建沙漠噪声生成器，使用不同的噪声类型和参数
+          FastNoiseLite desertNoise = new FastNoiseLite();
+          
+          // 配置沙漠噪声参数
+          desertNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;  // 使用平滑单形噪声，产生广阔的沙漠区域
+          desertNoise.Seed = seed;                                             // 使用相同的种子，确保一致性
+          desertNoise.Frequency = 0.015f;                                     // 中等频率，产生适中的沙漠分布
+          desertNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;        // 使用分形布朗运动
+          desertNoise.FractalLacunarity = 2f;                                 // 标准间隙值，产生均匀的细节分布
+          
+          // 用于记录沙漠噪声的最大值
+          float desertNoiseMax = 0f;
+
 		// 第一遍遍历：生成基础噪声地图并找到最大值
 		 for(int x = 0; x < width; x++){
 			 for(int y = 0; y < height; y++){
