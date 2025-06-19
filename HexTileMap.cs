@@ -163,13 +163,12 @@ public partial class HexTileMap : Node2D
                
 		};
 
-    // Forest gen values
-    Vector2 forestGenValues = new Vector2(forestNoiseMax/10 * 7, forestNoiseMax + 0.05f);
-    // Desert gen values
-    Vector2 desertGenValues = new Vector2(desertNoiseMax/10 * 6, desertNoiseMax + 0.05f);
-    // Mountain gen values
-    Vector2 mountainGenValues = new Vector2(mountainNoiseMax/10 * 5.5f, mountainNoiseMax + 0.05f);
-
+		// 森林生成阈值：只有森林噪声值大于该范围才会生成森林
+		Vector2 forestGenValues = new Vector2(forestNoiseMax/10 * 7, forestNoiseMax + 0.05f);
+		// 沙漠生成阈值：只有沙漠噪声值大于该范围才会生成沙漠
+		Vector2 desertGenValues = new Vector2(desertNoiseMax/10 * 6, desertNoiseMax + 0.05f);
+		// 山脉生成阈值：只有山脉噪声值大于该范围才会生成山脉
+		Vector2 mountainGenValues = new Vector2(mountainNoiseMax/10 * 5.5f, mountainNoiseMax + 0.05f);
 		
 		// 遍历整个地图网格
 		for(int x = 0; x < width; x++){
