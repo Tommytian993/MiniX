@@ -67,7 +67,7 @@ public partial class HexTileMap : Node2D
 		  // 初始化地形纹理映射
 		  // 每个地形类型对应瓦片图集中的特定坐标
 		  terrainTextures = new Dictionary<TerrainType, Vector2I>(){
-				{TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
+					{TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
 			 {TerrainType.WATER, new Vector2I(1, 0)},         // 水域：第0行第1列
 			 {TerrainType.DESERT, new Vector2I(0, 1)},        // 沙漠：第1行第0列
 			 {TerrainType.MOUNTAIN, new Vector2I(1, 1)},      // 山脉：第1行第1列
@@ -119,9 +119,6 @@ public partial class HexTileMap : Node2D
 		  forestNoise.Frequency = 0.04f;                                 // 较高的频率，产生更密集的森林分布
 		  forestNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;   // 使用分形布朗运动
 		  forestNoise.FractalLacunarity = 2f;                            // 标准间隙值，产生均匀的细节分布
-		  float forestNoiseMax = 0f;
-
-		  // 用于记录森林噪声的最大值
 		  float forestNoiseMax = 0f;
 
 		  // 创建沙漠噪声生成器，使用不同的噪声类型和参数
@@ -181,7 +178,7 @@ public partial class HexTileMap : Node2D
 			// 平原：噪声值较高的区域（45% 到最大值）
 			(noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
 
-		  };
+			};
 
 		  // 森林生成阈值：只有森林噪声值大于该范围才会生成森林
 		  Vector2 forestGenValues = new Vector2(forestNoiseMax / 10 * 7, forestNoiseMax + 0.05f);
