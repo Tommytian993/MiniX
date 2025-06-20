@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://iormak8pjan1"]
+[gd_scene load_steps=11 format=3 uid="uid://iormak8pjan1"]
 
 [ext_resource type="Script" uid="uid://d3xpq2jy5js6q" path="res://HexTileMap.cs" id="1_xkndl"]
 [ext_resource type="Texture2D" uid="uid://crj85r3tbwg3f" path="res://textures/hex_128.png" id="2_u44n3"]
@@ -33,9 +33,16 @@ tile_shape = 3
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_t88pq")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r0x5m"]
+texture = ExtResource("3_u44n3")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:1/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_xkndl"]
 tile_shape = 3
 tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_r0x5m")
 
 [node name="Game" type="Node"]
 
