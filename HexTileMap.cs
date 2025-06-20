@@ -67,6 +67,11 @@ public partial class HexTileMap : Node2D
                     {
                          // 打印该坐标位置的六边形信息，用于调试
                          GD.Print(mapData[mapCoords]);
+
+                         // 在叠加图层设置选中瓦片，提供视觉反馈
+                         // 使用瓦片坐标 (0,1) 作为选中状态的指示器
+                         // 这样用户可以看到当前点击的六边形位置
+                         overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
                     }
                }
           }
