@@ -61,8 +61,14 @@ public partial class HexTileMap : Node2D
           {
                // 将全局鼠标位置转换为地图坐标
                Vector2I mapCoords = baseLayer.LocalToMap(GetGlobalMousePosition());
-               // 打印该坐标位置的六边形信息，用于调试
-               GD.Print(mapData[mapCoords]);
+               if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
+               {
+                    if (mouse.ButtonMask == MouseButtonMask.Left)
+                    {
+                         // 打印该坐标位置的六边形信息，用于调试
+                         GD.Print(mapData[mapCoords]);
+                    }
+               }
           }
      }
 
