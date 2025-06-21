@@ -54,6 +54,7 @@ position = Vector2(-1, -1)
 tile_set = SubResource("TileSet_6ubv3")
 
 [node name="HexBordersLayer" type="TileMapLayer" parent="HexTileMap"]
+modulate = Color(1, 1, 1, 0.211765)
 tile_set = SubResource("TileSet_wbfu4")
 
 [node name="SelectionOverlayLayer" type="TileMapLayer" parent="HexTileMap"]
