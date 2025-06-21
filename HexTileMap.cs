@@ -22,6 +22,9 @@ public partial class HexTileMap : Node2D
      // 地形纹理映射字典，将地形类型映射到对应的瓦片坐标
      Dictionary<TerrainType, Vector2I> terrainTextures;
 
+     // 当前选中的单元格坐标，初始化为无效坐标 (-1, -1)
+     Vector2I currentSelectedCell = new Vector2I(-1, -1);
+
      public override void _Ready()
      {
           // 获取三个图层的引用
@@ -35,7 +38,7 @@ public partial class HexTileMap : Node2D
           // 初始化地形纹理映射
           // 每个地形类型对应瓦片图集中的特定坐标
           terrainTextures = new Dictionary<TerrainType, Vector2I>(){
-                                                          {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
+                                                                        {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
 			 {TerrainType.WATER, new Vector2I(1, 0)},         // 水域：第0行第1列
 			 {TerrainType.DESERT, new Vector2I(0, 1)},        // 沙漠：第1行第0列
 			 {TerrainType.MOUNTAIN, new Vector2I(1, 1)},      // 山脉：第1行第1列
@@ -52,8 +55,6 @@ public partial class HexTileMap : Node2D
      {
      }
 
-
-
      /// 处理未处理的输入事件，用于调试和交互
      public override void _UnhandledInput(InputEvent @event)
      {
@@ -69,11 +70,24 @@ public partial class HexTileMap : Node2D
                          // 打印该坐标位置的六边形信息，用于调试
                          GD.Print(mapData[mapCoords]);
 
-                         // 在叠加图层设置选中瓦片，提供视觉反馈
-                         // 使用瓦片坐标 (0,1) 作为选中状态的指示器
-                         // 这样用户可以看到当前点击的六边形位置
+                         // 如果点击的是新的单元格（不是当前已选中的）
+                         if (mapCoords != currentSelectedCell)
+                         {
+                              // 清除之前选中单元格的叠加效果（设置为-1表示移除瓦片）
+                              overlayLayer.SetCell(currentSelectedCell, -1);
+                         }
+
+                         // 在新选中的单元格位置设置叠加瓦片，提供视觉反馈
                          overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+
+                         // 更新当前选中的单元格坐标
+                         currentSelectedCell = mapCoords;
                     }
+               }
+               else
+               {
+                    // 如果点击在地图边界外，清除当前选中状态
+                    overlayLayer.SetCell(currentSelectedCell, -1);
                }
           }
      }
@@ -172,7 +186,7 @@ public partial class HexTileMap : Node2D
 			// 平原：噪声值较高的区域（45% 到最大值）
 			(noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
 
-                                 };
+                                         };
 
           // 森林生成阈值：只有森林噪声值大于该范围才会生成森林
           Vector2 forestGenValues = new Vector2(forestNoiseMax / 10 * 7, forestNoiseMax + 0.05f);
