@@ -1,13 +1,17 @@
-[gd_scene format=3 uid="uid://oqm8vt7mjcvd"]
+[gd_scene load_steps=2 format=3 uid="uid://oqm8vt7mjcvd"]
+
+[ext_resource type="Script" uid="uid://b0ygmmjb8q5i6" path="res://TerrainTileUi.cs" id="1_yi7in"]
 
 [node name="TerrainTileUi" type="Panel"]
-offset_right = 250.0
-offset_bottom = 260.0
+offset_right = 392.0
+offset_bottom = 259.0
+script = ExtResource("1_yi7in")
 
 [node name="TerrainImage" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 160.0
+expand_mode = 2
 
 [node name="TerrainLabel" type="Label" parent="."]
 layout_mode = 0

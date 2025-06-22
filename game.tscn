@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://iormak8pjan1"]
+[gd_scene load_steps=13 format=3 uid="uid://iormak8pjan1"]
 
 [ext_resource type="Script" uid="uid://d3xpq2jy5js6q" path="res://HexTileMap.cs" id="1_xkndl"]
 [ext_resource type="Texture2D" uid="uid://crj85r3tbwg3f" path="res://textures/hex_128.png" id="2_u44n3"]
 [ext_resource type="Texture2D" uid="uid://mqdekbfm2lc1" path="res://textures/hex_overlays.png" id="3_u44n3"]
 [ext_resource type="Script" uid="uid://bsww8kjwx2t51" path="res://Camera.cs" id="4_sb48q"]
+[ext_resource type="PackedScene" uid="uid://dcofgfvndqqyc" path="res://UIManager.tscn" id="5_r0x5m"]
+[ext_resource type="Script" uid="uid://beabrd3t3eu1c" path="res://UIManager.cs" id="6_3mrqo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sb48q"]
 texture = ExtResource("2_u44n3")
@@ -64,3 +66,8 @@ tile_set = SubResource("TileSet_xkndl")
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_sb48q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UiManager" parent="CanvasLayer" instance=ExtResource("5_r0x5m")]
+script = ExtResource("6_3mrqo")
