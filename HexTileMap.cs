@@ -61,6 +61,10 @@ public partial class HexTileMap : Node2D
 
           GenerateTerrain();  // 生成地形
           GenerateResources(); // 生成资源，为每个六边形分配食物和生产力数值
+
+          // 订阅六边形数据发送事件，将UI管理器的方法绑定到事件上
+          // 当SendHexData事件触发时，自动调用uiManager.SetTerrainTileUi方法
+          this.SendHexData += uiManager.SetTerrainTileUi;
      }
 
      public override void _Process(double delta)
@@ -79,8 +83,15 @@ public partial class HexTileMap : Node2D
                {
                     if (mouse.ButtonMask == MouseButtonMask.Left)
                     {
+                         // 获取当前点击位置的六边形数据，使用局部变量提高代码可读性
+                         Hex h = mapData[mapCoords];
+
                          // 打印该坐标位置的六边形信息，用于调试
-                         GD.Print(mapData[mapCoords]);
+                         GD.Print(h);
+
+                         // 触发六边形数据发送事件，通知UI系统更新显示
+                         // 使用空条件运算符(?.)确保事件有订阅者时才调用
+                         SendHexData?.Invoke(h);
 
                          // 如果点击的是新的单元格（不是当前已选中的）
                          if (mapCoords != currentSelectedCell)
