@@ -8,6 +8,7 @@ public partial class Game : Node
 	// 确保UI显示地形信息时不会卡顿或找不到图片
 	public override void _EnterTree()
 	{
+		GD.Print("==== Game _EnterTree called ====");
 		TerrainTileUi.LoadTerrainImages();
 	}
 }
