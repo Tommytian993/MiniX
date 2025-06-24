@@ -7,15 +7,15 @@ public partial class TerrainTileUi : Panel
      // 地形类型到字符串的映射字典，用于UI显示地形名称
      // 静态字典，所有实例共享，便于维护和本地化
      public static Dictionary<TerrainType, string> terrainTypeStrings = new Dictionary<TerrainType, string>
-      {
-            {TerrainType.PLAINS, "Plains"},
-            {TerrainType.WATER, "Water"},
-            {TerrainType.DESERT, "Desert"},
-            {TerrainType.MOUNTAIN, "Mountain"},
-            {TerrainType.SHALLOW_WATER, "Shallow Water"},
-            {TerrainType.BEACH, "Beach"},
-            {TerrainType.FOREST, "Forest"},
-      };
+       {
+               {TerrainType.PLAINS, "Plains"},
+               {TerrainType.WATER, "Water"},
+               {TerrainType.DESERT, "Desert"},
+               {TerrainType.MOUNTAIN, "Mountain"},
+               {TerrainType.SHALLOW_WATER, "Shallow Water"},
+               {TerrainType.BEACH, "Beach"},
+               {TerrainType.FOREST, "Forest"},
+       };
 
      // 地形类型到图片纹理的映射字典，用于UI显示地形图片
      // 静态字典，避免重复加载图片资源
@@ -26,13 +26,13 @@ public partial class TerrainTileUi : Panel
      public static void LoadTerrainImages()
      {
           // 依次加载每种地形的图片资源
-          Texture2D plains = ResourceLoader.Load<Texture2D>("res://textures/terrain/plains.jpg") as Texture2D;
-          Texture2D water = ResourceLoader.Load<Texture2D>("res://textures/terrain/water.jpg") as Texture2D;
-          Texture2D desert = ResourceLoader.Load<Texture2D>("res://textures/terrain/desert.jpg") as Texture2D;
-          Texture2D mountain = ResourceLoader.Load<Texture2D>("res://textures/terrain/mountain.jpg") as Texture2D;
-          Texture2D shallowWater = ResourceLoader.Load<Texture2D>("res://textures/terrain/shallow_water.jpg") as Texture2D;
-          Texture2D beach = ResourceLoader.Load<Texture2D>("res://textures/terrain/beach.jpg") as Texture2D;
-          Texture2D forest = ResourceLoader.Load<Texture2D>("res://textures/terrain/forest.jpg") as Texture2D;
+          Texture2D plains = ResourceLoader.Load<Texture2D>("res://textures/plains.jpg") as Texture2D;
+          Texture2D water = ResourceLoader.Load<Texture2D>("res://textures/water.jpg") as Texture2D;
+          Texture2D desert = ResourceLoader.Load<Texture2D>("res://textures/desert.jpg") as Texture2D;
+          Texture2D mountain = ResourceLoader.Load<Texture2D>("res://textures/mountain.jpg") as Texture2D;
+          Texture2D shallowWater = ResourceLoader.Load<Texture2D>("res://textures/shallow_water.jpg") as Texture2D;
+          Texture2D beach = ResourceLoader.Load<Texture2D>("res://textures/beach.jpg") as Texture2D;
+          Texture2D forest = ResourceLoader.Load<Texture2D>("res://textures/forest.jpg") as Texture2D;
 
           // 将加载的图片与地形类型对应存入字典
           terrainTypeTextures.Add(TerrainType.PLAINS, plains);
