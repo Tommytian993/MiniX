@@ -27,6 +27,7 @@ public partial class HexTileMap : Node2D
 
      // UI管理器引用，用于与UI系统进行通信
      UIManager uiManager;
+     [Signal] public delegate void ClickOffMapEventHandler();
 
      // 六边形数据发送事件委托，用于松耦合的组件通信
      public delegate void SendHexDataEventHandler(Hex h);
@@ -123,6 +124,7 @@ public partial class HexTileMap : Node2D
                {
                     // 如果点击在地图边界外，清除当前选中状态
                     overlayLayer.SetCell(currentSelectedCell, -1);
+                    EmitSignal(SignalName.ClickOffMap);
                }
           }
      }
