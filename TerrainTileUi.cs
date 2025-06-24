@@ -4,97 +4,82 @@ using System.Collections.Generic;
 
 public partial class TerrainTileUi : Panel
 {
-     // 地形类型到字符串的映射字典，用于UI显示地形名称
-     // 静态字典，所有实例共享，便于维护和本地化
-     public static Dictionary<TerrainType, string> terrainTypeStrings = new Dictionary<TerrainType, string>
-        {
-                  {TerrainType.PLAINS, "Plains"},
-                  {TerrainType.WATER, "Water"},
-                  {TerrainType.DESERT, "Desert"},
-                  {TerrainType.MOUNTAIN, "Mountain"},
-                  {TerrainType.SHALLOW_WATER, "Shallow Water"},
-                  {TerrainType.BEACH, "Beach"},
-                  {TerrainType.FOREST, "Forest"},
-        };
+	 // 地形类型到字符串的映射字典，用于UI显示地形名称
+	 // 静态字典，所有实例共享，便于维护和本地化
+	 public static Dictionary<TerrainType, string> terrainTypeStrings = new Dictionary<TerrainType, string>
+		{
+				  {TerrainType.PLAINS, "Plains"},
+				  {TerrainType.WATER, "Water"},
+				  {TerrainType.DESERT, "Desert"},
+				  {TerrainType.MOUNTAIN, "Mountain"},
+				  {TerrainType.SHALLOW_WATER, "Shallow Water"},
+				  {TerrainType.BEACH, "Beach"},
+				  {TerrainType.FOREST, "Forest"},
+		};
 
-     // 地形类型到图片纹理的映射字典，用于UI显示地形图片
-     // 静态字典，避免重复加载图片资源
-     public static Dictionary<TerrainType, Texture2D> terrainTypeTextures = new();
+	 // 地形类型到图片纹理的映射字典，用于UI显示地形图片
+	 // 静态字典，避免重复加载图片资源
+	 public static Dictionary<TerrainType, Texture2D> terrainTypeImages = new();
 
-     // 静态方法：加载所有地形类型的图片资源到字典中
-     // 只需在游戏启动时调用一次，后续直接查字典即可
-     public static void LoadTerrainImages()
-     {
-          // 依次加载每种地形的图片资源（去掉/terrain/目录，只保留文件名）
-          Texture2D plains = ResourceLoader.Load<Texture2D>("res://textures/plains.jpg") as Texture2D;
-          GD.Print($"plains loaded: {plains != null}");
-          Texture2D water = ResourceLoader.Load<Texture2D>("res://textures/water.jpg") as Texture2D;
-          GD.Print($"water loaded: {water != null}");
-          Texture2D desert = ResourceLoader.Load<Texture2D>("res://textures/desert.jpg") as Texture2D;
-          GD.Print($"desert loaded: {desert != null}");
-          Texture2D mountain = ResourceLoader.Load<Texture2D>("res://textures/mountain.jpg") as Texture2D;
-          GD.Print($"mountain loaded: {mountain != null}");
-          Texture2D shallowWater = ResourceLoader.Load<Texture2D>("res://textures/shallow_water.jpg") as Texture2D;
-          GD.Print($"shallowWater loaded: {shallowWater != null}");
-          Texture2D beach = ResourceLoader.Load<Texture2D>("res://textures/beach.jpg") as Texture2D;
-          GD.Print($"beach loaded: {beach != null}");
-          Texture2D forest = ResourceLoader.Load<Texture2D>("res://textures/forest.jpg") as Texture2D;
-          GD.Print($"forest loaded: {forest != null}");
+	 // 静态方法：加载所有地形类型的图片资源到字典中
+	 // 只需在游戏启动时调用一次，后续直接查字典即可
+	 public static void LoadTerrainImages()
+	 {
+		  Texture2D plains = ResourceLoader.Load("res://textures/plains.jpg") as Texture2D;
+		  GD.Print($"plains loaded: {plains != null}");
+		  Texture2D beach = ResourceLoader.Load("res://textures/beach.jpg") as Texture2D;
+		  GD.Print($"beach loaded: {beach != null}");
+		  Texture2D desert = ResourceLoader.Load("res://textures/desert.jpg") as Texture2D;
+		  GD.Print($"desert loaded: {desert != null}");
+		  Texture2D mountain = ResourceLoader.Load("res://textures/mountain.jpg") as Texture2D;
+		  GD.Print($"mountain loaded: {mountain != null}");
+		  Texture2D ice = ResourceLoader.Load("res://textures/ice.jpg") as Texture2D;
+		  GD.Print($"ice loaded: {ice != null}");
+		  Texture2D ocean = ResourceLoader.Load("res://textures/ocean.jpg") as Texture2D;
+		  GD.Print($"ocean loaded: {ocean != null}");
+		  Texture2D shallow = ResourceLoader.Load("res://textures/shallow.jpg") as Texture2D;
+		  GD.Print($"shallow loaded: {shallow != null}");
+		  Texture2D forest = ResourceLoader.Load("res://textures/forest.jpg") as Texture2D;
+		  GD.Print($"forest loaded: {forest != null}");
 
-          // 将加载的图片与地形类型对应存入字典
-          terrainTypeTextures.Add(TerrainType.PLAINS, plains);
-          terrainTypeTextures.Add(TerrainType.WATER, water);
-          terrainTypeTextures.Add(TerrainType.DESERT, desert);
-          terrainTypeTextures.Add(TerrainType.MOUNTAIN, mountain);
-          terrainTypeTextures.Add(TerrainType.SHALLOW_WATER, shallowWater);
-          terrainTypeTextures.Add(TerrainType.BEACH, beach);
-          terrainTypeTextures.Add(TerrainType.FOREST, forest);
-     }
+		  terrainTypeImages = new Dictionary<TerrainType, Texture2D>{
+	  { TerrainType.PLAINS, plains},
+	  { TerrainType.BEACH, beach},
+	  { TerrainType.DESERT, desert},
+	  { TerrainType.MOUNTAIN, mountain},
+	  { TerrainType.ICE, ice},
+	  { TerrainType.WATER, ocean},
+	  { TerrainType.SHALLOW_WATER, shallow},
+	  { TerrainType.FOREST, forest}
+	 };
+	 }
 
-     // 当前选中的六边形数据引用，用于存储和访问六边形信息
-     Hex h = null;
+	 // 当前选中的六边形数据引用，用于存储和访问六边形信息
+	 Hex h = null;
 
-     // UI组件引用：地形图片显示区域
-     TextureRect terrainImage;
+	 // UI组件引用：地形图片显示区域
+	 TextureRect terrainImage;
 
-     // UI组件引用：各种信息标签
-     Label terrainLabel, foodLabel, productionLabel;
+	 // UI组件引用：各种信息标签
+	 Label terrainLabel, foodLabel, productionLabel;
 
-     public override void _Ready()
-     {
-          // 获取场景中的UI节点引用，用于后续动态更新内容
-          terrainImage = GetNode<TextureRect>("TerrainImage");    // 地形图片显示区域
-          terrainLabel = GetNode<Label>("TerrainLabel");          // 地形类型标签
-          foodLabel = GetNode<Label>("FoodLabel");                // 食物产量标签
-          productionLabel = GetNode<Label>("ProductionLabel");    // 生产力产量标签
-     }
+	 public override void _Ready()
+	 {
+		  // 获取场景中的UI节点引用，用于后续动态更新内容
+		  terrainImage = GetNode<TextureRect>("TerrainImage");    // 地形图片显示区域
+		  terrainLabel = GetNode<Label>("TerrainLabel");          // 地形类型标签
+		  foodLabel = GetNode<Label>("FoodLabel");                // 食物产量标签
+		  productionLabel = GetNode<Label>("ProductionLabel");    // 生产力产量标签
+	 }
 
-     /// 设置当前显示的六边形数据并更新UI
-     /// <param name="h">要显示的六边形对象</param>
-     public void SetHex(Hex h)
-     {
-          GD.Print($"SetHex called: {h}, food={h.food}, production={h.production}");
-          // 检查UI控件引用
-          GD.Print($"terrainImage null? {terrainImage == null}, foodLabel null? {foodLabel == null}, productionLabel null? {productionLabel == null}, terrainLabel null? {terrainLabel == null}");
-          // 检查图片资源是否存在
-          if (!terrainTypeTextures.ContainsKey(h.terrainType) || terrainTypeTextures[h.terrainType] == null)
-          {
-               GD.PrintErr($"警告：找不到地形图片资源，类型={h.terrainType}");
-          }
-          // 检查标签资源是否存在
-          if (foodLabel == null || productionLabel == null || terrainLabel == null)
-          {
-               GD.PrintErr("警告：有UI标签控件为null，请检查节点名称和类型");
-          }
-          // 保存六边形引用，用于后续访问
-          this.h = h;
-          // 更新地形图片显示，使用静态字典中的纹理
-          terrainImage.Texture = terrainTypeTextures.ContainsKey(h.terrainType) ? terrainTypeTextures[h.terrainType] : null;
-          // 更新食物标签显示，显示当前六边形的食物产量
-          foodLabel.Text = $"Food: {h.food}";
-          // 更新生产力标签显示，显示当前六边形的生产力产量
-          productionLabel.Text = $"Production: {h.production}";
-          // 更新地形类型标签显示，使用静态字典中的字符串
-          terrainLabel.Text = $"Terrain: {terrainTypeStrings[h.terrainType]}";
-     }
+	 /// 设置当前显示的六边形数据并更新UI
+	 /// <param name="h">要显示的六边形对象</param>
+	 public void SetHex(Hex h)
+	 {
+		  this.h = h;
+		  terrainImage.Texture = terrainTypeImages[h.terrainType];
+		  foodLabel.Text = $"Food: {h.food}";
+		  productionLabel.Text = $"Production: {h.production}";
+		  terrainLabel.Text = $"Terrain: {terrainTypeStrings[h.terrainType]}";
+	 }
 }
