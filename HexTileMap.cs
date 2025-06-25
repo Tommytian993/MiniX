@@ -188,7 +188,18 @@ public partial class HexTileMap : Node2D
           city.centerCoordinates = coords;
           city.Position = baseLayer.MapToLocal(coords);
           // add territory
+          city.AddTerritory(new List<Hex> { mapData[coords] });
+
+          // add surrounding territory
      }
+
+     public List<Hex> GetSurroundingHexes(Vector2I coords)
+     {
+          List<Hex> result = new List<Hex>();
+          return result;
+     }
+
+
      public void GenerateTerrain()
      {
           // 创建多个噪声地图用于不同类型的地形生成

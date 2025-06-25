@@ -11,10 +11,13 @@ public class Hex
      public int food;
      public int production;
 
+     public City ownerCity;
+
      // 构造函数，初始化六边形with coordinates
      public Hex(Vector2I coords)
      {
           this.coordinates = coords;
+          this.ownerCity = null;
      }
 
 

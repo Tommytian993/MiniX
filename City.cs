@@ -26,6 +26,14 @@ public partial class City : Node2D
 		borderTilePool = new List<Hex>();
 	}
 
+	public void AddTerritory(List<Hex> territoryToAdd)
+	{
+		foreach (Hex h in territoryToAdd)
+		{
+			h.ownerCity = this;
+		}
+		territory.AddRange(territoryToAdd);
+	}
 
 
 
