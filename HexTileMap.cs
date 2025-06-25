@@ -176,6 +176,11 @@ public partial class HexTileMap : Node2D
      public void CreateCity(Civilization civ, Vector2I coords, string name)
      {
           City city = cityScene.Instantiate() as City;
+          city.map = this;
+          civ.cities.Add(city);
+          city.civ = civ;
+
+          AddChild(city);
      }
      public void GenerateTerrain()
      {
