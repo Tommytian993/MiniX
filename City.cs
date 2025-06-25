@@ -17,6 +17,11 @@ public partial class City : Node2D
 
      public override void _Ready()
      {
+          label = GetNode<Label>("Label");
+          sprite = GetNode<Sprite2D>("Sprite2D");
+          label.Text = name;
+          territory = new List<Hex>();
+          borderTilePool = new List<Hex>();
      }
 
 
