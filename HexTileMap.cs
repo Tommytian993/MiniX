@@ -194,6 +194,7 @@ public partial class HexTileMap : Node2D
           // center coordinates
           city.centerCoordinates = coords;
           city.Position = baseLayer.MapToLocal(coords);
+          mapData[coords].isCityCenter = true;
           // add territory
           city.AddTerritory(new List<Hex> { mapData[coords] });
 

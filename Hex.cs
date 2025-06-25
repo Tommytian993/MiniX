@@ -12,6 +12,7 @@ public class Hex
      public int production;
 
      public City ownerCity;
+     public bool isCityCenter = false;
 
      // 构造函数，初始化六边形with coordinates
      public Hex(Vector2I coords)
