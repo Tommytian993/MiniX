@@ -2,17 +2,17 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 
 public partial class HexTileMap : Node2D
 {
      PackedScene cityScene;
      [Export]
-     public int width = 100;  // 地图宽度
+     public int width = 100;
      [Export]
-     public int height = 60;  // 地图高度
+     public int height = 60;
 
-     // 六边形数据数组（二维数组存储）
      public Hex[,] hexes;
 
      TileMapLayer baseLayer, borderLayer, overlayLayer;  // 三个图层引用
@@ -28,6 +28,10 @@ public partial class HexTileMap : Node2D
 
      // UI管理器引用，用于与UI系统进行通信
      UIManager uiManager;
+
+     public Dictionary<Vector2I, City> cities;
+     public List<Civilization> civs;
+
      [Signal] public delegate void ClickOffMapEventHandler();
 
      // 六边形数据发送事件委托，用于松耦合的组件通信
@@ -72,8 +76,8 @@ public partial class HexTileMap : Node2D
 			 {TerrainType.ICE, new Vector2I(0, 3)},           // 冰原：第3行第0列
 		};
 
-          GenerateTerrain();  // 生成地形
-          GenerateResources(); // 生成资源，为每个六边形分配食物和生产力数值
+          GenerateTerrain();
+          GenerateResources();
 
           // 订阅六边形数据发送事件，将UI管理器的方法绑定到事件上
           // 当SendHexData事件触发时，自动调用uiManager.SetTerrainTileUi方法
