@@ -183,7 +183,9 @@ public partial class HexTileMap : Node2D
           AddChild(city);
 
           // color
+          city.SetIconColor(civ.territoryColor);
           // name
+          city.SetCityName(name);
           // center coordinates
           city.centerCoordinates = coords;
           city.Position = baseLayer.MapToLocal(coords);
