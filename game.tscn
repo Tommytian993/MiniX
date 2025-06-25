@@ -73,3 +73,5 @@ script = ExtResource("4_sb48q")
 
 [node name="UiManager" parent="CanvasLayer" instance=ExtResource("5_r0x5m")]
 script = ExtResource("6_3mrqo")
+
+[connection signal="ClickOffMap" from="HexTileMap" to="CanvasLayer/UiManager" method="HideAllPopups"]
