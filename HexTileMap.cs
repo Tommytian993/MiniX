@@ -193,6 +193,12 @@ public partial class HexTileMap : Node2D
           city.AddTerritory(new List<Hex> { mapData[coords] });
 
           // add surrounding territory
+          List<Hex> surrounding = GetSurroundingHexes(coords);
+          foreach (Hex h in surrounding)
+          {
+               if (h.ownerCity == null)
+                    city.AddTerritory(new List<Hex> { h });
+          }
      }
 
      public List<Hex> GetSurroundingHexes(Vector2I coords)
