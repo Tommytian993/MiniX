@@ -181,6 +181,13 @@ public partial class HexTileMap : Node2D
           city.civ = civ;
 
           AddChild(city);
+
+          // color
+          // name
+          // center coordinates
+          city.centerCoordinates = coords;
+          city.Position = baseLayer.MapToLocal(coords);
+          // add territory
      }
      public void GenerateTerrain()
      {
