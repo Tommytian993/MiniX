@@ -35,6 +35,13 @@ public partial class City : Node2D
 		territory.AddRange(territoryToAdd);
 	}
 
-
-
+	public void SetCityName(string newName)
+	{
+		name = newName;
+		label.Text = newName;
+	}
+	public void SetIconColor(Color c)
+	{
+		sprite.Modulate = c;
+	}
 }
