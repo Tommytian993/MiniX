@@ -2,8 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-
 
 public partial class HexTileMap : Node2D
 {
@@ -66,7 +64,7 @@ public partial class HexTileMap : Node2D
           // 初始化地形纹理映射
           // 每个地形类型对应瓦片图集中的特定坐标
           terrainTextures = new Dictionary<TerrainType, Vector2I>(){
-                                                                                                                                                                                                                                                                                                     {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
+                                                                                                                                                                                                                                                                                                                                                                              {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
 			 {TerrainType.WATER, new Vector2I(1, 0)},         // 水域：第0行第1列
 			 {TerrainType.DESERT, new Vector2I(0, 1)},        // 沙漠：第1行第0列
 			 {TerrainType.MOUNTAIN, new Vector2I(1, 1)},      // 山脉：第1行第1列
@@ -218,7 +216,7 @@ public partial class HexTileMap : Node2D
      public bool HexInBounds(Vector2I coords)
      {
           if (coords.X < 0 || coords.X >= width ||
-            coords.Y < 0 || coords.Y >= height)
+             coords.Y < 0 || coords.Y >= height)
                return false;
 
           return true;
@@ -316,7 +314,7 @@ public partial class HexTileMap : Node2D
 			// 平原：噪声值较高的区域（45% 到最大值）
 			(noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
 
-                                                                                                                                                                                                                                                                                                     };
+                                                                                                                                                                                                                                                                                                                                                                              };
 
           // 森林生成阈值：只有森林噪声值大于该范围才会生成森林
           Vector2 forestGenValues = new Vector2(forestNoiseMax / 10 * 7, forestNoiseMax + 0.05f);
