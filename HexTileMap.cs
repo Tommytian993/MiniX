@@ -198,7 +198,20 @@ public partial class HexTileMap : Node2D
      public List<Hex> GetSurroundingHexes(Vector2I coords)
      {
           List<Hex> result = new List<Hex>();
+          foreach (Vector2I coord in baseLayer.GetSurroundingCells(coords))
+          {
+               if (HexInBounds(coord))
+                    result.Add(mapData[coord]);
+          }
           return result;
+     }
+     public bool HexInBounds(Vector2I coords)
+     {
+          if (coords.X < 0 || coords.X >= width ||
+            coords.Y < 0 || coords.Y >= height)
+               return false;
+
+          return true;
      }
 
 
