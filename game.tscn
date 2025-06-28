@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://iormak8pjan1"]
+[gd_scene load_steps=16 format=3 uid="uid://iormak8pjan1"]
 
 [ext_resource type="Script" uid="uid://dl0vd5tdpbwyb" path="res://Game.cs" id="1_3mrqo"]
 [ext_resource type="Script" uid="uid://d3xpq2jy5js6q" path="res://HexTileMap.cs" id="1_xkndl"]
@@ -24,6 +24,23 @@ texture_region_size = Vector2i(128, 128)
 tile_shape = 3
 tile_size = Vector2i(128, 128)
 sources/0 = SubResource("TileSetAtlasSource_sb48q")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3mrqo"]
+texture = ExtResource("2_u44n3")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_joorw"]
+tile_shape = 3
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_3mrqo")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t88pq"]
 texture = ExtResource("3_u44n3")
@@ -56,6 +73,10 @@ script = ExtResource("1_xkndl")
 [node name="BaseLayer" type="TileMapLayer" parent="HexTileMap"]
 position = Vector2(-1, -1)
 tile_set = SubResource("TileSet_6ubv3")
+
+[node name="CivColorsLayer" type="TileMapLayer" parent="HexTileMap"]
+modulate = Color(1, 1, 1, 0.627451)
+tile_set = SubResource("TileSet_joorw")
 
 [node name="HexBordersLayer" type="TileMapLayer" parent="HexTileMap"]
 modulate = Color(1, 1, 1, 0.211765)
