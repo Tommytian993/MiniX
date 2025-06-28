@@ -13,7 +13,7 @@ public partial class HexTileMap : Node2D
 
      public Hex[,] hexes;
 
-     TileMapLayer baseLayer, borderLayer, overlayLayer;  // 三个图层引用
+     TileMapLayer baseLayer, borderLayer, overlayLayer, civColorsLayer;  // 三个图层引用
 
      // 地图数据字典，用于快速查找六边形数据
      Dictionary<Vector2I, Hex> mapData;
@@ -44,7 +44,7 @@ public partial class HexTileMap : Node2D
           baseLayer = GetNode<TileMapLayer>("BaseLayer");
           borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
           overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
-
+          civColorsLayer = GetNode<TileMapLayer>("CivColorsLayer");
           // 获取UI管理器引用，使用绝对路径确保可靠性
           uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
@@ -64,15 +64,15 @@ public partial class HexTileMap : Node2D
           // 初始化地形纹理映射
           // 每个地形类型对应瓦片图集中的特定坐标
           terrainTextures = new Dictionary<TerrainType, Vector2I>(){
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                         {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           {TerrainType.PLAINS, new Vector2I(0, 0)},        // 平原：第0行第0列
 			 {TerrainType.WATER, new Vector2I(1, 0)},         // 水域：第0行第1列,以此类推
 			 {TerrainType.DESERT, new Vector2I(0, 1)},
-                {TerrainType.MOUNTAIN, new Vector2I(1, 1)},
-                {TerrainType.SHALLOW_WATER, new Vector2I(1, 2)},
-                {TerrainType.BEACH, new Vector2I(0, 2)},
-                {TerrainType.FOREST, new Vector2I(1, 3)},
-                {TerrainType.ICE, new Vector2I(0, 3)},
-          };
+                    {TerrainType.MOUNTAIN, new Vector2I(1, 1)},
+                    {TerrainType.SHALLOW_WATER, new Vector2I(1, 2)},
+                    {TerrainType.BEACH, new Vector2I(0, 2)},
+                    {TerrainType.FOREST, new Vector2I(1, 3)},
+                    {TerrainType.ICE, new Vector2I(0, 3)},
+            };
 
           GenerateTerrain();
           GenerateResources();
@@ -209,6 +209,18 @@ public partial class HexTileMap : Node2D
           cities[coords] = city;
      }
 
+     public void UpdateCivTerritoryMap(Civilization civ)
+     {
+          foreach (City c in civ.cities)
+          {
+               foreach (Hex h in c.territory)
+               {
+                    if (h.ownerCity == null)
+                         h.ownerCity = c;
+               }
+          }
+     }
+
      public List<Hex> GetSurroundingHexes(Vector2I coords)
      {
           List<Hex> result = new List<Hex>();
@@ -222,7 +234,7 @@ public partial class HexTileMap : Node2D
      public bool HexInBounds(Vector2I coords)
      {
           if (coords.X < 0 || coords.X >= width ||
-              coords.Y < 0 || coords.Y >= height)
+               coords.Y < 0 || coords.Y >= height)
                return false;
 
           return true;
@@ -320,7 +332,7 @@ public partial class HexTileMap : Node2D
 			// 平原：噪声值较高的区域（45% 到最大值）
 			(noiseMax / 10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS),
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                         };
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           };
 
           // 森林生成阈值：只有森林噪声值大于该范围才会生成森林
           Vector2 forestGenValues = new Vector2(forestNoiseMax / 10 * 7, forestNoiseMax + 0.05f);
