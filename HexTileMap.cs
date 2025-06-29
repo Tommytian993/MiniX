@@ -215,8 +215,7 @@ public partial class HexTileMap : Node2D
           {
                foreach (Hex h in c.territory)
                {
-                    if (h.ownerCity == null)
-                         h.ownerCity = c;
+                    civColorsLayer.SetCell(h.coordinates, 0);
                }
           }
      }
