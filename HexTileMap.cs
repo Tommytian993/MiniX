@@ -72,6 +72,7 @@ public partial class HexTileMap : Node2D
                     {TerrainType.BEACH, new Vector2I(0, 2)},
                     {TerrainType.FOREST, new Vector2I(1, 3)},
                     {TerrainType.ICE, new Vector2I(0, 3)},
+                    {TerrainType.CIV_COLOR_BASE, new Vector2I(0, 3)},
             };
 
           GenerateTerrain();
@@ -205,6 +206,7 @@ public partial class HexTileMap : Node2D
                if (h.ownerCity == null)
                     city.AddTerritory(new List<Hex> { h });
           }
+          UpdateCivTerritoryMap(civ);
 
           cities[coords] = city;
      }
@@ -215,7 +217,7 @@ public partial class HexTileMap : Node2D
           {
                foreach (Hex h in c.territory)
                {
-                    civColorsLayer.SetCell(h.coordinates, 0);
+                    civColorsLayer.SetCell(h.coordinates, 0, terrainTextures[TerrainType.CIV_COLOR_BASE], civ.territoryColorAltTileId);
                }
           }
      }

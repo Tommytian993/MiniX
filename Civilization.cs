@@ -7,6 +7,7 @@ public class Civilization
 	public int id;
 	public List<City> cities;
 	public Color territoryColor;
+	public int territoryColorAltTileId;
 	public string name;
 	public bool playerCiv;
 
