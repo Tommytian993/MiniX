@@ -1,0 +1,1 @@
+This is a collection of ideas and experiment about map design(not a formal design document, just a notebook about updates during the development)
