@@ -1,11 +1,15 @@
 # MiniX HexTile Map Game
 
-This godot project is a hexagonal tile map game prototype
+This godot project is a prototype of a 4x game with hexagonal tile map
 
 ## Main Features so far
 - Procedural hex tile map generation of different terrains
 - Automatic assignment of terrain and resources such as food and productions
 - Clicking hex tile and displaying terrain details.
+
+## In Development
+- City spawning
+- AI enemies
 
 ## Files Structure
 - Will conclude this part after more files added
