@@ -13,3 +13,8 @@ So base node to represent the map - Node2D “HexTileMap"
 
 - Create Tileset for each layer, shape need to be changed to hexagon and tile size need to be 128 by 128 pixels
 
+- Map width, heigth set to 100, 60 and as export public
+
+# 2 Terrain Generation Function Set Up
+
+Attach script to HexTileMap and create: public void GenerateTerrain() for all the potential generation logic. 
