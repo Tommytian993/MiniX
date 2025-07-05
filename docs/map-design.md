@@ -1,3 +1,8 @@
 This is a collection of ideas and experiment about map design(not a formal design document, just a notebook about updates during the development)
 
 ! Godot 4.3 TileMap had made changes, TileMap got updated to represent a series of "tilemaplayers"
+
+TileMapLayers * 3
+- Base Layer: color (and basically the terrain type)
+- Hex Borders: borders on all hexagons.
+- Selection Overlay: allows clicking, selection and color change
