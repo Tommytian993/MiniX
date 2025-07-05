@@ -18,3 +18,5 @@ So base node to represent the map - Node2D “HexTileMap"
 # 2 Terrain Generation Function Set Up
 
 Attach script to HexTileMap and create: public void GenerateTerrain() for all the potential generation logic. 
+
+Declare 3 map layer variables: TileMapLayer baseLayer, borderLayer, overlayLayer; In the beginning of _Ready() function, get their reference by like "baseLayer = GetNode<TileMapLayer>("BaseLayer");"
