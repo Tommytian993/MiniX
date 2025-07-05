@@ -9,3 +9,5 @@ TileMapLayers * 3
 
 So base node to represent the map - Node2D “HexTileMap"
 3 child nodes TileMapLayers - BaseLayer, HexBorders and SelectionOverlayLayer.
+
+- Create Tileset for each layer, shape need to be changed to hexagon and tile size need to be 128 * 128 pixels
