@@ -8,7 +8,7 @@ TileMapLayers * 3
 - Hex Borders: borders on all hexagons.
 - Selection Overlay: allows clicking, selection and color change
 
-So base node to represent the map - Node2D “HexTileMap"
+So base node to represent the map - Node2D "HexTileMap"
 3 child nodes TileMapLayers - BaseLayer, HexBorders and SelectionOverlayLayer.
 
 - Create Tileset for each layer, shape need to be changed to hexagon and tile size need to be 128 by 128 pixels
