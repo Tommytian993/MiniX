@@ -6,3 +6,6 @@ TileMapLayers * 3
 - Base Layer: color (and basically the terrain type)
 - Hex Borders: borders on all hexagons.
 - Selection Overlay: allows clicking, selection and color change
+
+So base node to represent the map - Node2D “HexTileMap"
+3 child nodes TileMapLayers - BaseLayer, HexBorders and SelectionOverlayLayer.
