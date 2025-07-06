@@ -32,4 +32,6 @@ for (int x = 0; x < width; x++)
   }
 }
 
+- For each XY pairs we visit above, will call setCell function
+- setCell has 3 parameters: first is xy tilemap coordinate, second tileset atlas id(default 0), third is atlas coordinate.
 
