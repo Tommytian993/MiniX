@@ -8,7 +8,7 @@ TileMapLayers * 3
 - Hex Borders: borders on all hexagons.
 - Selection Overlay: allows clicking, selection and color change
 
-So base node to represent the map - Node2D "HexTileMap"
+So base node to represent the map - Node2D “HexTileMap"
 3 child nodes TileMapLayers - BaseLayer, HexBorders and SelectionOverlayLayer.
 
 - Create Tileset for each layer, shape need to be changed to hexagon and tile size need to be 128 by 128 pixels
@@ -20,3 +20,16 @@ So base node to represent the map - Node2D "HexTileMap"
 Attach script to HexTileMap and create: public void GenerateTerrain() for all the potential generation logic. 
 
 Declare 3 map layer variables: TileMapLayer baseLayer, borderLayer, overlayLayer; In the beginning of _Ready() function, get their reference by like "baseLayer = GetNode<TileMapLayer>("BaseLayer");"
+
+Map Generation Loop: 
+// X direction
+for (int x = 0; x < width; x++)
+{
+  // Y direction
+  for (int y = 0; y < height; y++)
+  {
+    // Terrain generation code
+  }
+}
+
+
