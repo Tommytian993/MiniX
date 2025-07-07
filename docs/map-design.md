@@ -40,3 +40,4 @@ for (int x = 0; x < width; x++)
 # 3 Camera Control Initialization
 
 - Create a Camera2D node camera under game node
+- Unlike most other nodes' perspectives in Godot, where the origin is at the top left, the camera’s origin is at the center.
