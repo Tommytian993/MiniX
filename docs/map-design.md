@@ -36,3 +36,7 @@ for (int x = 0; x < width; x++)
 - setCell has 3 parameters: first is xy tilemap coordinate, second tileset atlas id(default 0), third is coordinate of the texture on the atlas.
 - Thus "baseLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));"
 - To have low coupling we can seperate the assignments “borderLayer.SetCell(new Vector2I(x, y), 0, new Vector2I(0, 0));”
+
+# 3 Camera Control Initialization
+
+- Create a Camera2D node camera under game node
