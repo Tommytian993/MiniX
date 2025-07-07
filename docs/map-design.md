@@ -41,3 +41,13 @@ for (int x = 0; x < width; x++)
 
 - Create a Camera2D node camera under game node
 - Unlike most other nodes' perspectives in Godot, where the origin is at the top left, the camera’s origin is at the center.
+
+To control the map, we should set up an input map
+Map Left: A key
+Map Right: D key
+Map Up: W key
+Map Down: S key
+Zoom In (Keyboard): =/+ key
+Zoom Out (Keyboard): - key
+Zoom In (Mouse): Mouse Wheel Up
+Zoom Out (Mouse): Mouse Wheel Down
