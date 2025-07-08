@@ -63,3 +63,11 @@ float zoom_speed = 0.05f;
 
 - Then we can create our Camera panning feature in a new: public override void _PhysicsProcess(double delta). We use physics process here instead of the default process because it is called with more stable tick rates, thus allowing more smooth camera movements.
 
+- we can then poll our input events, and change positions accordingly.
+
+if (Input.IsActionPressed("map_right"))
+{
+  this.Position += new Vector2(velocity, 0);
+}
+
+-
