@@ -51,3 +51,13 @@ Zoom In (Keyboard): =/+ key
 Zoom Out (Keyboard): - key
 Zoom In (Mouse): Mouse Wheel Up
 Zoom Out (Mouse): Mouse Wheel Down
+
+# 4 Camera Script
+
+- We can attach a script to our Camera as camera.cs, in it first we define the moving and zooming speed 
+
+[Export]
+int velocity = 15;
+[Export]
+float zoom_speed = 0.05f;
+
