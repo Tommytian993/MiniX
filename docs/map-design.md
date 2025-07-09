@@ -71,3 +71,5 @@ if (Input.IsActionPressed("map_right"))
 }
 
 - We can change the velocity's value and direction here to make other movements, just need to keep in mind that the up direction is negative on the y-axis in this system.
+
+- Similar to panning, we can use the zoom property in Camera2D to toggle zoom, to prevent zooming in to close or too far, we can have boundary checks before execution.
