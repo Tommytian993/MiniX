@@ -82,3 +82,9 @@ if (Input.IsActionPressed("map_zoom_out")) {
     if (this.Zoom > new Vector2(0.1f, 0.1f))
         this.Zoom -= new Vector2(zoom_speed, zoom_speed);
 }
+
+- Besides holding the plus and minus keys for zooming, we can also add mouse scroll zooming.
+We'll initialize these boolean variables:
+
+bool mouseWheelScrollingUp = false;
+bool mouseWheelScrollingDown = false;
