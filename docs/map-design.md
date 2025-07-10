@@ -88,3 +88,15 @@ We'll initialize these boolean variables:
 
 bool mouseWheelScrollingUp = false;
 bool mouseWheelScrollingDown = false;
+
+- Then use IsActionJustReleased function to check and give values to them:
+
+if (Input.IsActionJustReleased("mouseZoomOut"))
+    mouseWheelScrollingDown = true;
+if (!Input.IsActionJustReleased("mouseZoomOut"))
+    mouseWheelScrollingDown = false;
+
+- Finally we can add them in our existing zoom control loop:
+
+if (Input.IsActionPressed("map_zoom_out") || mouseWheelScrollingDown)
+    // Zoom out code here
