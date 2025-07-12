@@ -106,3 +106,19 @@ if (Input.IsActionPressed("map_zoom_out") || mouseWheelScrollingDown)
 - We need to stop camera movement at the the boundary of the map, first we can set up 4 variables:
 
 float leftBound, rightBound, topBound, bottomBound;
+
+- We need to assign values to them base on our state of the map, so we need a map reference variable as well
+
+public partial class Camera : Camera2D
+{
+  // Map boundaries
+  float leftBound, rightBound, topBound, bottomBound;
+  
+  // Map reference
+  HexTileMap map;
+  public override void _Ready()
+  {
+    map = GetNode<HexTileMap>("../HexTileMap");
+    // ...
+  }
+}
