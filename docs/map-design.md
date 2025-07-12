@@ -100,3 +100,9 @@ if (!Input.IsActionJustReleased("mouseZoomOut"))
 
 if (Input.IsActionPressed("map_zoom_out") || mouseWheelScrollingDown)
     // Zoom out code here
+
+# 5 Setting Boundaries for Camera Panning
+
+- We need to stop camera movement at the the boundary of the map, first we can set up 4 variables:
+
+float leftBound, rightBound, topBound, bottomBound;
