@@ -109,11 +109,13 @@ float leftBound, rightBound, topBound, bottomBound;
 
 - We need to assign values to them base on our state of the map, so we need a map reference variable as well
 
+! Please make sure you declare HexTileMap map outside the _Ready() function to make it a global variable
+
 public partial class Camera : Camera2D
 {
   // Map boundaries
   float leftBound, rightBound, topBound, bottomBound;
-  
+
   // Map reference
   HexTileMap map;
   public override void _Ready()
