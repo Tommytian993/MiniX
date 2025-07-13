@@ -131,3 +131,10 @@ public Vector2 MapToLocal(Vector2I coords)
 {
   return baseLayer.MapToLocal(coords);
 } 
+
+- Pass in the map reference to calculate the boundary variable values:
+
+leftBound = ToGlobal(map.MapToLocal(new Vector2I(0, 0))).X + 100;
+rightBound = ToGlobal(map.MapToLocal(new Vector2I(map.width, 0))).X - 100;
+topBound = ToGlobal(map.MapToLocal(new Vector2I(0, 0))).Y + 50;
+bottomBound = ToGlobal(map.MapToLocal(new Vector2I(0, map.height))).Y - 50;
