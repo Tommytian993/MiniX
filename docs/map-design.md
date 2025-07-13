@@ -124,3 +124,10 @@ public partial class Camera : Camera2D
     // ...
   }
 }
+
+- To calculate map boundaries, we first define a helper to get local coordinates on our tilemap
+
+public Vector2 MapToLocal(Vector2I coords)
+{
+  return baseLayer.MapToLocal(coords);
+} 
