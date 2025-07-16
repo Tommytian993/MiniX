@@ -22,5 +22,9 @@ public class Hex
 
 Dictionary<Vector2I, Hex> mapData;
 
+public override void _Ready()
+{
+    mapData = new Dictionary<Vector2I, Hex>();
+}
 
 
