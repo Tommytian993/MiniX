@@ -5,7 +5,7 @@ This is a collection of ideas and experiment about creating the procedural terra
 
 public enum TerrainType { PLAINS, WATER, DESERT, MOUNTAIN, ICE, SHALLOW_WATER, FOREST, BEACH }
 
-- Then we create the Hex class, which will encapsulate all the data about a single hex tile, for now we have its coordinates and terraintype as follows:
+- We can create the Hex class, which will encapsulate all the data about a single hex tile, for now we have its coordinates and terraintype as follows:
 
 public class Hex
 {
@@ -17,4 +17,10 @@ public class Hex
         this.coordinates = coords;
     }
 }
+
+- Then back to our HexTileMap, we'll create a dictionary to store grid coordinates and map it to each Hex objects:
+
+Dictionary<Vector2I, Hex> mapData;
+
+
 
