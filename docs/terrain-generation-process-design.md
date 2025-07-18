@@ -48,4 +48,6 @@ Dictionary<TerrainType, Vector2I> terrainTextures;
 
 FastNoiseLite noise = new FastNoiseLite();
 
-- There are 
+- There are several parameters inside the FastNoiseLite that will determine the nature of the generated noise:
+
+Noise Type: Algorithms including Perlin, Cellular, Value, and Simplex and etc. The could be the foundation of the noise's type and pattern.
