@@ -51,3 +51,5 @@ FastNoiseLite noise = new FastNoiseLite();
 - There are several parameters inside the FastNoiseLite that will determine the nature of the generated noise:
 
 Noise Type: Algorithms including Perlin, Cellular, Value, and Simplex and etc. The could be the foundation of the noise's type and pattern.
+
+Seed: We probably heard of this when playing minecraft. Depend on the algorithm, usually the same seed will produce the same pattern for an algorithm. For our generation now we'll set it to be random.
