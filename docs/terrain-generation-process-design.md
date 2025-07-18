@@ -44,4 +44,8 @@ Dictionary<TerrainType, Vector2I> terrainTextures;
 { TerrainType.ICE, new Vector2I(0, 3)},
 
 # 3. FastNoiseLite
-- To proceduraly generate our terrains, we can make use of Godot’s built-in noise generator, FastNoiseLite.
+- To proceduraly generate our terrains, we can make use of Godot’s built-in noise generator, FastNoiseLite. We can create an instance like this:
+
+FastNoiseLite noise = new FastNoiseLite();
+
+- There are 
