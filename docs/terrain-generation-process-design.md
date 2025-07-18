@@ -32,5 +32,14 @@ public override void _Ready()
 
 Dictionary<TerrainType, Vector2I> terrainTextures;
 
+- In the ready function, we'll fill in the key-value pairs, type enums with its corresponding texture atlas coordinates.
 
+{ TerrainType.PLAINS, new Vector2I(0, 0) },
+{ TerrainType.WATER, new Vector2I(1, 0)}
+{ TerrainType.DESERT, new Vector2I(0, 1)},
+{ TerrainType.MOUNTAIN, new Vector2I(1, 1)},
+{ TerrainType.SHALLOW_WATER, new Vector2I(1, 2)},
+{ TerrainType.BEACH, new Vector2I(0, 2)},
+{ TerrainType.FOREST, new Vector2I(1, 3)},
+{ TerrainType.ICE, new Vector2I(0, 3)},
 
