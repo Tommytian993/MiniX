@@ -57,3 +57,11 @@ Seed: We probably heard of this when playing minecraft. Depend on the algorithm,
 Frequency: This affects the density of the noise pattern, higher value = denser pattern.
 
 Fractal Options: This also mainly affect the appearance of the noise, I need to do more research but so far I think it affect properties like blurriness, lacunaity, edges of the noise pattern.
+
+- Here is an example how we can assign values to them:
+
+noise.Seed = seed; 
+noise.Frequency = 0.009f; 
+noise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm; 
+noise.FractalOctaves = 10; 
+noise.FractalLacunarity = 3.15f; 
