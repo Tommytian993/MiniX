@@ -1,6 +1,6 @@
 This is a collection of ideas and experiment about creating the procedural terrain generation in this game(not a formal design document, just a notebook about updates during the development)
 
-# 1. Terrain type Representations
+# 1. Terrain Type Representations
 - First we can use an enum structure to represent all the available types:
 
 public enum TerrainType { PLAINS, WATER, DESERT, MOUNTAIN, ICE, SHALLOW_WATER, FOREST, BEACH }
@@ -26,5 +26,11 @@ public override void _Ready()
 {
     mapData = new Dictionary<Vector2I, Hex>();
 }
+
+# 2. Terrain Types and Texture Atlas
+- For our game at this time for simplicity, we have colored tiles as texture atlas for the terrain types. To map them, we create a dictionary similar to the coordiante-type dictionary:
+
+Dictionary<TerrainType, Vector2I> terrainTextures;
+
 
 
