@@ -65,3 +65,10 @@ noise.Frequency = 0.009f;
 noise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm; 
 noise.FractalOctaves = 10; 
 noise.FractalLacunarity = 3.15f; 
+
+- We'll first set up 4 runs for noise, the first is ocean and continents, the others are what their name suggests:
+
+float[,] NoiseMap = new float[mapWidth, mapHeight];
+float[,] ForestMap = new float[mapWidth, mapHeight];
+float[,] DesertMap = new float[mapWidth, mapHeight];
+float[,] MountainsMap = new float[mapWidth, mapHeight];
