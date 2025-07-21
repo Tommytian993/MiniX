@@ -78,3 +78,7 @@ float[,] MountainsMap = new float[mapWidth, mapHeight];
 Random random = new Random();
 int seed = random.Next(100000);
 
+- Just to reiterate, we use FastNoiseLite object and it's parameters to produce a unique noise as a return value, and we would need a variable called noiseMax, to track the max value which will be used as border seperating different terrains.
+
+float noiseMax = 0f;
+
