@@ -72,3 +72,9 @@ float[,] NoiseMap = new float[mapWidth, mapHeight];
 float[,] ForestMap = new float[mapWidth, mapHeight];
 float[,] DesertMap = new float[mapWidth, mapHeight];
 float[,] MountainsMap = new float[mapWidth, mapHeight];
+
+- Then we created relevent objects for generation, random function and the seed for each generation
+
+Random random = new Random();
+int seed = random.Next(100000);
+
