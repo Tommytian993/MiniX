@@ -82,6 +82,6 @@ int seed = random.Next(100000);
 
 float noiseMax = 0f;
 
-- To store each noise value, we make use of GetNoise2D function and pass in the pixel cooridante
+- To store each noise value in the noise map inside the loops, we make use of GetNoise2D function and pass in the pixel cooridante.
 
 noiseMap[x, y] = Math.Abs(noise.GetNoise2D(x, y));
