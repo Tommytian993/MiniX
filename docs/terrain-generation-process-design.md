@@ -43,7 +43,7 @@ Dictionary<TerrainType, Vector2I> terrainTextures;
 { TerrainType.FOREST, new Vector2I(1, 3)},
 { TerrainType.ICE, new Vector2I(0, 3)},
 
-# 3. FastNoiseLite
+# 3. FastNoiseLite Set Up
 - To proceduraly generate our terrains, we can make use of Godot’s built-in noise generator, FastNoiseLite. We can create an instance like this:
 
 FastNoiseLite noise = new FastNoiseLite();
@@ -82,6 +82,7 @@ int seed = random.Next(100000);
 
 float noiseMax = 0f;
 
+# 3. Start noise generation and storage
 - To store each noise value in the noise map inside the loops, we make use of GetNoise2D function and pass in the pixel cooridante.
 
 noiseMap[x, y] = Math.Abs(noise.GetNoise2D(x, y));
