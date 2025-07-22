@@ -92,3 +92,12 @@ noiseMap[x, y] = Math.Abs(noise.GetNoise2D(x, y));
 if (noiseMap[x, y] > noiseMax) {
   noiseMax = noiseMap[x ,y];
 }
+
+- At this point we arrived at the final step - Defining Terrain Ratios, this means each type will have a min and max noise value that uniquely enclose them:
+
+List<(float Min, float Max, TerrainType Type)> terrainGenValues = new List<(float Min, float Max, TerrainType Type)>{
+  (0, noiseMax/10 * 2.5f, TerrainType.WATER),
+  (noiseMax/10 * 2.5f, noiseMax/10 * 4, TerrainType.SHALLOW_WATER),
+  (noiseMax/10 * 4, noiseMax/10 * 4.5f, TerrainType.BEACH),
+  (noiseMax/10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS)
+};
