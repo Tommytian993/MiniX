@@ -86,3 +86,9 @@ float noiseMax = 0f;
 - To store each noise value in the noise map inside the loops, we make use of GetNoise2D function and pass in the pixel cooridante.
 
 noiseMap[x, y] = Math.Abs(noise.GetNoise2D(x, y));
+
+- We need a max noise value for each terrain type, we can simply via the following code track and update this value:
+
+if (noiseMap[x, y] > noiseMax) {
+  noiseMax = noiseMap[x ,y];
+}
