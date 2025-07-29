@@ -105,4 +105,5 @@ List<(float Min, float Max, TerrainType Type)> terrainGenValues = new List<(floa
 # 4. Add the terrain hexagons to the map
 - Here we are at the final step for ocean and land terrain generation, with all the noise values in hand, we will create terrain hexagons and assign to the map with these values. Let's go to our main loop where we set the cells, there are five steps to complete. 
 
-- 1. 
+- 1. Create a new hex at the current position in the map
+Hex hex = new Hex(new Vector2I(x, y));
