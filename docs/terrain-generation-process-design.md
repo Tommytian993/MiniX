@@ -107,3 +107,6 @@ List<(float Min, float Max, TerrainType Type)> terrainGenValues = new List<(floa
 
 - 1. Create a new hex at the current position in the map
 Hex hex = new Hex(new Vector2I(x, y));
+
+- 2. Get noise value from dict, at the same current location
+float noiseValue = noiseMap[x, y];
