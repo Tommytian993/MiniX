@@ -117,3 +117,6 @@ hex.terrainType = terrainGenValues.First(range => noiseValue >= range.Min  &&   
 
 - 4. We add the hex to mapData
 mapData[new Vector2I(x, y)] = hex;
+
+- 5. Lastly we set the cells in tilemap, remember we created the terrainTextures dictionary that contains the mapping of terrain to texture atlas coordinates. So we set the cell with that atlas texture.
+baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[hex.terrainType]);
