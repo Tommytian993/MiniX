@@ -101,3 +101,8 @@ List<(float Min, float Max, TerrainType Type)> terrainGenValues = new List<(floa
   (noiseMax/10 * 4, noiseMax/10 * 4.5f, TerrainType.BEACH),
   (noiseMax/10 * 4.5f, noiseMax + 0.05f, TerrainType.PLAINS)
 };
+
+# 4. Add the terrain hexagons to the map
+- Here we are at the final step for ocean and land terrain generation, with all the noise values in hand, we will create terrain hexagons and assign to the map with these values. Let's go to our main loop where we set the cells, there are five steps to complete. 
+
+- 1. 
