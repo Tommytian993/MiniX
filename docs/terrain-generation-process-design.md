@@ -114,3 +114,6 @@ float noiseValue = noiseMap[x, y];
 - 3. The third step is setting the hex.terrain member variable. To help with our assignment, we can use a feature in C# called "Language Integrated Query" (LINQ), this helps us query data in a more readable and concise way, we'll use the First keyword here and it will return the first element satisfying the criterias. The criterias we apply here is the noise value boundaries. In the end, we add the .TYPE to set the range to be our terrain type.
 
 hex.terrainType = terrainGenValues.First(range => noiseValue >= range.Min  &&       noiseValue < range.Max).Type;
+
+- 4. We add the hex to mapData
+mapData[new Vector2I(x, y)] = hex;
