@@ -209,3 +209,40 @@ if (mountainMap[x, y] >= mountainGenValues[0] &&
 - Lastly we wanna generate ice, like the north and south pole. AKA ice caps. That would be slightly different from all the ones we created before. Instead of using noises, we'll be traversing and randomly filling out hexes among the above and below's x-axis.
 This would be the final layer we implement.
 
+// thickness of the ice cap, ideally 3-6
+int maxIce = 5;
+
+// along the x-axis
+for (int x = 0; x < width; x++)
+{
+    // -------------------------------
+    // ☝️ north pole y = 0
+    // -------------------------------
+
+    // randomly generate 1 ~ maxIce layers of ice（r.Next(maxIce) creates 0 to maxIce - 1，then +1）
+    for (int y = 0; y < r.Next(maxIce) + 1; y++)
+    {
+        // get current hex（Hex is customized map structure）
+        Hex h = mapData[new Vector2I(x, y)];
+
+        // set to ice terrain
+        h.terrainType = TerrainType.ICE;
+
+        // set the cell on tilemap
+        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+    }
+
+    // -------------------------------
+    // 👇 south pole y = height -1
+    // -------------------------------
+
+    // likewise from the opposite direction
+    for (int y = height - 1; y > height - 1 - r.Next(maxIce) - 1; y--)
+    {
+        Hex h = mapData[new Vector2I(x, y)];
+
+        h.terrainType = TerrainType.ICE;
+        
+        baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[h.terrainType]);
+    }
+}
