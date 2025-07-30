@@ -189,3 +189,18 @@ mountainNoise.FractalType = FastNoiseLite.FractalTypeEnum.Ridged;
 mountainNoise.FractalOctaves = 5;
 mountainNoise.FractalLacunarity = 2.0f;
 mountainNoise.FractalGain = 0.5f;
+
+- The next 3 steps are exactly the same
+
+mountainMap[x, y] = Math.Abs(mountainNoise.GetNoise2D(x, y));
+if (mountainMap[x, y] > mountainNoiseMax) mountainNoiseMax = mountainMap[x ,y];
+
+Vector2 mountainGenValues = new Vector2(mountainNoiseMax/10 * 5.5f, mountainNoiseMax + 0.05f);
+…and generate the mountains, just like we did with the forest and desert tiles:
+
+if (mountainMap[x, y] >= mountainGenValues[0] &&
+  mountainMap[x, y] <= mountainGenValues[1] &&
+  h.terrainType == TerrainType.PLAINS)
+{
+  h.terrainType = TerrainType.MOUNTAIN;
+}
