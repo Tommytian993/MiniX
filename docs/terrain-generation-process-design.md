@@ -153,3 +153,10 @@ if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x ,y];
 
 desertMap[x, y] = Math.Abs(desertNoise.GetNoise2D(x, y));
 if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x ,y];
+
+- We calculate and use Vector2 to store the thredhold range as below:
+
+// Forest gen values
+Vector2 forestGenValues = new Vector2(forestNoiseMax/10 * 7, forestNoiseMax + 0.05f);
+// Desert gen values
+Vector2 desertGenValues = new Vector2(desertNoiseMax/10 * 6, desertNoiseMax + 0.05f);
