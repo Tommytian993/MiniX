@@ -120,3 +120,8 @@ mapData[new Vector2I(x, y)] = hex;
 
 - 5. Lastly we set the cells in tilemap, remember we created the terrainTextures dictionary that contains the mapping of terrain to texture atlas coordinates. So we set the cell with that atlas texture.
 baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[hex.terrainType]);
+
+# 5. Forest and Desert Terrains
+- For other additional terrains, we just need to generate new noise values and determine boundaries.
+
+- For the forest FastNoiseLite initiation, we can use OpenSimplex to create continous and natural landscape, slightly increase octaves details.
