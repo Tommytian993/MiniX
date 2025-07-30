@@ -160,3 +160,12 @@ if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x ,y];
 Vector2 forestGenValues = new Vector2(forestNoiseMax/10 * 7, forestNoiseMax + 0.05f);
 // Desert gen values
 Vector2 desertGenValues = new Vector2(desertNoiseMax/10 * 6, desertNoiseMax + 0.05f);
+
+- We use a check to make use desert only generate on plains(not oceans and etc...)
+
+if (desertMap[x, y] >= desertGenValues[0] &&
+  desertMap[x, y] <= desertGenValues[1] &&
+  h.terrainType == TerrainType.PLAINS)
+{
+  h.terrainType = TerrainType.DESERT;
+}
