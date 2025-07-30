@@ -204,3 +204,8 @@ if (mountainMap[x, y] >= mountainGenValues[0] &&
 {
   h.terrainType = TerrainType.MOUNTAIN;
 }
+
+# 6. Ice Terrain generation
+- Lastly we wanna generate ice, like the north and south pole. AKA ice caps. That would be slightly different from all the ones we created before. Instead of using noises, we'll be traversing and randomly filling out hexes among the above and below's x-axis.
+This would be the final layer we implement.
+
