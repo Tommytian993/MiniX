@@ -136,3 +136,12 @@ forestNoise.FractalLacunarity = 2.0f;
 forestNoise.FractalGain = 0.5f;
 
 - For the desert FastNoiseLite initiation, we can use SimplexSmooth for a continous but not drastically changing terrain. 
+
+FastNoiseLite desertNoise = new FastNoiseLite();
+desertNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.SimplexSmooth;
+desertNoise.Seed = seed;
+desertNoise.Frequency = 0.015f;
+desertNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;
+desertNoise.FractalOctaves = 4;
+desertNoise.FractalLacunarity = 2.0f;
+desertNoise.FractalGain = 0.45f;
