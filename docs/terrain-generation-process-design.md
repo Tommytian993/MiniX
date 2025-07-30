@@ -169,3 +169,13 @@ if (desertMap[x, y] >= desertGenValues[0] &&
 {
   h.terrainType = TerrainType.DESERT;
 }
+
+- Likewise for forest
+
+// Forest
+if (forestMap[x, y] >= forestGenValues[0] &&
+  forestMap[x, y] <= forestGenValues[1] &&
+  h.terrainType == TerrainType.PLAINS)
+{
+  h.terrainType = TerrainType.FOREST;
+}
