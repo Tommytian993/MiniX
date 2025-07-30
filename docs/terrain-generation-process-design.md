@@ -121,7 +121,7 @@ mapData[new Vector2I(x, y)] = hex;
 - 5. Lastly we set the cells in tilemap, remember we created the terrainTextures dictionary that contains the mapping of terrain to texture atlas coordinates. So we set the cell with that atlas texture.
 baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[hex.terrainType]);
 
-# 5. Forest and Desert Terrains
+# 5. Forest, Desert and Mountain Terrains
 - For other additional terrains, we just need to generate new noise values and determine boundaries.
 
 - For the forest FastNoiseLite initiation, we can use OpenSimplex to create continous and natural landscape, slightly increase octaves details.
@@ -172,10 +172,20 @@ if (desertMap[x, y] >= desertGenValues[0] &&
 
 - Likewise for forest
 
-// Forest
 if (forestMap[x, y] >= forestGenValues[0] &&
   forestMap[x, y] <= forestGenValues[1] &&
   h.terrainType == TerrainType.PLAINS)
 {
   h.terrainType = TerrainType.FOREST;
 }
+
+- For Mountains we want it to look "ridged", there's a exact noise parameter, we set it as 
+
+FastNoiseLite mountainNoise = new FastNoiseLite();
+mountainNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.Simplex;
+mountainNoise.Seed = seed;
+mountainNoise.Frequency = 0.02f;
+mountainNoise.FractalType = FastNoiseLite.FractalTypeEnum.Ridged;
+mountainNoise.FractalOctaves = 5;
+mountainNoise.FractalLacunarity = 2.0f;
+mountainNoise.FractalGain = 0.5f;
