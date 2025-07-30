@@ -125,3 +125,12 @@ baseLayer.SetCell(new Vector2I(x, y), 0, terrainTextures[hex.terrainType]);
 - For other additional terrains, we just need to generate new noise values and determine boundaries.
 
 - For the forest FastNoiseLite initiation, we can use OpenSimplex to create continous and natural landscape, slightly increase octaves details.
+
+FastNoiseLite forestNoise = new FastNoiseLite();
+forestNoise.NoiseType = FastNoiseLite.NoiseTypeEnum.OpenSimplex2;
+forestNoise.Seed = seed;
+forestNoise.Frequency = 0.04f;
+forestNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm; 
+forestNoise.FractalOctaves = 5; 
+forestNoise.FractalLacunarity = 2.0f; 
+forestNoise.FractalGain = 0.5f;
