@@ -145,3 +145,11 @@ desertNoise.FractalType = FastNoiseLite.FractalTypeEnum.Fbm;
 desertNoise.FractalOctaves = 4;
 desertNoise.FractalLacunarity = 2.0f;
 desertNoise.FractalGain = 0.45f;
+
+- Afterwards, we can store these values and determine the boundary like we've done before
+
+forestMap[x, y] = Math.Abs(forestNoise.GetNoise2D(x, y));
+if (forestMap[x, y] > forestNoiseMax) forestNoiseMax = forestMap[x ,y];
+
+desertMap[x, y] = Math.Abs(desertNoise.GetNoise2D(x, y));
+if (desertMap[x, y] > desertNoiseMax) desertNoiseMax = desertMap[x ,y];
