@@ -7,3 +7,13 @@ public override string ToString()
 {
     return $"Coordinates: ({this.coordinates.X}, {this.coordinates.Y}). Terrain type: {this.terrainType}";
 }
+
+- Add UnhandledInput override for detecting mouse clicks
+
+public override void _UnhandledInput(InputEvent @event)
+{
+    if (@event is InputEventMouseButton mouse)
+    {
+        // implement later
+    }
+}
