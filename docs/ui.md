@@ -20,4 +20,6 @@ public override void _UnhandledInput(InputEvent @event)
 
 - When we click on the world there will be a mouse coordinate on the screen, first we need to translate that to map coordianates. There will be 3 steps, first is getting that mouse coordinate, then converting it to local coordiantes and lastly converting it to map coordinates. 
 
-- The 3 functions for the conversions are get_global_mouse_position, to_local, and local_to_map().
+- The 3 functions for the conversions are get_global_mouse_position, to_local, and local_to_map(), here we can use all of them on the same line:
+
+Vector2I mapCoords = baseLayer.LocalToMap(ToLocal(GetGlobalMousePosition()));
