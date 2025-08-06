@@ -48,3 +48,15 @@ overlayLayer.SetCell(mapCoordinates, 0, new Vector2I(0, 1));
 - Now we need to create the feature to deselect a cell after clicking, we need to first initialize a vector2I to hold current clicked cell coordinates:
 
 Vector2I currentSelectedCell = new Vector2I(-1, -1);
+
+- Then inside the final check and after printing out the tile coordinates, we need to 
+
+GD.Print(mapData[mapCoords]);
+
+// remove old highlight and highlight new one if new cell clicked, change currentSelectCell to store current coordinates.s
+if (mapCoords != currentSelectedCell)
+{
+overlayLayer.SetCell(currentSelectedCell, -1);
+}
+overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+currentSelectedCell = mapCoords;
