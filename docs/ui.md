@@ -17,3 +17,5 @@ public override void _UnhandledInput(InputEvent @event)
         // implement later
     }
 }
+
+- When we click on the world there will be a mouse coordinate on the screen, first we need to translate that to map coordianates. There will be 3 steps, first is getting that mouse coordinate, then converting it to local coordiantes and lastly converting it to map coordinates.
