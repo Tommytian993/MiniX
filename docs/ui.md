@@ -25,4 +25,11 @@ public override void _UnhandledInput(InputEvent @event)
 Vector2I mapCoords = baseLayer.LocalToMap(ToLocal(GetGlobalMousePosition()));
 GD.Print(mapData[mapCoords]); // then print out
 
-- Now if we test this, there will be edges cases like clicking off the map and throwing errors. We need to address this by by limiting our mouse click detection to be within the bounds of the map.
+- Now if we test this, there will be edges cases like clicking off the map and throwing errors. We need to address this by by limiting our mouse click detection to be within the bounds of the map. 
+
+- To do that, first we need have a boundary check after the click, and before the print out:
+
+if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
+{
+    // proceed to handle the click
+}s
