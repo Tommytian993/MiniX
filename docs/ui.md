@@ -39,4 +39,8 @@ if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y <
 if (mouse.ButtonMask == MouseButtonMask.Left)
 {
     // proceed to handle the click
-}s
+}
+
+- After handling the edge cases, we need to add a visual feedback when clicking on the tile, we'll set the current cell to a overlay layer for highlight:
+
+overlayLayer.SetCell(mapCoordinates, 0, new Vector2I(0, 1));
