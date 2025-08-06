@@ -44,3 +44,7 @@ if (mouse.ButtonMask == MouseButtonMask.Left)
 - After handling the edge cases, we need to add a visual feedback when clicking on the tile, we'll set the current cell to a overlay layer for highlight:
 
 overlayLayer.SetCell(mapCoordinates, 0, new Vector2I(0, 1));
+
+- Now we need to create the feature to deselect a cell after clicking, we need to first initialize a vector2I to hold current clicked cell coordinates:
+
+Vector2I currentSelectedCell = new Vector2I(-1, -1);
