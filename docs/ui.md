@@ -53,10 +53,16 @@ Vector2I currentSelectedCell = new Vector2I(-1, -1);
 
 GD.Print(mapData[mapCoords]);
 
-// remove old highlight and highlight new one if new cell clicked, change currentSelectCell to store current coordinates.s
+// remove old highlight and highlight new one if new cell clicked, change currentSelectCell to store current coordinates.
 if (mapCoords != currentSelectedCell)
 {
 overlayLayer.SetCell(currentSelectedCell, -1);
 }
 overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
 currentSelectedCell = mapCoords;
+
+// in case selecting outside the map, just deselect the current tile
+else
+{
+    overlayLayer.SetCell(currentSelectedCell, -1);
+}
