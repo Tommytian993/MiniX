@@ -32,4 +32,11 @@ GD.Print(mapData[mapCoords]); // then print out
 if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
 {
     // proceed to handle the click
+}
+
+- Now another edge case might be right-clicking on the tile, that would also be allowed to happen with our current "@event is InputEventMouseButton mouse", we can fix this by adding another check and querying the button mask of the click:
+
+if (mouse.ButtonMask == MouseButtonMask.Left)
+{
+    // proceed to handle the click
 }s
