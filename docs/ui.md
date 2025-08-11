@@ -85,7 +85,7 @@ public override string ToString()
 public void GenerateResources()
 {
     Random r = new Random();
-    
+
     for (int x = 0; x < width; x++)
     {
         for (int y = 0; y < height; y++)
@@ -113,3 +113,5 @@ public void GenerateResources()
         }
     }
 }
+
+- We'll call this function in the _Ready right after the generateTerrain.
