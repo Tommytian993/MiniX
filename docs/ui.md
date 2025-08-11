@@ -72,3 +72,10 @@ else
 
 public int food;
 public int production;
+
+- We can override the toString to print them out along with coordinates and terrian: 
+
+public override string ToString()
+{
+    return $"Coordinates: ({this.coordinates.X}, {this.coordinates.Y}). Terrain: {this.terrainType}). Food value: {this.food}. Production value: {this.production}";
+}
