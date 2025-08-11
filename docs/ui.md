@@ -136,3 +136,5 @@ public partial class TerrainTileUI : Panel
 }
 
 - To add a UI Manager, we can set a new canvas layer, it will be a seperate 2D drawing surface, to be placed above our map canvas.
+
+- So set a new node under our game CanvasLayer, new child scene - UI Manager, and set it as a generic 2D node.
