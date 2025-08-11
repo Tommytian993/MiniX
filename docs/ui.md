@@ -118,3 +118,10 @@ public void GenerateResources()
 
 # 3. Terrain UI Creation
 - We should create a new scene for the basic UI, use a "Panel" as the root node type, name it "TerrainTileUI". (Note that when we define games, per Godot naming conventions, sometimes it automatically converts the final "i" to capital letters)
+
+- We'll need to expand it, change its dimension to 250 ** 2 pixels first.
+
+- Add a "TextureRect" node under it, serve as terrain image placeholder, fix it size to match the width of the panel.
+
+- Add 3 labels node under TextureRect: TerrainLabel, FoodLabel, and ProductionLabel.
+
