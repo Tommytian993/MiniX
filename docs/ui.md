@@ -66,3 +66,9 @@ else
 {
     overlayLayer.SetCell(currentSelectedCell, -1);
 }
+
+# 2. Resource Generation
+- For now, each hex has terrain and coordinates, we should start adding resource attributes, first we can start with the 2 basic values, food and production. They will be defined as int values:
+
+public int food;
+public int production;
