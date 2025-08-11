@@ -79,3 +79,37 @@ public override string ToString()
 {
     return $"Coordinates: ({this.coordinates.X}, {this.coordinates.Y}). Terrain: {this.terrainType}). Food value: {this.food}. Production value: {this.production}";
 }
+
+- We want to set these resource values in our map generation loop in HexTileMap, let's define a function called generateResources, it will generate random numbers with boundaries based on the type of the hex's terrain: 
+
+public void GenerateResources()
+{
+    Random r = new Random();
+    
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            Hex h = mapData[new Vector2I(x, y)];
+            switch (h.terrainType)
+            {
+                case TerrainType.PLAINS:
+                    h.food = r.Next(2, 6);
+                    h.production = r.Next(0, 3);
+                    break;
+                case TerrainType.FOREST:
+                    h.food = r.Next(1, 4);
+                    h.production = r.Next(2, 6);
+                    break;
+                case TerrainType.DESERT:
+                    h.food = r.Next(0, 2);
+                    h.production = r.Next(0, 2);
+                    break;
+                case TerrainType.BEACH:
+                    h.food = r.Next(0, 4);
+                    h.production = r.Next(0, 2);
+                    break;
+            }
+        }
+    }
+}
