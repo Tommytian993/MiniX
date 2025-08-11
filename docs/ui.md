@@ -125,3 +125,12 @@ public void GenerateResources()
 
 - Add 3 labels node under TextureRect: TerrainLabel, FoodLabel, and ProductionLabel.
 
+# 4. Creating an UI Manager, and integrating the previous terrain UI to it
+
+- Before adding the new UI Manager, we need to append a script to the current TerrainTileUI, this will be helpful for the manager later to access the functions and properties in there. 
+
+using Godot;
+public partial class TerrainTileUI : Panel
+{
+    // will add contents later
+}
