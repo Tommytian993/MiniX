@@ -117,4 +117,4 @@ public void GenerateResources()
 - We'll call this function in the _Ready right after the generateTerrain.
 
 # 3. Terrain UI Creation
-- We should create a new scene for the basic UI, use a "Panel" as the root node type, name it "TerrainTileUI".
+- We should create a new scene for the basic UI, use a "Panel" as the root node type, name it "TerrainTileUI". (Note that when we define games, per Godot naming conventions, sometimes it automatically converts the final "i" to capital letters)
