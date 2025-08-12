@@ -162,3 +162,7 @@ public override void _Ready()
     productionLabel = GetNode<Label>("ProductionLabel");
     terrainImage = GetNode<TextureRect>("TerrainImage");
 }
+
+- We then need an reference to the hex object we want to view its data, we create a new hex object, note this is just a pointer used by UI to reference the actual tile:
+
+Hex h = null;
