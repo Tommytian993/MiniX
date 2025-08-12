@@ -140,3 +140,25 @@ public partial class TerrainTileUI : Panel
 - So set a new node under our game CanvasLayer, new child scene - UI Manager, and set it as a generic 2D node.
 
 - So just to reiterate, we will have a lot of UI panels later, this UI Manager determines which UI panel should be on the screen at a given time. It will manage a group of packed scenes that represent different types of UI elements, and handle signals, that updates the UI.
+
+- We'll have more packed scenes for UI later, for now, we can load into UI Manager the TerrainTileUI scene:
+
+PackedScene terrainUiScene;
+public override void _Ready()
+{
+    terrainUiScene = ResourceLoader.Load("TerrainTileUI.tscn");
+}
+
+- Then we can import and instantiate them any time if needed.
+
+- We need to get reference to the terrainUI panel's components, which are TextureRect image and the 3 labels. We'll create them as member variables and get their references in the _Ready() function:
+
+TextureRect terrainImage;
+Label terrainLabel, foodLabel, productionLabel;
+public override void _Ready()
+{
+    terrainLabel = GetNode<Label>("TerrainLabel");
+    foodLabel = GetNode<Label>("FoodLabel");
+    productionLabel = GetNode<Label>("ProductionLabel");
+    terrainImage = GetNode<TextureRect>("TerrainImage");
+}
