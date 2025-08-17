@@ -251,3 +251,29 @@ public static Dictionary<TerrainType, string> terrainTypeStrings = new Dictionar
 
 // usage
 terrainLabel.Text = "Terrain: " + terrainTypeStrings[hex.terrainType];
+
+- That's for the names, then we need to load the terrain textures or terrain images, by creating a dictionary mapping terrain types to Texture2D objects, and we'll load them at once when the game starts:
+
+public static Dictionary<TerrainType, Texture2D> terrainTypeImages = new Dictionary<TerrainType, Texture2D>();
+public static void LoadTerrainImages()
+{
+    Texture2D plains = ResourceLoader.Load("res://textures/plains.jpg") as Texture2D;
+    Texture2D beach = ResourceLoader.Load("res://textures/beach.jpg") as Texture2D;
+    Texture2D desert = ResourceLoader.Load("res://textures/desert.jpg") as Texture2D;
+    Texture2D mountain = ResourceLoader.Load("res://textures/mountain.jpg") as Texture2D;
+    Texture2D ice = ResourceLoader.Load("res://textures/ice.jpg") as Texture2D;
+    Texture2D ocean = ResourceLoader.Load("res://textures/ocean.jpg") as Texture2D;
+    Texture2D shallow = ResourceLoader.Load("res://textures/shallow.jpg") as Texture2D;
+    Texture2D forest = ResourceLoader.Load("res://textures/forest.jpg") as Texture2D;
+    terrainTypeImages = new Dictionary<TerrainType, Texture2D>
+    {
+        { TerrainType.PLAINS, plains },
+        { TerrainType.BEACH, beach },
+        { TerrainType.DESERT, desert },
+        { TerrainType.MOUNTAIN, mountain },
+        { TerrainType.ICE, ice },
+        { TerrainType.WATER, ocean },
+        { TerrainType.SHALLOW_WATER, shallow },
+        { TerrainType.FOREST, forest },
+    };
+}
