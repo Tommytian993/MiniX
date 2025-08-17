@@ -292,7 +292,7 @@ terrainImage.Texture = terrainTypeImages[hex.terrainType];
  # 7. Deselecting the ui when clicking off
  - Now we can add this minor feature we the Godot's built-in signal system, and allow the user to click off the map and close the ui panel.
  Basically we'll create a function to destroy the current UI pop-up when given the signal, so inside our UIManager class: 
- 
+
  public void HideAllPopups()
 {
     if (terrainUi is not null)
@@ -300,4 +300,29 @@ terrainImage.Texture = terrainTypeImages[hex.terrainType];
         terrainUi.QueueFree();
         terrainUi = null;
     }
+}
+
+- In HexTileMap, we'll create this signal, this time with our Godot's built-in event declaration:
+
+[Signal]
+public delegate void ClickOffMapEventHandler();
+
+- Make
+
+if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
+{
+    
+    if (mouse.ButtonMask == MouseButtonMask.Left)
+    {
+        Hex h = mapData[mapCoords];
+        SendHexData?.Invoke(h);
+        if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+        overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+        currentSelectedCell = mapCoords;
+    }
+}
+else
+{
+    overlayLayer.SetCell(currentSelectedCell, -1);
+    EmitSignal(SignalName.ClickOffMap);
 }
