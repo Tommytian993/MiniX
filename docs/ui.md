@@ -232,5 +232,22 @@ public void SetTerrainUI(Hex h)
   terrainUi.SetHex(h);
 }
 
+# 6. Displaying food and production data
+- To accomplish this, first we need to create dictionary mapping of terrain types to strings, so we can add the specfic text to label based on the type:
 
+// static members are shared among all instances so it is good for enumerations and textures.
 
+public static Dictionary<TerrainType, string> terrainTypeStrings = new Dictionary<TerrainType, string>
+{
+    { TerrainType.PLAINS, "Plains" },
+    { TerrainType.BEACH, "Beach" },
+    { TerrainType.DESERT, "Desert" },
+    { TerrainType.MOUNTAIN, "Mountain" },
+    { TerrainType.ICE, "Ice" },
+    { TerrainType.WATER, "Water" },
+    { TerrainType.SHALLOW_WATER, "Shallow Water" },
+    { TerrainType.FOREST, "Forest" },
+};
+
+// usage
+terrainLabel.Text = "Terrain: " + terrainTypeStrings[hex.terrainType];
