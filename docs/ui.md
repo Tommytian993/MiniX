@@ -210,3 +210,16 @@ public partial class HexTileMap : Node2D
     public delegate void SendHexDataEventHandler(Hex h);
     public event SendHexDataEventHandler SendHexData;
 }
+
+- After that, we can attach the signal and invoke it to our UI manager, in HexTileMap's on_ready function.
+
+// after initial uimanager object, attach signal to this function
+this.SendHexData += uimanager.SetTerrainUI;
+
+- And we can invoke the event when its clicked within the bounds in UnhandledInput:
+
+// within if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
+
+SendHexData?.Invoke(h);
+
+- Lastly we want to ensure the order of setHex and add node, we cannot set it
