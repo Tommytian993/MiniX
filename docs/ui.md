@@ -201,3 +201,5 @@ public partial class HexTileMap : Node2D
         uimanager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
     }
 }
+
+- Now we can set up our signals, using the C# signal systems, with events and delegates. There is also a built-in event system in Godot. However since we are using "Hex" here, not a traditional node type, then it would be more appropriate to use the C# event system.
