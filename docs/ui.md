@@ -202,4 +202,11 @@ public partial class HexTileMap : Node2D
     }
 }
 
-- Now we can set up our signals, using the C# signal systems, with events and delegates. There is also a built-in event system in Godot. However since we are using "Hex" here, not a traditional node type, then it would be more appropriate to use the C# event system.
+- Now we can set up our signals, using the C# signal systems, with events and delegates. There is also a built-in event system in Godot. However since we are using "Hex" here, not a traditional node type, then it would be more appropriate to use the C# event system. (Technically the Godot's system is also built on top of that)
+
+public partial class HexTileMap : Node2D
+{
+    // when clicked, suppose to send out a hex's data
+    public delegate void SendHexDataEventHandler(Hex h);
+    public event SendHexDataEventHandler SendHexData;
+}
