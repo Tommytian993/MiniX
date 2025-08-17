@@ -185,3 +185,19 @@ public void SetTerrainUI(Hex h)
     AddChild(terrainUi);
     terrainUi.SetHex(h);
 }
+
+# 5. Sending signals from HexTileMap to UI Manager
+
+- With these pipeline set up finished, we can now propergate data down to TerrainTile UI. First let's store a reference in HexTileMap:
+
+public partial class HexTileMap : Node2D
+{
+    // reference 
+    UIManager uimanager;
+
+    public override void _Ready()
+    {
+        // other code
+        uimanager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
+    }
+}
