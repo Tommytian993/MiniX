@@ -307,7 +307,7 @@ terrainImage.Texture = terrainTypeImages[hex.terrainType];
 [Signal]
 public delegate void ClickOffMapEventHandler();
 
-- Make
+- Make sure to emit it in the _UnhandledInput, if the click condition is not within the map range:
 
 if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
 {
