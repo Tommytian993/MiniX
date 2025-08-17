@@ -284,3 +284,7 @@ public override void _EnterTree()
 {
     TerrainTileUI.LoadTerrainImages();
 }
+
+- Lastly in the SetHex we set the texture:
+
+terrainImage.Texture = terrainTypeImages[hex.terrainType];
