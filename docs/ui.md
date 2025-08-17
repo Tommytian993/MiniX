@@ -222,4 +222,15 @@ this.SendHexData += uimanager.SetTerrainUI;
 
 SendHexData?.Invoke(h);
 
-- Lastly we want to ensure the order of setHex and add node, we cannot set it
+- Lastly we want to ensure the order of setHex and add node, we cannot reference the labels until terrain UI is added to the scene:
+
+public void SetTerrainUI(Hex h)
+{
+  if (terrainUi is not null) terrainUi.QueueFree();
+  terrainUi = terrainUiScene.Instantiate() as TerrainTileUI; 
+  AddChild(terrainUi);
+  terrainUi.SetHex(h);
+}
+
+
+
