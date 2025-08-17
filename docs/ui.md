@@ -170,3 +170,13 @@ Hex h = null;
 - As mentioned, our UIManager will held the specific references to UI elements:
 
 TerrainTileUI terrainUi = null;
+
+- Accordingly, we can create a set function:
+
+public void SetTerrainUI(Hex h)
+{
+    if (terrainUi is not null) terrainUi.QueueFree();
+    terrainUi = terrainUiScene.Instantiate() as TerrainTileUI;
+    AddChild(terrainUi);
+    terrainUi.SetHex(h);
+}
