@@ -175,8 +175,13 @@ TerrainTileUI terrainUi = null;
 
 public void SetTerrainUI(Hex h)
 {
+    # check and refresh current UI board
     if (terrainUi is not null) terrainUi.QueueFree();
+
+    # instanitate a new scene as node 
     terrainUi = terrainUiScene.Instantiate() as TerrainTileUI;
+
+    # add to UIManger (or canvas)?
     AddChild(terrainUi);
     terrainUi.SetHex(h);
 }
