@@ -288,3 +288,16 @@ public override void _EnterTree()
 - Lastly in the SetHex we set the texture:
 
 terrainImage.Texture = terrainTypeImages[hex.terrainType];
+
+ # 7. Deselecting the ui when clicking off
+ - Now we can add this minor feature we the Godot's built-in signal system, and allow the user to click off the map and close the ui panel.
+ Basically we'll create a function to destroy the current UI pop-up when given the signal, so inside our UIManager class: 
+ 
+ public void HideAllPopups()
+{
+    if (terrainUi is not null)
+    {
+        terrainUi.QueueFree();
+        terrainUi = null;
+    }
+}
