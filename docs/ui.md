@@ -326,3 +326,6 @@ else
     overlayLayer.SetCell(currentSelectedCell, -1);
     EmitSignal(SignalName.ClickOffMap);
 }
+
+- Make sure to connect HexTileMap's ClickOffMap signal to the UIManager node’s hideAllPopups function in the Editor
+
