@@ -277,3 +277,10 @@ public static void LoadTerrainImages()
         { TerrainType.FOREST, forest },
     };
 }
+
+- We will call it in the overriden EnterTree() function, which will be executed right after we went into the game:
+
+public override void _EnterTree()
+{
+    TerrainTileUI.LoadTerrainImages();
+}
