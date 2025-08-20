@@ -74,3 +74,9 @@ public void CreateCity(Civilization civ, Vector2I coords, string name)
 {
     City city = cityScene.Instantiate() as City;
 }
+
+- To make our CreateCity work, we need to set up references and addition operations in the involving classes:
+
+- First let's add a civilization reference to our city class, because each city will be belonging to a civilization:
+
+public Civilization civ;
