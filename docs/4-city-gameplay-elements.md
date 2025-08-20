@@ -83,4 +83,8 @@ public Civilization civ;
 
 - Inside HexTileMap, when a city is created, we can do this:
 
-city.map = this;
+city.map = this; // inside city there's "public HexTileMap map;"
+
+- Also in HexTileMap, we can then add the city to the civilization's cities list:
+
+civ.cities.Add(city);
