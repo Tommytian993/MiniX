@@ -39,7 +39,7 @@ territory = new List<Hex>();
 borderTilePool = new List<Hex>();
 
 # 2. Creating Civilization Class
-- Each civilization will have color and name, and control multiple cities. Technically, I don't think they need graphics or visual scenes for now, let's create only a script: Civilization.cs. We give it an identifier, cities, color, name, and an boolean checking if this is the player's city.
+- Each civilization will have color and name, and control multiple cities. Technically, I don't think they need graphics or visual scenes for now, let's create only a script: Civilization.cs. We give it an identifier, cities, color, name, and an boolean checking if this is the player's city. 
 
 using Godot;
 using System;
@@ -51,8 +51,19 @@ public class Civilization
     public Color territoryColor;
     public string name;
     public bool playerCiv;
+
     public Civilization()
     {
         cities = new List<City>();
     }
+}
+
+# 3. Creating Cities in HexTileMap
+- Let's create a function to add a city to the civilization, first create and import our packed scene:
+
+PackedScene cityScene;
+public override void _Ready()
+{
+    cityScene = ResourceLoader.Load<PackedScene>("City.tscn");
+    // Other code to initialize scenes and etc...
 }
