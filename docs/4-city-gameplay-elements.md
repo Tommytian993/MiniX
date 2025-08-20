@@ -67,3 +67,10 @@ public override void _Ready()
     cityScene = ResourceLoader.Load<PackedScene>("City.tscn");
     // Other code to initialize scenes and etc...
 }
+
+- And a helper function taking in the civilization, city center coordinates and the city name:
+
+public void CreateCity(Civilization civ, Vector2I coords, string name)
+{
+    City city = cityScene.Instantiate() as City;
+}
