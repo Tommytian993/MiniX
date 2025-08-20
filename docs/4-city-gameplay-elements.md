@@ -97,4 +97,11 @@ city.civ = civ;
 
 AddChild(city);
 
-# 4. Assigning relevent 
+# 4. Assigning relevent data to Cities
+
+- Now these are the initial properties of the city, we will fill up some of these placeholders. First, the map coordinates of the city's center, so inside CreateCity:
+
+city.centerCoordinates = coords;
+
+// this is where to draw it, Position is the Node2D position property in unit of pixels, MapToLocal will transform the map coordinate to the world's pixel coordinates
+city.Position = baseLayer.MapToLocal(coords); 
