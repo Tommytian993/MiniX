@@ -92,3 +92,9 @@ civ.cities.Add(city);
 - Conversely, we assign the civilization to the city, but note each city would only have one civilization(at a time):
 
 city.civ = civ;
+
+- Lastly we add the city scene, to the scene tree and let it appear on the map:
+
+AddChild(city);
+
+# 4. Assigning relevent 
