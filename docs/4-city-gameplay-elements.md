@@ -88,3 +88,7 @@ city.map = this; // inside city there's "public HexTileMap map;"
 - Also in HexTileMap, we can then add the city to the civilization's cities list:
 
 civ.cities.Add(city);
+
+- Conversely, we assign the civilization to the city, but note each city would only have one civilization(at a time):
+
+city.civ = civ;
