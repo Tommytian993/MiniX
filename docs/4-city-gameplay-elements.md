@@ -1,0 +1,4 @@
+This is a collection of ideas and experiment about implementing the city gameplay system
+
+# 1. Creating and Initializing the City Scenes
+- Let's create a 2D scene called "City" and 2 child nodes, one is a Sprite2D to contain the city's graphic image, the other is a Label which will represent the city's name. For the Sprite2D, we drag the city.png image into the texture slot and center the offset. Then we set the Label's default text to "city name" and edit other attributes like size or color to make it more visible. Lastly we attach a script to the city for future functionalities, including adding territories, populations and spawning units.
