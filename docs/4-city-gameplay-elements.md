@@ -38,4 +38,21 @@ label.Text = name;
 territory = new List<Hex>();
 borderTilePool = new List<Hex>();
 
-# 2. Creating 
+# 2. Creating Civilization Class
+- Each civilization will have color and name, and control multiple cities. Technically, I don't think they need graphics or visual scenes for now, let's create only a script: Civilization.cs. We give it an identifier, cities, color, name, and an boolean checking if this is the player's city.
+
+using Godot;
+using System;
+using System.Collections.Generic;
+public class Civilization
+{
+    public int id;
+    public List<City> cities;
+    public Color territoryColor;
+    public string name;
+    public bool playerCiv;
+    public Civilization()
+    {
+        cities = new List<City>();
+    }
+}
