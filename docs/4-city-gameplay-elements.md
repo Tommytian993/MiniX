@@ -80,3 +80,7 @@ public void CreateCity(Civilization civ, Vector2I coords, string name)
 - First let's add a civilization reference to our city class, because each city will be belonging to a civilization:
 
 public Civilization civ;
+
+- Inside HexTileMap, when a city is created, we can do this:
+
+city.map = this;
