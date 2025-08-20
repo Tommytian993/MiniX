@@ -29,3 +29,13 @@ public partial class City : Node2D
     Label label;
     Sprite2D sprite;
 }
+
+- Let's not forget in the _Ready() function to append values to some of them to prevent initialization errors:
+
+label = GetNode<Label>("Label");
+sprite = GetNode<Sprite2D>("Sprite2D");
+label.Text = name;
+territory = new List<Hex>();
+borderTilePool = new List<Hex>();
+
+# 2. Creating 
