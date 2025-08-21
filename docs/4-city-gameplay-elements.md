@@ -120,3 +120,12 @@ public void AddTerritory(List<Hex> territoryToAdd)
     // add to the list and will implemet AddRange
     territory.AddRange(territoryToAdd);
 }
+
+Then in our Hex class, we will add and initialize the ownerCity variable
+
+public City ownerCity; // New member variable
+public Hex(Vector2I coords)
+{
+     //this.coordinates = coords;
+     ownerCity = null; // Initialize ownerCity to null
+}
