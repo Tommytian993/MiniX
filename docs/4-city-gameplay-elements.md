@@ -104,4 +104,19 @@ AddChild(city);
 city.centerCoordinates = coords;
 
 // this is where to draw it, Position is the Node2D position property in unit of pixels, MapToLocal will transform the map coordinate to the world's pixel coordinates
+// Mainly for drawing and label showing 
 city.Position = baseLayer.MapToLocal(coords); 
+
+- Let's create an AddTerritory function to add hexes to our city as territories, so inside our City class, it will take in a list of hexes as parameter:
+
+public void AddTerritory(List<Hex> territoryToAdd)
+{
+    // each hex will point to the ownercity as this
+    foreach (Hex h in territoryToAdd)
+    {
+        h.ownerCity = this;
+    }
+
+    // add to the list and will implemet AddRange
+    territory.AddRange(territoryToAdd);
+}
