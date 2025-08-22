@@ -173,3 +173,14 @@ public List<Hex> GetSurroundingHexes(Vector2I coords)
     return result;
 }
 
+- Then we could simply populate the surrouding hexes, then we can iterate through them to check if they don't have an ownercity and is occupieable, if so we 
+
+List<Hex> surroundingHexes = GetSurroundingHexes(city.centerCoordinates);
+
+foreach (Hex hex in surroundingHexes)
+{
+    if (hex.ownerCity == null)
+    {
+        city.AddTerritory(new List<Hex> { hex });
+    }
+}
