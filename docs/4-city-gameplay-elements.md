@@ -159,3 +159,17 @@ public bool HexInBounds(Vector2I coords)
   
   return true;
 }
+
+- Now we will complete our GetSurroundingHexes function:
+
+public List<Hex> GetSurroundingHexes(Vector2I coords)
+{
+    List<Hex> result = new List<Hex>();
+    foreach (Vector2I coord in baseLayer.GetSurroundingCells(coords))
+    {
+        if (HexInBounds(coord))
+            result.Add(mapData[coord]);
+    }
+    return result;
+}
+
