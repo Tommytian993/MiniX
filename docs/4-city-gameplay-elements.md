@@ -149,3 +149,13 @@ public List<Hex> GetSurroundingHexes(Vector2I coords)
     return result;
 }
 
+- Before adding each surrounding hex, we will apply this function to check if it is within the map bounds:
+
+public bool HexInBounds(Vector2I coords)
+{
+  if (coords.X < 0 || coords.X >= width ||
+    coords.Y < 0 || coords.Y >= height)
+    return false;
+  
+  return true;
+}
