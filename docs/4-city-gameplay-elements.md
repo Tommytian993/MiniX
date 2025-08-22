@@ -121,7 +121,7 @@ public void AddTerritory(List<Hex> territoryToAdd)
     territory.AddRange(territoryToAdd);
 }
 
-Then in our Hex class, we will add and initialize the ownerCity variable
+- Then in our Hex class, we will add and initialize the ownerCity variable
 
 public City ownerCity; // New member variable
 public Hex(Vector2I coords)
@@ -129,3 +129,23 @@ public Hex(Vector2I coords)
      //this.coordinates = coords;
      ownerCity = null; // Initialize ownerCity to null
 }
+
+- When we call the createCity, we also need to add the initial territory:
+
+// Adding territory to the city
+city.AddTerritory(new List<Hex>{mapData[coords]});
+
+// Add the surrounding territory 
+
+- Then to find the surrounding hexes, we'll have this code, GetSurroundingCells is TileMapLayer's method to return the neighoring cells, in our case of hex map there will be 6
+
+public List<Hex> GetSurroundingHexes(Vector2I coords)
+{
+    List<Hex> result = new List<Hex>();
+    foreach (Vector2I coord in baseLayer.GetSurroundingCells(coords))
+    {
+        // More code
+    }
+    return result;
+}
+
