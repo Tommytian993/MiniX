@@ -248,7 +248,7 @@ public void CreateCity(Civilization civ, Vector2I coords, string name)
     cities[coords] = city;
 }
 
-# City and Civilization Coloring
+# 5. City and Civilization Coloring
 
 - In order to color the map base on the city and civilization, first we need to create a new TileMapLayer -> CivColorsLayer, and place it between BaseLayer and HexBordersLayer, we need to give it a TileSet, and set the Modulate Alpha to 60%(Half transparent so we can see the terrain color below)
 
@@ -275,3 +275,53 @@ public void UpdateCivTerritoryMap(Civilization civ)
 - Alternative tiles is a godot map feature that allows us to create variants of existing base tiles. We'll make use of this to create  alternative tiles for different civilizations' colors.
 
 - First in our Civilization class we add a "public int territoryColorAltTileId;" to store its id.
+
+# 6. City and Civilization Spawning
+
+- To spawn our cities, we need to make sure they are on land and usually plains, let's create a generateCivStartingLocations function, that returns a list of Vector2 integers, meaning the valid starting locations for civilizations and cities.
+
+- For simplicity's sake, let's just choose plain tiles randomly, and prevent them to cluster too closely.
+
+public List<Vector2I> generateCivStartingLocations(int numLocations)
+{
+     // final result 
+    List<Vector2I> locations = new List<Vector2I>();   
+    List<Vector2I> plainsTiles = new List<Vector2I>(); // 候选plains
+
+    // 1. iterate map, get all plains
+    for (int x = 0; x < width; x++)
+    {
+        for (int y = 0; y < height; y++)
+        {
+            if (mapData[new Vector2I(x, y)].terrainType == TerrainType.PLAINS)
+            {
+                plainsTiles.Add(new Vector2I(x, y));
+            }
+        }
+    }
+
+    // 2. random generater
+    Random r = new Random();
+    for (int i = 0; i < numLocations; i++)
+    {
+        Vector2I coord = new Vector2I();
+        bool valid = false;
+        int counter = 0;
+
+        // continue to find with a deadlock of 10000
+        while (!valid && counter < 10000)
+        {
+            coord = plainsTiles[r.Next(plainsTiles.Count)];
+
+            // valid = isValidLocation(coord, locations);
+
+            counter++;
+        }
+
+        // add valid 
+        if (valid)
+            locations.Add(coord);
+    }
+
+    return locations;
+}
