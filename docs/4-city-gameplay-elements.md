@@ -184,3 +184,21 @@ foreach (Hex hex in surroundingHexes)
         city.AddTerritory(new List<Hex> { hex });
     }
 }
+
+- Lastly we set the city name and icon color
+
+public void SetCityName(string newName)
+{
+    name = newName;
+    label.Text = newName;
+}
+public void SetIconColor(Color c)
+{
+    sprite.Modulate = c;
+}
+
+// In CreateCity
+city.SetCityName(name);
+city.SetIconColor(civ.territoryColor);
+
+
