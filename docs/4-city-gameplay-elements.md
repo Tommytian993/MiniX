@@ -201,10 +201,6 @@ public void SetIconColor(Color c)
 city.SetCityName(name);
 city.SetIconColor(civ.territoryColor);
 
-# City and Civilization Coloring
-
-- In order to color the map base on the city and civilization, first we need to create a new TileMapLayer -> CivColorsLayer, and place it between BaseLayer and HexBordersLayer, we need to give it a TileSet, and set the Modulate Alpha to 60%(Half transparent so we can see the terrain color below)
-
 - In our HexTileMap we should keep track of the cities and instantiate them in Ready()
 
 public Dictionary<Vector2I, City> cities;
@@ -252,15 +248,28 @@ public void CreateCity(Civilization civ, Vector2I coords, string name)
     cities[coords] = city;
 }
 
+# City and Civilization Coloring
+
+- In order to color the map base on the city and civilization, first we need to create a new TileMapLayer -> CivColorsLayer, and place it between BaseLayer and HexBordersLayer, we need to give it a TileSet, and set the Modulate Alpha to 60%(Half transparent so we can see the terrain color below)
+
+- Let's add our civColorsLayer to load the resource.
+
+baseLayer = GetNode<TileMapLayer>("BaseLayer");
+borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
+overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
+civColorsLayer = GetNode<TileMapLayer>("CivColorsLayer");
+
 - To paint the territories, we would create a function: UpdateCivTerritoryMap, to loop through the cities and hexes to paint them by setting the colors on their cells.
 
 public void UpdateCivTerritoryMap(Civilization civ)
 {
     foreach (City c in civ.cities)
     {
-      foreach (Hex h in c.territory)
-      {
-        
-      }
+        foreach (Hex h in c.territory)
+        {
+            civColorsLayer.SetCell(h.coordinates, 0, terrainTextures[TerrainType.CIV_COLOR_BASE], civ.territoryColorAltTileId);
+        }
     }
 }
+
+
