@@ -13,6 +13,9 @@ public partial class HexTileMap : Node2D
 	[Export]
 	public int height = 60;
 
+	[Export]
+	public int NUM_AI_CIVS = 6;   // can change in editor panel
+
 	public Hex[,] hexes;
 
 	TileMapLayer baseLayer,
@@ -452,7 +455,7 @@ public partial class HexTileMap : Node2D
 	/// </summary>
 	/// <param name="numLocations">需要生成的位置数量</param>
 	/// <returns>有效的起始位置列表</returns>
-	public List<Vector2I> generateCivStartingLocations(int numLocations)
+	public List<Vector2I> GenerateCivStartingLocations(int numLocations)
 	{
 		// final result 
 		List<Vector2I> locations = new List<Vector2I>();   
@@ -535,5 +538,27 @@ public partial class HexTileMap : Node2D
 		}
 
 		return true;
+	}
+
+	/// <summary>
+	/// 生成AI文明
+	/// </summary>
+	/// <param name="civStarts">文明起始位置列表</param>
+	public void GenerateAICivs(List<Vector2I> civStarts)
+	{
+		for (int i = 0; i < civStarts.Count; i++)
+		{
+			Civilization currentCiv = new Civilization
+			{
+				id = i + 1,
+				playerCiv = false
+			};
+
+			currentCiv.SetRandomColor();
+
+			CreateCity(currentCiv, civStarts[i], "City " + civStarts[i].X);
+
+			civs.Add(currentCiv);
+		}
 	}
 }

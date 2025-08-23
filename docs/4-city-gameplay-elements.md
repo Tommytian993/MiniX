@@ -282,7 +282,7 @@ public void UpdateCivTerritoryMap(Civilization civ)
 
 - For simplicity's sake, let's just choose plain tiles randomly, and prevent them to cluster too closely.
 
-public List<Vector2I> generateCivStartingLocations(int numLocations)
+public List<Vector2I> GenerateCivStartingLocations(int numLocations)
 {
      // final result 
     List<Vector2I> locations = new List<Vector2I>();   
