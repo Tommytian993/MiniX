@@ -251,3 +251,16 @@ public void CreateCity(Civilization civ, Vector2I coords, string name)
     // add the city in the cities dictionary
     cities[coords] = city;
 }
+
+- To paint the territories, we would create a function: UpdateCivTerritoryMap, to loop through the cities and hexes to paint them by setting the colors on their cells.
+
+public void UpdateCivTerritoryMap(Civilization civ)
+{
+    foreach (City c in civ.cities)
+    {
+      foreach (Hex h in c.territory)
+      {
+        
+      }
+    }
+}
