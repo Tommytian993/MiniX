@@ -29,6 +29,9 @@ public partial class HexTileMap : Node2D
 	// 地形纹理映射字典，将地形类型映射到对应的瓦片坐标
 	Dictionary<TerrainType, Vector2I> terrainTextures;
 
+	// TileSetAtlasSource引用，用于创建替代瓦片
+	TileSetAtlasSource terrainAtlas;
+
 	// 当前选中的单元格坐标，初始化为无效坐标 (-1, -1)
 	Vector2I currentSelectedCell = new Vector2I(-1, -1);
 
@@ -55,6 +58,9 @@ public partial class HexTileMap : Node2D
 		borderLayer = GetNode<TileMapLayer>("HexBordersLayer");
 		overlayLayer = GetNode<TileMapLayer>("SelectionOverlayLayer");
 		civColorsLayer = GetNode<TileMapLayer>("CivColorsLayer");
+		
+		// 获取TileSetAtlasSource引用
+		terrainAtlas = civColorsLayer.TileSet.GetSource(0) as TileSetAtlasSource;
 		// 获取UI管理器引用，使用绝对路径确保可靠性
 		uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 
@@ -555,6 +561,11 @@ public partial class HexTileMap : Node2D
 			};
 
 			currentCiv.SetRandomColor();
+
+			// 创建替代瓦片并设置颜色
+			int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+			terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = currentCiv.territoryColor;
+			currentCiv.territoryColorAltTileId = id;
 
 			CreateCity(currentCiv, civStarts[i], "City " + civStarts[i].X);
 
