@@ -358,3 +358,10 @@ foreach (Hex h in GetSurroundingHexes(coord))
     }
   }
 }
+
+- Now let's parameterize the number of ai civ we want to create, currently set to 6, and add that number + 1(player) to the start generating location function:
+
+List<Vector2I> starts = GenerateCivStartingLocations(NUM_AI_CIVS + 1);
+
+[Export]
+public int NUM_AI_CIVS = 6;   // 可在 Editor 面板里改
