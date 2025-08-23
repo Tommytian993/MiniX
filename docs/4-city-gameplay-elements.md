@@ -204,3 +204,50 @@ city.SetIconColor(civ.territoryColor);
 # City and Civilization Coloring
 
 - In order to color the map base on the city and civilization, first we need to create a new TileMapLayer -> CivColorsLayer, and place it between BaseLayer and HexBordersLayer, we need to give it a TileSet, and set the Modulate Alpha to 60%(Half transparent so we can see the terrain color below)
+
+- In our HexTileMap we should keep track of the cities and instantiate them in Ready()
+
+public Dictionary<Vector2I, City> cities;
+public List<Civilization> civs;
+
+// in Ready()
+cities = new Dictionary<Vector2I, City>();
+civs = new List<Civilization>();
+
+- Then we add this to the Hex class, to check if a hex is a cityCenter
+
+public bool isCityCenter = false;
+
+- Lastly in our CreateCity function we set these values:
+
+public void CreateCity(Civilization civ, Vector2I coords, string name)
+{
+    City city = cityScene.Instantiate() as City;
+    city.map = this;
+    civ.cities.Add(city);
+    city.civ = civ;
+    AddChild(city);
+
+    // color + name
+    city.SetIconColor(civ.territoryColor);
+    city.SetCityName(name);
+
+    // set the coordinates of the city
+    city.centerCoordinates = coords;
+    city.Position = baseLayer.MapToLocal(coords);
+    mapData[coords].isCityCenter = true;
+
+    // add territory to the city
+    city.AddTerritory(new List<Hex>{mapData[coords]});
+    List<Hex> surrounding = GetSurroundingHexes(coords);
+    foreach (Hex h in surrounding)
+    {
+        if (h.ownerCity == null)
+            city.AddTerritory(new List<Hex>{h});
+    }
+
+    UpdateCivTerritoryMap(civ);
+
+    // add the city in the cities dictionary
+    cities[coords] = city;
+}
