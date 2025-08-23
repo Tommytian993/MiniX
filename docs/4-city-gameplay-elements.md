@@ -397,3 +397,33 @@ public void GenerateAICivs(List<Vector2I> civStarts)
         civs.Add(currentCiv);
     }
 }
+
+- To (Alternative tiles)
+
+
+
+
+
+- We can create a funciton to create the player civilization likewise:
+
+public Civilization CreatePlayerCiv(Vector2I start)
+{
+    Civilization playerCiv = new Civilization();
+
+    playerCiv.id = 0; // default 0
+
+    playerCiv.playerCiv = true;
+
+    playerCiv.territoryColor = new Color(PLAYER_COLOR); // color, can change in editor
+
+    int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+
+    terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = playerCiv.territoryColor;
+
+    playerCiv.territoryColorAltTileId = id;
+    civs.Add(playerCiv);
+    
+    CreateCity(playerCiv, start, "Player City");
+    return playerCiv;
+}
+
