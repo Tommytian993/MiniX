@@ -427,3 +427,12 @@ public Civilization CreatePlayerCiv(Vector2I start)
     return playerCiv;
 }
 
+- We reserve the first civilization for the player, and then generate the ai civilizations:
+
+// player civ generation
+Civilization playerCiv = CreatePlayerCiv(starts[0]);
+starts.RemoveAt(0);
+
+// other points to generate ais
+GenerateAICivs(starts);
+
