@@ -4,7 +4,8 @@ This godot project is a prototype of a 4x game with hexagonal tile map
 
 ## Main Features so far
 - Procedural hex tile map generation of different terrains
-<img width="577" height="289" alt="Screenshot 2025-08-22 at 10 26 13 PM" src="https://github.com/user-attachments/assets/0430b60c-2658-436d-b815-d49fc48c5a55" />
+
+![Screenshot 2025-08-22 at 10 26 13 PM](https://github.com/user-attachments/assets/0430b60c-2658-436d-b815-d49fc48c5a55)
 
 - Automatic assignment of terrain and resources such as food and productions
 - Clicking hex tile and displaying terrain details.
