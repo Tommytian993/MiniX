@@ -215,6 +215,9 @@ public partial class HexTileMap : Node2D
 		city.SetIconColor(civ.territoryColor);
 		// center coordinates
 		city.centerCoordinates = coords;
+		
+		// 确保label显示正确的名称
+		city.SetCityName(name);
 		city.Position = baseLayer.MapToLocal(coords);
 		mapData[coords].isCityCenter = true;
 		// add territory

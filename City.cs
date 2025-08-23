@@ -21,9 +21,14 @@ public partial class City : Node2D
 	{
 		label = GetNode<Label>("Label");
 		sprite = GetNode<Sprite2D>("Sprite2D");
-		label.Text = name;
 		territory = new List<Hex>();
 		borderTilePool = new List<Hex>();
+		
+		// 如果name已经设置，则更新label
+		if (!string.IsNullOrEmpty(name))
+		{
+			label.Text = name;
+		}
 	}
 
 	public void AddTerritory(List<Hex> territoryToAdd)
