@@ -512,4 +512,28 @@ public partial class HexTileMap : Node2D
 
 		return locations;
 	}
+
+	/// <summary>
+	/// 检查位置是否有效（不在边界附近，不与其他城市太近）
+	/// </summary>
+	/// <param name="coord">要检查的坐标</param>
+	/// <param name="locations">已有的位置列表</param>
+	/// <returns>位置是否有效</returns>
+	private bool isValidLocation(Vector2I coord, List<Vector2I> locations)
+	{
+		// boundary check not near the border 
+		if (coord.X < 3 || coord.X > width - 3 || coord.Y < 3 || coord.Y > height - 3)
+		{
+			return false;
+		}
+
+		// check not near existing cities within 20
+		foreach (Vector2I l in locations)
+		{
+			if (Math.Abs(coord.X - l.X) < 20 || Math.Abs(coord.Y - l.Y) < 20)
+				return false;
+		}
+
+		return true;
+	}
 }
