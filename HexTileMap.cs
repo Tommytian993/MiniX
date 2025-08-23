@@ -98,6 +98,12 @@ public partial class HexTileMap : Node2D
 		civs = new List<Civilization>();
 		cities = new Dictionary<Vector2I, City>();
 
+		// 生成文明和城市
+		List<Vector2I> starts = GenerateCivStartingLocations(NUM_AI_CIVS + 1);
+		GD.Print($"生成了 {starts.Count} 个起始位置");
+		GenerateAICivs(starts);
+		GD.Print($"生成了 {civs.Count} 个文明和 {cities.Count} 个城市");
+
 		// 订阅六边形数据发送事件，将UI管理器的方法绑定到事件上
 		// 当SendHexData事件触发时，自动调用uiManager.SetTerrainTileUi方法
 		this.SendHexData += uiManager.SetTerrainUi;
@@ -203,10 +209,10 @@ public partial class HexTileMap : Node2D
 
 		AddChild(city);
 
+		// name (必须在_Ready之前设置)
+		city.name = name;
 		// color
 		city.SetIconColor(civ.territoryColor);
-		// name
-		city.SetCityName(name);
 		// center coordinates
 		city.centerCoordinates = coords;
 		city.Position = baseLayer.MapToLocal(coords);
