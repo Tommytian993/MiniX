@@ -446,4 +446,70 @@ public partial class HexTileMap : Node2D
 		// 使用基础图层的坐标转换方法
 		return baseLayer.MapToLocal(coords);
 	}
+
+	/// <summary>
+	/// 生成文明起始位置
+	/// </summary>
+	/// <param name="numLocations">需要生成的位置数量</param>
+	/// <returns>有效的起始位置列表</returns>
+	public List<Vector2I> generateCivStartingLocations(int numLocations)
+	{
+		// final result 
+		List<Vector2I> locations = new List<Vector2I>();   
+		List<Vector2I> plainsTiles = new List<Vector2I>(); // 候选plains
+
+		// 1. iterate map, get all plains
+		for (int x = 0; x < width; x++)
+		{
+			for (int y = 0; y < height; y++)
+			{
+				if (mapData[new Vector2I(x, y)].terrainType == TerrainType.PLAINS)
+				{
+					plainsTiles.Add(new Vector2I(x, y));
+				}
+			}
+		}
+
+		// 2. random generater
+		Random r = new Random();
+		for (int i = 0; i < numLocations; i++)
+		{
+			Vector2I coord = new Vector2I();
+			bool valid = false;
+			int counter = 0;
+
+			// continue to find with a deadlock of 10000
+			while (!valid && counter < 10000)
+			{
+				coord = plainsTiles[r.Next(plainsTiles.Count)];
+
+				valid = isValidLocation(coord, locations);
+
+				counter++;
+			}
+
+			// add valid 
+			if (valid)
+			{
+				locations.Add(coord);
+				
+				// get the surrounding ones and remove buffer zones:
+				plainsTiles.Remove(coord);
+				foreach (Hex h in GetSurroundingHexes(coord))
+				{
+					foreach (Hex j in GetSurroundingHexes(h.coordinates))
+					{
+						foreach (Hex k in GetSurroundingHexes(j.coordinates))
+						{
+							plainsTiles.Remove(h.coordinates);
+							plainsTiles.Remove(j.coordinates);
+							plainsTiles.Remove(k.coordinates);
+						}
+					}
+				}
+			}
+		}
+
+		return locations;
+	}
 }
