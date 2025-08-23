@@ -364,4 +364,14 @@ foreach (Hex h in GetSurroundingHexes(coord))
 List<Vector2I> starts = GenerateCivStartingLocations(NUM_AI_CIVS + 1);
 
 [Export]
-public int NUM_AI_CIVS = 6;   // 可在 Editor 面板里改
+public int NUM_AI_CIVS = 6;   // can change in editor panel
+
+- Let's create a function to generate AI Civilizations with starting locations as parameters, we will iterate through all of them, instantiate new civilization object, set its id and whether a player civ, assign random color, create a starting city via CreateCity, and add the civilization to the map.
+
+- One step before that, lets create a random color generation
+
+public void SetRandomColor()
+{
+    Random r = new Random();
+    territoryColor = new Color(r.Next(255)/255.0f, r.Next(255)/255.0f, r.Next(255)/255.0f);
+}
