@@ -15,4 +15,13 @@ public class Civilization
 	{
 		cities = new List<City>();
 	}
+
+	/// <summary>
+	/// 设置随机颜色
+	/// </summary>
+	public void SetRandomColor()
+	{
+		Random r = new Random();
+		territoryColor = new Color(r.Next(255)/255.0f, r.Next(255)/255.0f, r.Next(255)/255.0f);
+	}
 }
