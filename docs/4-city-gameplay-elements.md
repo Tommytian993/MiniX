@@ -272,4 +272,6 @@ public void UpdateCivTerritoryMap(Civilization civ)
     }
 }
 
+- Alternative tiles is a godot map feature that allows us to create variants of existing base tiles. We'll make use of this to create  alternative tiles for different civilizations' colors.
 
+- First in our Civilization class we add a "public int territoryColorAltTileId;" to store its id.
