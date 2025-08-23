@@ -375,3 +375,25 @@ public void SetRandomColor()
     Random r = new Random();
     territoryColor = new Color(r.Next(255)/255.0f, r.Next(255)/255.0f, r.Next(255)/255.0f);
 }
+
+// currentCiv.SetRandomColor();
+
+- Then:
+
+public void GenerateAICivs(List<Vector2I> civStarts)
+{
+    for (int i = 0; i < civStarts.Count; i++)
+    {
+        Civilization currentCiv = new Civilization
+        {
+            id = i + 1,
+            playerCiv = false
+        };
+
+        currentCiv.SetRandomColor();
+
+        CreateCity(currentCiv, civStarts[i], "City " + civStarts[i].X);
+
+        civs.Add(currentCiv);
+    }
+}
