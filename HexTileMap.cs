@@ -16,6 +16,9 @@ public partial class HexTileMap : Node2D
 	[Export]
 	public int NUM_AI_CIVS = 6;   // can change in editor panel
 
+	// 玩家文明颜色常量
+	private static readonly Color PLAYER_COLOR = new Color(0, 0, 1, 1); // 蓝色
+
 	public Hex[,] hexes;
 
 	TileMapLayer baseLayer,
@@ -101,6 +104,13 @@ public partial class HexTileMap : Node2D
 		// 生成文明和城市
 		List<Vector2I> starts = GenerateCivStartingLocations(NUM_AI_CIVS + 1);
 		GD.Print($"生成了 {starts.Count} 个起始位置");
+		
+		// 生成玩家文明
+		Civilization playerCiv = CreatePlayerCiv(starts[0]);
+		starts.RemoveAt(0);
+		GD.Print("玩家文明已创建");
+		
+		// 生成AI文明
 		GenerateAICivs(starts);
 		GD.Print($"生成了 {civs.Count} 个文明和 {cities.Count} 个城市");
 
@@ -553,6 +563,28 @@ public partial class HexTileMap : Node2D
 		}
 
 		return true;
+	}
+
+	/// <summary>
+	/// 创建玩家文明
+	/// </summary>
+	/// <param name="start">玩家起始位置</param>
+	/// <returns>玩家文明对象</returns>
+	public Civilization CreatePlayerCiv(Vector2I start)
+	{
+		Civilization playerCiv = new Civilization();
+		playerCiv.id = 0;
+		playerCiv.playerCiv = true;
+		playerCiv.territoryColor = PLAYER_COLOR;
+		
+		// 创建替代瓦片并设置颜色
+		int id = terrainAtlas.CreateAlternativeTile(terrainTextures[TerrainType.CIV_COLOR_BASE]);
+		terrainAtlas.GetTileData(terrainTextures[TerrainType.CIV_COLOR_BASE], id).Modulate = playerCiv.territoryColor;
+		playerCiv.territoryColorAltTileId = id;
+		
+		civs.Add(playerCiv);
+		CreateCity(playerCiv, start, "Player City");
+		return playerCiv;
 	}
 
 	/// <summary>
