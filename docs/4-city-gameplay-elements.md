@@ -325,3 +325,36 @@ public List<Vector2I> generateCivStartingLocations(int numLocations)
 
     return locations;
 }
+
+- For the helper: isValidLocation, we will check if the tile is near border, too close to existing spawn locations and in the end add buffer clearer to clear the nearby tiles of a valid location(so they are too close and we don't need to even consider them)
+
+private bool isValidLocation(Vector2I coord, List<Vector2I> locations)
+{
+     // boundary check not near the border 
+     if (coord.X < 3 || coord.X > width - 3 || coord.Y < 3 || coord.Y > height - 3)
+     {
+     return false;
+     }
+
+     // check not near existing cities within 20
+     foreach (Vector2I l in locations){
+          if (Math.Abs(coord.X - l.X) < 20 || Math.Abs(coord.Y - l.Y) < 20)
+               return false;
+     }
+}
+
+// get the surrounding ones and remove buffer zones:
+
+plainsTiles.Remove(coord);
+foreach (Hex h in GetSurroundingHexes(coord))
+{
+  foreach (Hex j in GetSurroundingHexes(h.coordinates))
+  {
+    foreach (Hex k in GetSurroundingHexes(j.coordinates))
+    {
+      plainsTiles.Remove(h.coordinates);
+      plainsTiles.Remove(j.coordinates);
+      plainsTiles.Remove(k.coordinates);
+    }
+  }
+}
