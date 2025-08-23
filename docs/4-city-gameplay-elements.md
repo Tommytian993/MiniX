@@ -201,4 +201,6 @@ public void SetIconColor(Color c)
 city.SetCityName(name);
 city.SetIconColor(civ.territoryColor);
 
+# City and Civilization Coloring
 
+- In order to color the map base on the city and civilization, first we need to create a new TileMapLayer -> CivColorsLayer, and place it between BaseLayer and HexBordersLayer, we need to give it a TileSet, and set the Modulate Alpha to 60%(Half transparent so we can see the terrain color below)
