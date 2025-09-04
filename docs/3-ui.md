@@ -372,3 +372,14 @@ public partial class CityUI : Panel
         production = GetNode<Label>("Production");
     }
 }
+
+- We'll create a function inside this class, and update all these values when taking in a city object:
+
+public void SetCityUI(City city)
+{
+    this.city = city;
+    cityName.Text = this.city.name;
+    population.Text = "Population: " + this.city.population;
+    food.Text = "Food: " + this.city.totalFood;
+    production.Text = "Production: " + this.city.totalProduction;
+}
