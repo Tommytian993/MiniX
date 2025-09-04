@@ -341,4 +341,15 @@ public int population = 1;
 public int totalFood;
 public int totalProduction;
 
+- We then add the function to calculate not just the city center, but all terrority tile resources of the city.
 
+public void CalculateTerritoryResourceTotals()
+{
+    totalFood = 0;
+    totalProduction = 0;
+    foreach (Hex h in territory)
+    {
+        totalFood += h.food;
+        totalProduction += h.production;
+    }
+}
