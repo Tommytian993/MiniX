@@ -14,6 +14,12 @@ public partial class City : Node2D
 
 	public string name;
 
+	// Population
+	public int population = 1;
+	// Resources
+	public int totalFood;
+	public int totalProduction;
+
 	Label label;
 	Sprite2D sprite;
 
@@ -38,6 +44,18 @@ public partial class City : Node2D
 			h.ownerCity = this;
 		}
 		territory.AddRange(territoryToAdd);
+		CalculateTerritoryResourceTotals();
+	}
+
+	public void CalculateTerritoryResourceTotals()
+	{
+		totalFood = 0;
+		totalProduction = 0;
+		foreach (Hex h in territory)
+		{
+			totalFood += h.food;
+			totalProduction += h.production;
+		}
 	}
 
 	public void SetCityName(string newName)

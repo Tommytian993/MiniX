@@ -329,3 +329,6 @@ else
 
 - Make sure to connect HexTileMap's ClickOffMap signal to the UIManager node’s hideAllPopups function in the Editor
 
+# 8. Creating City UI
+
+- Hi, for reading this part you should probably finish the 4-city-gameplay-elements first,
