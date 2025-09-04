@@ -5,15 +5,18 @@ public partial class UIManager : Node2D
 {
 	// 地形UI场景的打包场景引用，用于动态加载地形信息面板
 	PackedScene terrainUiScene;
+	PackedScene cityUiScene;
 
 	// 当前活跃的地形UI面板实例，用于管理UI生命周期
 	TerrainTileUi terrainUi;
+	CityUI cityUi;
 
 	public override void _Ready()
 	{
 		// 在节点准备就绪时加载地形UI场景
 		// 从指定路径加载打包的场景资源，用于后续实例化UI面板
 		terrainUiScene = ResourceLoader.Load<PackedScene>("res://TerrainTileUI.tscn");
+		cityUiScene = ResourceLoader.Load<PackedScene>("res://CityUI.tscn"); 
 
 		// 调试：检查场景是否正确加载
 		if (terrainUiScene == null)
