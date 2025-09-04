@@ -331,4 +331,14 @@ else
 
 # 8. Creating City UI
 
-- Hi, for reading this part you should probably finish the 4-city-gameplay-elements first,
+- Hi, for reading this part you should probably finish the 4-city-gameplay-elements first.
+
+- Let's create a new scene CityUI, add textureRect and labels.
+
+- First in our city class itself, we add the variable values for the labels:
+
+public int population = 1;
+public int totalFood;
+public int totalProduction;
+
+
