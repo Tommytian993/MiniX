@@ -341,7 +341,7 @@ public int population = 1;
 public int totalFood;
 public int totalProduction;
 
-- We then add the function to calculate not just the city center, but all terrority tile resources of the city.
+- We then add the function to calculate not just the city center, but all terrority tile resources of the city. This need to be called inside the CalculateTerritoryResourceTotals() whenever a new tile gets added to the city
 
 public void CalculateTerritoryResourceTotals()
 {
@@ -351,5 +351,24 @@ public void CalculateTerritoryResourceTotals()
     {
         totalFood += h.food;
         totalProduction += h.production;
+    }
+}
+
+- Let's now create a CityUi script that is a panel, and include references to all of its subnodes like labels.
+
+using Godot;
+using System;
+public partial class CityUI : Panel
+{
+    Label cityName, population, food, production;
+    // City data
+    City city;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        cityName = GetNode<Label>("CityName");
+        population = GetNode<Label>("Population");
+        food = GetNode<Label>("Food");
+        production = GetNode<Label>("Production");
     }
 }
