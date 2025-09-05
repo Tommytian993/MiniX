@@ -36,10 +36,12 @@ public partial class UIManager : Node2D
 		if (terrainUi is not null)
 		{
 			terrainUi.QueueFree();
+			terrainUi = null;
 		}
 		if (cityUi is not null)
 		{
 			cityUi.QueueFree();
+			cityUi = null;
 		}
 	}
 
@@ -71,6 +73,7 @@ public partial class UIManager : Node2D
 		{
 			GD.Print("清理旧的UI面板");
 			terrainUi.QueueFree();  // 将旧UI面板加入释放队列
+			terrainUi = null;  // 立即设置为null，避免访问已释放的对象
 		}
 
 		// 从打包场景实例化新的UI面板

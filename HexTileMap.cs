@@ -105,15 +105,18 @@ public partial class HexTileMap : Node2D
 		cities = new Dictionary<Vector2I, City>();
 
 		// 生成文明和城市
+		GD.Print("开始生成文明和城市...");
 		List<Vector2I> starts = GenerateCivStartingLocations(NUM_AI_CIVS + 1);
 		GD.Print($"生成了 {starts.Count} 个起始位置");
 		
 		// 生成玩家文明
+		GD.Print("创建玩家文明...");
 		Civilization playerCiv = CreatePlayerCiv(starts[0]);
 		starts.RemoveAt(0);
 		GD.Print("玩家文明已创建");
 		
 		// 生成AI文明
+		GD.Print("创建AI文明...");
 		GenerateAICivs(starts);
 		GD.Print($"生成了 {civs.Count} 个文明和 {cities.Count} 个城市");
 
@@ -204,6 +207,7 @@ public partial class HexTileMap : Node2D
 
 	public void CreateCity(Civilization civ, Vector2I coords, string name)
 	{
+		GD.Print($"CreateCity 被调用: {name} 在坐标 {coords}");
 		City city = cityScene.Instantiate() as City;
 		city.map = this;
 		civ.cities.Add(city);
