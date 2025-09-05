@@ -235,6 +235,7 @@ public partial class HexTileMap : Node2D
 		UpdateCivTerritoryMap(civ);
 
 		cities[coords] = city;
+		GD.Print($"城市 {name} 已创建在坐标 {coords}，人口: {city.population}, 食物: {city.totalFood}, 生产: {city.totalProduction}");
 	}
 
 	public void UpdateCivTerritoryMap(Civilization civ)

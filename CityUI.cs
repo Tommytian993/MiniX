@@ -18,10 +18,12 @@ public partial class CityUI : Panel
 
 	public void SetCityUI(City city)
 	{
+		GD.Print($"SetCityUI: 设置城市 {city.name}, 人口: {city.population}, 食物: {city.totalFood}, 生产: {city.totalProduction}");
 		this.city = city;
 		cityName.Text = this.city.name;
 		population.Text = "Population: " + this.city.population;
 		food.Text = "Food: " + this.city.totalFood;
 		production.Text = "Production: " + this.city.totalProduction;
+		GD.Print($"UI文本已设置: {cityName.Text}, {population.Text}, {food.Text}, {production.Text}");
 	}
 }

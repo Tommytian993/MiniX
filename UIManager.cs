@@ -49,6 +49,11 @@ public partial class UIManager : Node2D
 		HideAllPopups();
 		cityUi = cityUiScene.Instantiate() as CityUI;
 		AddChild(cityUi);
+		
+		// 设置UI位置到屏幕右上角
+		cityUi.Position = new Vector2(GetViewport().GetVisibleRect().Size.X - cityUi.Size.X - 10, 10);
+		GD.Print($"UI位置设置为: {cityUi.Position}");
+		
 		cityUi.SetCityUI(city);
 		GD.Print("城市UI已创建并添加到场景树");
 	}
