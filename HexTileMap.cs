@@ -53,6 +53,9 @@ public partial class HexTileMap : Node2D
 	// 六边形数据发送事件，当选中六边形时触发
 	public event SendHexDataEventHandler SendHexData;
 
+	[Signal]
+	public delegate void SendCityUIInfoEventHandler(City city);
+
 	public override void _Ready()
 	{
 		cityScene = ResourceLoader.Load<PackedScene>("res://City.tscn");
