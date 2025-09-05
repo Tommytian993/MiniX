@@ -90,13 +90,8 @@ public partial class UIManager : Node2D
 	{
 		GD.Print($"SetTerrainTileUi被调用，六边形数据：{h}");
 
-		// 如果已存在UI面板，先清理旧的实例
-		if (terrainUi is not null)
-		{
-			GD.Print("清理旧的UI面板");
-			terrainUi.QueueFree();  // 将旧UI面板加入释放队列
-			terrainUi = null;  // 立即设置为null，避免访问已释放的对象
-		}
+		// 隐藏所有弹出UI，包括城市UI和地形UI
+		HideAllPopups();
 
 		// 从打包场景实例化新的UI面板
 		terrainUi = terrainUiScene.Instantiate() as TerrainTileUi;
