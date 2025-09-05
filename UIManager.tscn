@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://dcofgfvndqqyc"]
+[gd_scene load_steps=2 format=3 uid="uid://dcofgfvndqqyc"]
+
+[ext_resource type="PackedScene" uid="uid://bu5ck8ld7m1pc" path="res://general_ui.tscn" id="1_fpov5"]
 
 [node name="UiManager" type="Node2D"]
+
+[node name="GeneralUi" parent="." instance=ExtResource("1_fpov5")]

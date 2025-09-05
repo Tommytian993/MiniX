@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu5ck8ld7m1pc"]
 
-[ext_resource type="Script" path="res://GeneralUI.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://ctna8yng2ma8k" path="res://GeneralUI.cs" id="1_script"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_23qlu"]
 font_size = 24
 
 [node name="GeneralUi" type="Panel"]
-script = ExtResource("1_script")
 offset_left = 250.0
 offset_right = 900.0
 offset_bottom = 50.0
+script = ExtResource("1_script")
 
 [node name="TurnLabel" type="Label" parent="."]
 layout_mode = 0
