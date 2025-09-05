@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bu5ck8ld7m1pc"]
+
+[node name="GeneralUi" type="Panel"]
+offset_left = 250.0
+offset_right = 900.0
+offset_bottom = 50.0
