@@ -127,44 +127,30 @@ public partial class HexTileMap : Node2D
 	/// 处理未处理的输入事件，用于调试和交互
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		// 检查是否是鼠标按钮事件
 		if (@event is InputEventMouseButton mouse)
 		{
-			// 将全局鼠标位置转换为地图坐标
-			Vector2I mapCoords = baseLayer.LocalToMap(GetGlobalMousePosition());
+			Vector2I mapCoords = baseLayer.LocalToMap(ToLocal(GetGlobalMousePosition()));
 			if (mapCoords.X >= 0 && mapCoords.X < width && mapCoords.Y >= 0 && mapCoords.Y < height)
 			{
+				Hex h = mapData[mapCoords];
 				if (mouse.ButtonMask == MouseButtonMask.Left)
 				{
-					// 获取当前点击位置的六边形数据，使用局部变量提高代码可读性
-					Hex h = mapData[mapCoords];
-
-					// 打印该坐标位置的六边形信息，用于调试
-					GD.Print(h);
-
-					// 触发六边形数据发送事件，通知UI系统更新显示
-					// 使用空条件运算符(?.)确保事件有订阅者时才调用
-					GD.Print($"触发事件：准备发送六边形数据 - {h}");
-					SendHexData?.Invoke(h);
-					GD.Print("事件已触发");
-
-					// 如果点击的是新的单元格（不是当前已选中的）
-					if (mapCoords != currentSelectedCell)
+					if (cities.ContainsKey(mapCoords))
 					{
-						// 清除之前选中单元格的叠加效果（设置为-1表示移除瓦片）
-						overlayLayer.SetCell(currentSelectedCell, -1);
+						EmitSignal(SignalName.SendCityUIInfo, cities[mapCoords]);
 					}
-
-					// 在新选中的单元格位置设置叠加瓦片，提供视觉反馈
-					overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
-
-					// 更新当前选中的单元格坐标
-					currentSelectedCell = mapCoords;
+					else
+					{
+						SendHexData?.Invoke(h);
+					
+						if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+						overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+						currentSelectedCell = mapCoords;
+					}
 				}
 			}
 			else
 			{
-				// 如果点击在地图边界外，清除当前选中状态
 				overlayLayer.SetCell(currentSelectedCell, -1);
 				EmitSignal(SignalName.ClickOffMap);
 			}
