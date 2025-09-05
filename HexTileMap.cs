@@ -135,18 +135,21 @@ public partial class HexTileMap : Node2D
 				Hex h = mapData[mapCoords];
 				if (mouse.ButtonMask == MouseButtonMask.Left)
 				{
+					GD.Print($"点击坐标: {mapCoords}, cities字典包含 {cities.Count} 个城市");
 					if (cities.ContainsKey(mapCoords))
 					{
+						GD.Print($"点击城市: {cities[mapCoords].name} 在坐标 {mapCoords}");
 						EmitSignal(SignalName.SendCityUIInfo, cities[mapCoords]);
 					}
 					else
 					{
+						GD.Print("点击的不是城市，显示地形信息");
 						SendHexData?.Invoke(h);
-					
-						if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
-						overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
-						currentSelectedCell = mapCoords;
 					}
+					
+					if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
+					overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
+					currentSelectedCell = mapCoords;
 				}
 			}
 			else

@@ -45,10 +45,12 @@ public partial class UIManager : Node2D
 
 	public void SetCityUi(City city)
 	{
+		GD.Print($"SetCityUi 被调用，城市: {city.name}");
 		HideAllPopups();
 		cityUi = cityUiScene.Instantiate() as CityUI;
 		AddChild(cityUi);
 		cityUi.SetCityUI(city);
+		GD.Print("城市UI已创建并添加到场景树");
 	}
 
 	/// <summary>
