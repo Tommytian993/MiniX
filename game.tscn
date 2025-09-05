@@ -96,3 +96,4 @@ script = ExtResource("4_sb48q")
 script = ExtResource("6_3mrqo")
 
 [connection signal="ClickOffMap" from="HexTileMap" to="CanvasLayer/UiManager" method="HideAllPopups"]
+[connection signal="SendCityUIInfo" from="HexTileMap" to="CanvasLayer/UiManager" method="SetCityUi"]
