@@ -37,7 +37,12 @@ public partial class UIManager : Node2D
 		{
 			terrainUi.QueueFree();
 		}
+		if (cityUi is not null)
+		{
+			cityUi.QueueFree();
+		}
 	}
+
 
 	/// <summary>
 	/// 设置地形UI面板，动态创建并显示六边形信息
