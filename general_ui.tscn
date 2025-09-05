@@ -1,6 +1,19 @@
-[gd_scene format=3 uid="uid://bu5ck8ld7m1pc"]
+[gd_scene load_steps=2 format=3 uid="uid://bu5ck8ld7m1pc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_23qlu"]
+font_size = 24
 
 [node name="GeneralUi" type="Panel"]
 offset_left = 250.0
 offset_right = 900.0
 offset_bottom = 50.0
+
+[node name="TurnLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 5.0
+offset_right = 109.0
+offset_bottom = 76.0
+text = "Turn: 0
+"
+label_settings = SubResource("LabelSettings_23qlu")
