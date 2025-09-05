@@ -43,6 +43,13 @@ public partial class UIManager : Node2D
 		}
 	}
 
+	public void SetCityUi(City city)
+	{
+		HideAllPopups();
+		cityUi = cityUiScene.Instantiate() as CityUI;
+		AddChild(cityUi);
+		cityUi.SetCityUI(city);
+	}
 
 	/// <summary>
 	/// 设置地形UI面板，动态创建并显示六边形信息
