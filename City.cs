@@ -56,6 +56,7 @@ public partial class City : Node2D
 			totalFood += h.food;
 			totalProduction += h.production;
 		}
+		GD.Print($"城市 {name} 资源计算完成: 食物={totalFood}, 生产={totalProduction}, 领土数量={territory.Count}");
 	}
 
 	public void SetCityName(string newName)

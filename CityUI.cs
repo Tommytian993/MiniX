@@ -10,10 +10,12 @@ public partial class CityUI : Panel
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		GD.Print("CityUI _Ready 被调用");
 		cityName = GetNode<Label>("CityName");
 		population = GetNode<Label>("Population");
 		food = GetNode<Label>("Food");
 		production = GetNode<Label>("Production");
+		GD.Print($"CityUI 节点获取完成: cityName={cityName != null}, population={population != null}, food={food != null}, production={production != null}");
 	}
 
 	public void SetCityUI(City city)

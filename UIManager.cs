@@ -52,9 +52,10 @@ public partial class UIManager : Node2D
 		cityUi = cityUiScene.Instantiate() as CityUI;
 		AddChild(cityUi);
 		
-		// 设置UI位置到屏幕右上角
-		cityUi.Position = new Vector2(GetViewport().GetVisibleRect().Size.X - cityUi.Size.X - 10, 10);
-		GD.Print($"UI位置设置为: {cityUi.Position}");
+		// 设置UI位置到屏幕右上角（使用固定大小，因为UI可能还没完全初始化）
+		Vector2 screenSize = GetViewport().GetVisibleRect().Size;
+		cityUi.Position = new Vector2(screenSize.X - 250 - 10, 10); // 250是UI的宽度
+		GD.Print($"UI位置设置为: {cityUi.Position}, 屏幕大小: {screenSize}");
 		
 		cityUi.SetCityUI(city);
 		GD.Print("城市UI已创建并添加到场景树");
