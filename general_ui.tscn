@@ -17,3 +17,11 @@ offset_bottom = 76.0
 text = "Turn: 0
 "
 label_settings = SubResource("LabelSettings_23qlu")
+
+[node name="EndTurnButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 5.0
+offset_right = 377.0
+offset_bottom = 42.0
+text = "End Turn"
