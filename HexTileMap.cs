@@ -240,6 +240,7 @@ public partial class HexTileMap : Node2D
 
 		cities[coords] = city;
 		GD.Print($"城市 {name} 已创建在坐标 {coords}，人口: {city.population}, 食物: {city.totalFood}, 生产: {city.totalProduction}");
+		GD.Print($"城市 {name} 领土数量: {city.territory.Count}");
 	}
 
 	public void UpdateCivTerritoryMap(Civilization civ)

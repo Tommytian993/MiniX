@@ -49,16 +49,22 @@ public partial class UIManager : Node2D
 	{
 		GD.Print($"SetCityUi 被调用，城市: {city.name}");
 		HideAllPopups();
+		GD.Print("开始实例化城市UI...");
 		cityUi = cityUiScene.Instantiate() as CityUI;
+		GD.Print($"城市UI实例化结果: {cityUi != null}");
+		
+		GD.Print("添加城市UI到场景树...");
 		AddChild(cityUi);
+		GD.Print("城市UI已添加到场景树");
 		
 		// 设置UI位置到屏幕右上角（使用固定大小，因为UI可能还没完全初始化）
 		Vector2 screenSize = GetViewport().GetVisibleRect().Size;
 		cityUi.Position = new Vector2(screenSize.X - 250 - 10, 10); // 250是UI的宽度
 		GD.Print($"UI位置设置为: {cityUi.Position}, 屏幕大小: {screenSize}");
 		
+		GD.Print("开始设置城市UI数据...");
 		cityUi.SetCityUI(city);
-		GD.Print("城市UI已创建并添加到场景树");
+		GD.Print("城市UI数据设置完成");
 	}
 
 	/// <summary>
