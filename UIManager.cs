@@ -16,7 +16,7 @@ public partial class UIManager : Node2D
 		// 在节点准备就绪时加载地形UI场景
 		// 从指定路径加载打包的场景资源，用于后续实例化UI面板
 		terrainUiScene = ResourceLoader.Load<PackedScene>("res://TerrainTileUI.tscn");
-		cityUiScene = ResourceLoader.Load<PackedScene>("res://CityUI.tscn"); 
+		cityUiScene = ResourceLoader.Load<PackedScene>("res://city_ui.tscn"); 
 
 		// 调试：检查场景是否正确加载
 		if (terrainUiScene == null)
@@ -26,6 +26,15 @@ public partial class UIManager : Node2D
 		else
 		{
 			GD.Print("成功：TerrainTileUI.tscn场景已加载。");
+		}
+		
+		if (cityUiScene == null)
+		{
+			GD.PrintErr("错误：无法加载CityUI.tscn场景！请检查文件路径。");
+		}
+		else
+		{
+			GD.Print("成功：CityUI.tscn场景已加载。");
 		}
 	}
 
@@ -50,6 +59,12 @@ public partial class UIManager : Node2D
 		GD.Print($"SetCityUi 被调用，城市: {city.name}");
 		HideAllPopups();
 		GD.Print("开始实例化城市UI...");
+		GD.Print($"cityUiScene 是否为null: {cityUiScene == null}");
+		if (cityUiScene == null)
+		{
+			GD.PrintErr("错误：cityUiScene 为 null！");
+			return;
+		}
 		cityUi = cityUiScene.Instantiate() as CityUI;
 		GD.Print($"城市UI实例化结果: {cityUi != null}");
 		
