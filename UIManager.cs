@@ -10,6 +10,12 @@ public partial class UIManager : Node2D
 	// 当前活跃的地形UI面板实例，用于管理UI生命周期
 	TerrainTileUi terrainUi;
 	CityUI cityUi;
+	
+	// 通用UI引用
+	GeneralUI generalUI;
+
+	[Signal]
+	public delegate void EndTurnEventHandler();
 
 	public override void _Ready()
 	{
@@ -36,6 +42,15 @@ public partial class UIManager : Node2D
 		{
 			GD.Print("成功：CityUI.tscn场景已加载。");
 		}
+		
+		// 获取GeneralUI引用
+		generalUI = GetNode<GeneralUI>("GeneralUI");
+		
+		// 获取结束回合按钮引用
+		Button endTurnButton = generalUI.GetNode<Button>("EndTurnButton");
+		
+		// 连接按钮信号到SignalEndTurn函数
+		endTurnButton.Pressed += SignalEndTurn;
 	}
 
 
@@ -106,5 +121,11 @@ public partial class UIManager : Node2D
 		// 必须在AddChild之后调用，确保UI组件已经正确初始化
 		terrainUi.SetHex(h);
 		GD.Print("六边形数据已设置到UI面板");
+	}
+
+	public void SignalEndTurn()
+	{
+		EmitSignal(SignalName.EndTurn);
+		generalUI.IncrementTurnCounter();
 	}
 }

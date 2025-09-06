@@ -123,9 +123,17 @@ public partial class HexTileMap : Node2D
 		// 订阅六边形数据发送事件，将UI管理器的方法绑定到事件上
 		// 当SendHexData事件触发时，自动调用uiManager.SetTerrainTileUi方法
 		this.SendHexData += uiManager.SetTerrainUi;
+		
+		// 连接UIManager的EndTurn信号到ProcessTurn函数
+		uiManager.EndTurn += ProcessTurn;
 	}
 
 	public override void _Process(double delta) { }
+
+	public void ProcessTurn()
+	{
+		GD.Print("Turn ended");
+	}
 
 	/// 处理未处理的输入事件，用于调试和交互
 	public override void _UnhandledInput(InputEvent @event)
