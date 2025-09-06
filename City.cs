@@ -19,6 +19,14 @@ public partial class City : Node2D
 	// Resources
 	public int totalFood;
 	public int totalProduction;
+	
+	// Population growth tracking
+	public static int POPULATION_THRESHOLD_INCREASE = 15;
+	public int populationGrowthThreshold;
+	public int populationGrowthTracker;
+	
+	// Static dictionary to prevent cities from expanding into the same tiles
+	public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
 
 	Label label;
 	Sprite2D sprite;
@@ -67,5 +75,17 @@ public partial class City : Node2D
 	public void SetIconColor(Color c)
 	{
 		sprite.Modulate = c;
+	}
+
+	public void ProcessTurn()
+	{
+		populationGrowthTracker += totalFood;
+		if (populationGrowthTracker > populationGrowthThreshold) // Grow population
+		{
+			population++;
+			populationGrowthTracker = 0;
+			populationGrowthThreshold += POPULATION_THRESHOLD_INCREASE;
+			GD.Print($"城市 {name} 人口增长到 {population}，新阈值: {populationGrowthThreshold}");
+		}
 	}
 }

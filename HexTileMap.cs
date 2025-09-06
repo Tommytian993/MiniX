@@ -133,6 +133,12 @@ public partial class HexTileMap : Node2D
 	public void ProcessTurn()
 	{
 		GD.Print("Turn ended");
+		
+		// Process turn for all cities
+		foreach (City city in cities.Values)
+		{
+			city.ProcessTurn();
+		}
 	}
 
 	/// 处理未处理的输入事件，用于调试和交互
