@@ -45,12 +45,15 @@ public partial class UIManager : Node2D
 		
 		// 获取GeneralUI引用
 		generalUI = GetNode<GeneralUI>("GeneralUI");
+		GD.Print($"GeneralUI 引用获取: {generalUI != null}");
 		
 		// 获取结束回合按钮引用
 		Button endTurnButton = generalUI.GetNode<Button>("EndTurnButton");
+		GD.Print($"EndTurnButton 引用获取: {endTurnButton != null}");
 		
 		// 连接按钮信号到SignalEndTurn函数
 		endTurnButton.Pressed += SignalEndTurn;
+		GD.Print("EndTurnButton 信号已连接");
 	}
 
 
@@ -125,8 +128,10 @@ public partial class UIManager : Node2D
 
 	public void SignalEndTurn()
 	{
+		GD.Print("SignalEndTurn 被调用！");
 		EmitSignal(SignalName.EndTurn);
 		generalUI.IncrementTurnCounter();
+		GD.Print("回合计数器已增加");
 	}
 
 	public void RefreshUI()

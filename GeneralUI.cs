@@ -17,5 +17,6 @@ public partial class GeneralUI : Panel
 	{
 		turns += 1;
 		turnLabel.Text = "Turn: " + turns;
+		GD.Print($"回合计数器增加到: {turns}");
 	}
 }
