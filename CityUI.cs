@@ -28,4 +28,12 @@ public partial class CityUI : Panel
 		production.Text = "Production: " + this.city.totalProduction;
 		GD.Print($"UI文本已设置: {cityName.Text}, {population.Text}, {food.Text}, {production.Text}");
 	}
+
+	public void Refresh()
+	{
+		cityName.Text = this.city.name;
+		population.Text = "Population: " + this.city.population;
+		food.Text = "Food: " + this.city.totalFood;
+		production.Text = "Production: " + this.city.totalProduction;
+	}
 }
