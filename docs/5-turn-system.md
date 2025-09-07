@@ -32,3 +32,11 @@ public partial class GeneralUI : Panel
 
 GeneralUI generalUI = GetNode<GeneralUI>("GeneralUI");
 
+- Let's create the end turn signal in UIManager:
+
+[Signal]
+public delegate void EndTurnEventHandler();
+
+- We get the button reference from GeneralUI:
+
+Button endTurnButton = generalUI.GetNode<Button>("EndTurnButton");
