@@ -81,12 +81,16 @@ public partial class City : Node2D
 
 	public void ProcessTurn()
 	{
+		CleanUpBorderPool();
 		populationGrowthTracker += totalFood;
 		if (populationGrowthTracker > populationGrowthThreshold) // Grow population
 		{
 			population++;
 			populationGrowthTracker = 0;
 			populationGrowthThreshold += POPULATION_THRESHOLD_INCREASE;
+			// Grow territory
+			AddRandomNewTile();
+			map.UpdateCivTerritoryMap(civ);
 			GD.Print($"城市 {name} 人口增长到 {population}，新阈值: {populationGrowthThreshold}");
 		}
 	}
@@ -119,5 +123,32 @@ public partial class City : Node2D
 			return false;
 		}
 		return true;
+	}
+
+	public void AddRandomNewTile()
+	{
+		if (borderTilePool.Count > 0)
+		{
+			Random r = new Random();
+			int index = r.Next(borderTilePool.Count);
+			this.AddTerritory(new List<Hex>{borderTilePool[index]});
+			borderTilePool.RemoveAt(index);
+		}
+	}
+
+	public void CleanUpBorderPool()
+	{
+		List<Hex> toRemove = new List<Hex>();
+		foreach (Hex b in borderTilePool)
+		{
+			if (invalidTiles.ContainsKey(b) && invalidTiles[b] != this)
+			{
+				toRemove.Add(b);
+			}
+		}
+		foreach (Hex b in toRemove)
+		{
+			borderTilePool.Remove(b);
+		}
 	}
 }
