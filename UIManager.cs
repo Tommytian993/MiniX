@@ -44,7 +44,7 @@ public partial class UIManager : Node2D
 		}
 		
 		// 获取GeneralUI引用
-		generalUI = GetNode<GeneralUI>("GeneralUI");
+		generalUI = GetNode<GeneralUI>("GeneralUi");
 		GD.Print($"GeneralUI 引用获取: {generalUI != null}");
 		
 		// 获取结束回合按钮引用
