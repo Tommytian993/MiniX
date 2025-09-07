@@ -40,3 +40,13 @@ public delegate void EndTurnEventHandler();
 - We get the button reference from GeneralUI:
 
 Button endTurnButton = generalUI.GetNode<Button>("EndTurnButton");
+
+- An intermediate function needs to be created to handle the button signal and emit the end turn signal:
+
+public void SignalEndTurn()
+{
+    EmitSignal(SignalName.EndTurn);
+    generalUI.IncrementTurnCounter();
+}
+
+endTurnButton.Pressed += SignalEndTurn;
