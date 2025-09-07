@@ -110,3 +110,25 @@ public void AddTerritory(List<Hex> territoryToAdd)
     territory.AddRange(territoryToAdd);
     CalculateTerritoryResourceTotals();
 }
+
+- To check if the tile could be valid, here is the function, terrain whether occupied by other cities, whether pooled by other cities will all need to be considered
+
+public bool IsValidNeighborTile(Hex n)
+{
+    if (n.terrainType == TerrainType.WATER ||
+        n.terrainType == TerrainType.ICE ||
+        n.terrainType == TerrainType.SHALLOW_WATER ||
+        n.terrainType == TerrainType.MOUNTAIN)
+    {
+        return false;
+    }
+    if (n.ownerCity != null && n.ownerCity.civ != null)
+    {
+        return false;
+    }
+    if (invalidTiles.ContainsKey(n) && invalidTiles[n] != this)
+    {
+        return false;
+    }
+    return true;
+}
