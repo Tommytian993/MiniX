@@ -38,6 +38,10 @@ public partial class City : Node2D
 		territory = new List<Hex>();
 		borderTilePool = new List<Hex>();
 		
+		// Initialize population growth threshold
+		populationGrowthThreshold = 10; // Start with a low threshold for first growth
+		populationGrowthTracker = 0;
+		
 		// 如果name已经设置，则更新label
 		if (!string.IsNullOrEmpty(name))
 		{

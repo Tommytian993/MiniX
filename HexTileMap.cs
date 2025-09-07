@@ -134,13 +134,7 @@ public partial class HexTileMap : Node2D
 	{
 		GD.Print("Turn ended");
 		
-		// Process turn for all cities
-		foreach (City city in cities.Values)
-		{
-			city.ProcessTurn();
-		}
-		
-		// Process turn for all civilizations
+		// Process turn for all civilizations (which will process their cities)
 		foreach (Civilization c in civs)
 		{
 			c.ProcessTurn();
