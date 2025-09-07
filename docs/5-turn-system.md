@@ -23,3 +23,12 @@ public partial class GeneralUI : Panel
         turnLabel.Text = "Turn: " + turns;
     }
 }
+
+# 2. Integrating GeneralUI to UIManager
+
+- CityUI, TerrainUI are ephemeral, GeneralUi should be persistent. Thus we instantiate it as a child scene under UIManger. And it will display throughout the game.
+
+- In UIManager script, we do not need to import a packed scene since we already made an instance. We still need to get the reference like this:
+
+GeneralUI generalUI = GetNode<GeneralUI>("GeneralUI");
+
