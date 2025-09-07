@@ -50,3 +50,49 @@ public void SignalEndTurn()
 }
 
 endTurnButton.Pressed += SignalEndTurn;
+
+- Let's finally create this skeletal reaction function in HexTileMap and call UIManager's instance on its endTurn function to test thsi process.
+
+public void ProcessTurn()
+{
+    GD.Print("Turn ended");
+}
+
+// _Ready() of HexTileMap
+UIManager uiManager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
+uiManager.EndTurn += ProcessTurn;
+
+# 3. City Population Growth
+
+- Our city have food and production values, as well as a population that starts with one. The mechanic is designed to be: as food value increase, population and city tiles will expand.
+
+- To know the potential tiles to add to the city, we will define this list:
+
+public List<Hex> borderTilePool;
+public override void _Ready()
+{
+    borderTilePool = new List<Hex>();
+}
+
+- We define population growth related values:
+
+public static int POPULATION_THRESHOLD_INCREASE = 15;
+public int populationGrowthThreshold;
+public int populationGrowthTracker;
+
+- Now each turn, the tracker would add the food value and check against the thredhold:
+
+public void ProcessTurn()
+{
+    populationGrowthTracker += totalFood;
+    if (populationGrowthTracker > populationGrowthThreshold) // Grow population
+    {
+        population++;
+        populationGrowthTracker = 0;
+        populationGrowthThreshold += POPULATION_THRESHOLD_INCREASE;
+    }
+}
+
+- We need to define this invalid_tiles dictionary to prevent city overlaps:
+
+public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
