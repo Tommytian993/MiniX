@@ -96,3 +96,17 @@ public void ProcessTurn()
 - We need to define this invalid_tiles dictionary to prevent city overlaps:
 
 public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
+
+- Now we should modify AddTerritory to add the new territoriy's surrounding tiles to the border pool.
+
+public void AddTerritory(List<Hex> territoryToAdd)
+{
+    foreach (Hex h in territoryToAdd)
+    {
+        h.ownerCity = this;
+        // Add new border hexes to the border tile pool
+        AddValidNeighborsToBorderPool(h);
+    }
+    territory.AddRange(territoryToAdd);
+    CalculateTerritoryResourceTotals();
+}
