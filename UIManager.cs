@@ -128,4 +128,10 @@ public partial class UIManager : Node2D
 		EmitSignal(SignalName.EndTurn);
 		generalUI.IncrementTurnCounter();
 	}
+
+	public void RefreshUI()
+	{
+		if (cityUi is not null)
+			cityUi.Refresh();
+	}
 }

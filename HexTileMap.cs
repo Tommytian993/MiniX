@@ -139,6 +139,12 @@ public partial class HexTileMap : Node2D
 		{
 			city.ProcessTurn();
 		}
+		
+		// Process turn for all civilizations
+		foreach (Civilization c in civs)
+		{
+			c.ProcessTurn();
+		}
 	}
 
 	/// 处理未处理的输入事件，用于调试和交互
