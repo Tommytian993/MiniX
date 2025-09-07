@@ -50,6 +50,8 @@ public partial class City : Node2D
 		foreach (Hex h in territoryToAdd)
 		{
 			h.ownerCity = this;
+			// Add new border hexes to the border tile pool
+			AddValidNeighborsToBorderPool(h);
 		}
 		territory.AddRange(territoryToAdd);
 		CalculateTerritoryResourceTotals();
@@ -87,5 +89,35 @@ public partial class City : Node2D
 			populationGrowthThreshold += POPULATION_THRESHOLD_INCREASE;
 			GD.Print($"城市 {name} 人口增长到 {population}，新阈值: {populationGrowthThreshold}");
 		}
+	}
+
+	public void AddValidNeighborsToBorderPool(Hex h)
+	{
+		List<Hex> neighbors = map.GetSurroundingHexes(h.coordinates);
+		foreach (Hex n in neighbors)
+		{
+			if (IsValidNeighborTile(n)) borderTilePool.Add(n);
+			invalidTiles[n] = this;
+		}
+	}
+
+	public bool IsValidNeighborTile(Hex n)
+	{
+		if (n.terrainType == TerrainType.WATER ||
+			n.terrainType == TerrainType.ICE ||
+			n.terrainType == TerrainType.SHALLOW_WATER ||
+			n.terrainType == TerrainType.MOUNTAIN)
+		{
+			return false;
+		}
+		if (n.ownerCity != null && n.ownerCity.civ != null)
+		{
+			return false;
+		}
+		if (invalidTiles.ContainsKey(n) && invalidTiles[n] != this)
+		{
+			return false;
+		}
+		return true;
 	}
 }
