@@ -4,6 +4,7 @@ using System;
 public partial class CityUI : Panel
 {
 	Label cityName, population, food, production;
+	UnitBuildButton settlerButton, warriorButton;
 	// City data
 	City city;
 
@@ -15,7 +16,13 @@ public partial class CityUI : Panel
 		population = GetNode<Label>("Population");
 		food = GetNode<Label>("Food");
 		production = GetNode<Label>("Production");
+		
+		// Get unit build buttons
+		settlerButton = GetNode<UnitBuildButton>("BuildScrollContainer/BuildVBox/SettlerButton");
+		warriorButton = GetNode<UnitBuildButton>("BuildScrollContainer/BuildVBox/WarriorButton");
+		
 		GD.Print($"CityUI 节点获取完成: cityName={cityName != null}, population={population != null}, food={food != null}, production={production != null}");
+		GD.Print($"按钮获取完成: settlerButton={settlerButton != null}, warriorButton={warriorButton != null}");
 	}
 
 	public void SetCityUI(City city)
@@ -35,5 +42,12 @@ public partial class CityUI : Panel
 		population.Text = "Population: " + this.city.population;
 		food.Text = "Food: " + this.city.totalFood;
 		production.Text = "Production: " + this.city.totalProduction;
+	}
+	
+	public void SetupUnitButtons()
+	{
+		// For now, we'll set up placeholder units
+		// In the next lesson, we'll create actual unit instances
+		GD.Print("设置单位按钮 - 暂时使用占位符");
 	}
 }
