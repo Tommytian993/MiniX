@@ -12,7 +12,9 @@ public partial class Warrior : Unit
 	{
 		base._Ready();
 		
-		// Set warrior-specific movement points
+		// 设置战士单位属性
+		unitName = "Warrior";
+		productionRequired = 50;
 		maxMovementPoints = 2;
 		movementPoints = maxMovementPoints;
 		

@@ -9,6 +9,11 @@ public partial class Unit : Node2D
 	[Export]
 	public int maxMovementPoints = 2;
 	
+	/// <summary>单位名称</summary>
+	public string unitName = "DEFAULT";
+	/// <summary>建造所需生产值</summary>
+	public int productionRequired;
+	
 	public Civilization owner;
 	public Vector2I currentPosition;
 	

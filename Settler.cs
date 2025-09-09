@@ -9,7 +9,9 @@ public partial class Settler : Unit
 	{
 		base._Ready();
 		
-		// Set settler-specific movement points
+		// 设置殖民者单位属性
+		unitName = "Settler";
+		productionRequired = 100;
 		maxMovementPoints = 2;
 		movementPoints = maxMovementPoints;
 		
