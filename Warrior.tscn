@@ -1,5 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c9y8l3n0o5r6s"]
+[gd_scene load_steps=3 format=3 uid="uid://c9y8l3n0o5r6s"]
 
 [ext_resource type="PackedScene" uid="uid://b8x7k2m9n4p5q" path="res://Unit.tscn" id="1_unit"]
+[ext_resource type="Script" path="res://Warrior.cs" id="2_script"]
 
 [node name="Warrior" instance=ExtResource("1_unit")]
+script = ExtResource("2_script")
