@@ -28,6 +28,14 @@ public partial class City : Node2D
 	// Static dictionary to prevent cities from expanding into the same tiles
 	public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
 
+	// 单位建造系统
+	/// <summary>单位建造队列</summary>
+	public List<Unit> unitBuildQueue;
+	/// <summary>当前正在建造的单位</summary>
+	public Unit currentUnitBeingBuilt;
+	/// <summary>单位建造进度</summary>
+	public int unitBuildTracker = 0;
+
 	Label label;
 	Sprite2D sprite;
 
@@ -37,6 +45,11 @@ public partial class City : Node2D
 		sprite = GetNode<Sprite2D>("Sprite2D");
 		territory = new List<Hex>();
 		borderTilePool = new List<Hex>();
+		
+		// 初始化单位建造系统
+		unitBuildQueue = new List<Unit>();
+		currentUnitBeingBuilt = null;
+		unitBuildTracker = 0;
 		
 		// Initialize population growth threshold
 		populationGrowthThreshold = 10; // Start with a low threshold for first growth
@@ -153,6 +166,20 @@ public partial class City : Node2D
 		foreach (Hex b in toRemove)
 		{
 			borderTilePool.Remove(b);
+		}
+	}
+
+	/// <summary>添加单位到建造队列</summary>
+	public void AddUnitToBuildQueue(Unit u)
+	{
+		unitBuildQueue.Add(u);
+		GD.Print($"城市 {name} 添加单位到建造队列: {u.unitName}, 队列长度: {unitBuildQueue.Count}");
+		
+		// 如果是队列中第一个单位，设为当前建造单位
+		if (unitBuildQueue.Count == 1)
+		{
+			currentUnitBeingBuilt = u;
+			GD.Print($"开始建造单位: {u.unitName}");
 		}
 	}
 }
