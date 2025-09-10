@@ -10,6 +10,13 @@ public partial class Unit : Node2D
 	[Export]
 	public int maxMovementPoints = 2;
 	
+	// 生命值属性
+	public int maxHp;
+	public int hp;
+	// 移动点数属性
+	public int maxMovePoints;
+	public int movePoints;
+	
 	// 单位名称
 	public string unitName = "DEFAULT";
 	// 建造所需生产值
