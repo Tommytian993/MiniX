@@ -15,6 +15,10 @@ public partial class Warrior : Unit
 		// 设置战士单位属性
 		unitName = "Warrior";
 		productionRequired = 50;
+		maxHp = 3;
+		hp = 3;
+		movePoints = 1;
+		maxMovePoints = 1;
 		maxMovementPoints = 2;
 		movementPoints = maxMovementPoints;
 		

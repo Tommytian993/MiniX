@@ -12,6 +12,10 @@ public partial class Settler : Unit
 		// 设置殖民者单位属性
 		unitName = "Settler";
 		productionRequired = 100;
+		maxHp = 1;
+		hp = 1;
+		movePoints = 2;
+		maxMovePoints = 2;
 		maxMovementPoints = 2;
 		movementPoints = maxMovementPoints;
 		
