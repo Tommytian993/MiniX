@@ -13,7 +13,7 @@ public partial class Camera : Camera2D
 	HexTileMap map;
 	
 	// 缩放相关变量
-	private float zoom_speed = 0.1f;  // 缩放速度
+	private float zoom_speed = 0.07f;  // 缩放速度
 	private bool mouseWheelScrollingUp = false;    // 鼠标滚轮向上滚动标志
 	private bool mouseWheelScrollingDown = false;  // 鼠标滚轮向下滚动标志
 
