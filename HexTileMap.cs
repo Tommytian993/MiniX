@@ -14,7 +14,7 @@ public partial class HexTileMap : Node2D
 	public int height = 60;
 
 	[Export]
-	public int NUM_AI_CIVS = 6;   // can change in editor panel
+	public int NUM_AI_CIVS = 12;   // can change in editor panel
 
 	// 玩家文明颜色常量
 	private static readonly Color PLAYER_COLOR = new Color(0, 0, 1, 1); // 蓝色
