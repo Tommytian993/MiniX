@@ -24,7 +24,8 @@ public partial class UIManager : Node2D
 		// 在节点准备就绪时加载地形UI场景
 		// 从指定路径加载打包的场景资源，用于后续实例化UI面板
 		terrainUiScene = ResourceLoader.Load<PackedScene>("res://TerrainTileUI.tscn");
-		cityUiScene = ResourceLoader.Load<PackedScene>("res://city_ui.tscn"); 
+		cityUiScene = ResourceLoader.Load<PackedScene>("res://city_ui.tscn");
+		unitUiScene = ResourceLoader.Load<PackedScene>("res://UnitUI.tscn"); 
 
 		// 调试：检查场景是否正确加载
 		if (terrainUiScene == null)
@@ -43,6 +44,15 @@ public partial class UIManager : Node2D
 		else
 		{
 			GD.Print("成功：CityUI.tscn场景已加载。");
+		}
+		
+		if (unitUiScene == null)
+		{
+			GD.PrintErr("错误：无法加载UnitUI.tscn场景！请检查文件路径。");
+		}
+		else
+		{
+			GD.Print("成功：UnitUI.tscn场景已加载。");
 		}
 		
 		// 获取GeneralUI引用
