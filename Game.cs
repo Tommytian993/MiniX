@@ -10,5 +10,6 @@ public partial class Game : Node
 		GD.Print("==== Game _EnterTree called ====");
 		TerrainTileUi.LoadTerrainImages();
 		Unit.LoadUnitScenes();
+		Unit.LoadTextures();
 	}
 }
