@@ -14,6 +14,7 @@ This godot project is a prototype of a 4x game with hexagonal tile map
 <img src="https://github.com/user-attachments/assets/e9cf3087-15b4-40d4-8fe2-4c8a33fb8bf7" />
 
 ## In Development
+- Various Unit Mechanisms
 - AI enemies
 - Multiplayer Mechanics
 
