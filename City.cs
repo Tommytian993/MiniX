@@ -109,6 +109,7 @@ public partial class City : Node2D
 			map.UpdateCivTerritoryMap(civ);
 			GD.Print($"城市 {name} 人口增长到 {population}，新阈值: {populationGrowthThreshold}");
 		}
+		ProcessUnitBuildQueue();
 	}
 
 	public void AddValidNeighborsToBorderPool(Hex h)
@@ -188,7 +189,29 @@ public partial class City : Node2D
 		Unit unitToSpawn = (Unit)Unit.unitSceneResources[u.GetType()].Instantiate();
 		unitToSpawn.Position = map.MapToLocal(this.centerCoordinates);
 		unitToSpawn.SetCiv(this.civ);
+		unitToSpawn.coords = this.centerCoordinates;
 		map.AddChild(unitToSpawn);
 		GD.Print($"城市 {name} 生成单位: {u.unitName} 在坐标 {centerCoordinates}");
+	}
+	
+	// 处理单位建造队列
+	public void ProcessUnitBuildQueue()
+	{
+		if (unitBuildQueue.Count > 0)
+		{
+			if (currentUnitBeingBuilt == null)
+			{
+				currentUnitBeingBuilt = unitBuildQueue[0];
+			}
+			unitBuildTracker += totalProduction;
+			if (unitBuildTracker >= currentUnitBeingBuilt.productionRequired)
+			{
+				SpawnUnit(currentUnitBeingBuilt);
+				unitBuildQueue.RemoveAt(0);
+				currentUnitBeingBuilt = null;
+				unitBuildTracker = 0;
+				GD.Print($"城市 {name} 完成单位建造: {currentUnitBeingBuilt?.unitName}");
+			}
+		}
 	}
 }

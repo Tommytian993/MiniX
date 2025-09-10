@@ -19,6 +19,8 @@ public partial class Unit : Node2D
 	public Civilization civ;
 	public Civilization owner;
 	public Vector2I currentPosition;
+	// 单位在地图上的坐标
+	public Vector2I coords = new Vector2I();
 	
 	// 单位场景资源映射
 	public static Dictionary<Type, PackedScene> unitSceneResources;
