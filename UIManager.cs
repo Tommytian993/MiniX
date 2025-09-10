@@ -158,4 +158,15 @@ public partial class UIManager : Node2D
 		if (unitUi is not null)
 			unitUi.Refresh();
 	}
+	
+	// 设置单位UI
+	public void SetUnitUI(Unit u)
+	{
+		GD.Print($"SetUnitUI 被调用，单位: {u?.unitName}");
+		HideAllPopups();
+		unitUi = unitUiScene.Instantiate() as UnitUI;
+		AddChild(unitUi);
+		unitUi.SetUnit(u);
+		GD.Print("UnitUI 已创建并设置单位");
+	}
 }
