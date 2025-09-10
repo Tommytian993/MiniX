@@ -34,6 +34,9 @@ public partial class CityUI : Panel
 		food.Text = "Food: " + this.city.totalFood;
 		production.Text = "Production: " + this.city.totalProduction;
 		GD.Print($"UI文本已设置: {cityName.Text}, {population.Text}, {food.Text}, {production.Text}");
+		
+		// 连接单位建造按钮信号
+		ConnectUnitBuildSignals(this.city);
 	}
 
 	public void Refresh()
@@ -44,6 +47,13 @@ public partial class CityUI : Panel
 		production.Text = "Production: " + this.city.totalProduction;
 	}
 	
+	// Refresh重载方法，用于信号连接
+	public void Refresh(Unit u)
+	{
+		Refresh();
+		PopulateUnitQueueUI(this.city);
+	}
+	
 	public void SetupUnitButtons()
 	{
 		// For now, we'll set up placeholder units
@@ -51,7 +61,7 @@ public partial class CityUI : Panel
 		GD.Print("设置单位按钮 - 暂时使用占位符");
 	}
 	
-	/// <summary>填充单位队列UI显示</summary>
+	// 填充单位队列UI显示
 	public void PopulateUnitQueueUI(City city)
 	{
 		VBoxContainer queue = GetNode<VBoxContainer>("QueueScrollContainer/QueueVBox");
@@ -70,17 +80,33 @@ public partial class CityUI : Panel
 			if (i == 0) // 当前正在建造的单位
 			{
 				Label currentLabel = new Label();
-				currentLabel.Text = $"正在建造: {u.unitName} ({city.unitBuildTracker}/{u.productionRequired})";
+				currentLabel.Text = $"{u.unitName} {city.unitBuildTracker}/{u.productionRequired}";
 				queue.AddChild(currentLabel);
 			}
 			else // 队列中等待的单位
 			{
 				Label queueLabel = new Label();
-				queueLabel.Text = $"等待: {u.unitName}";
+				queueLabel.Text = $"{u.unitName} 0/{u.productionRequired}";
 				queue.AddChild(queueLabel);
 			}
 		}
 		
 		GD.Print($"更新单位队列UI: {city.unitBuildQueue.Count} 个单位在队列中");
+	}
+	
+	// 连接单位建造按钮信号
+	public void ConnectUnitBuildSignals(City city)
+	{
+		// 设置按钮对应的单位类型
+		settlerButton.u = new Settler();
+		warriorButton.u = new Warrior();
+		
+		// 连接信号到城市建造队列
+		settlerButton.OnPressed += city.AddUnitToBuildQueue;
+		settlerButton.OnPressed += this.Refresh;
+		warriorButton.OnPressed += city.AddUnitToBuildQueue;
+		warriorButton.OnPressed += this.Refresh;
+		
+		GD.Print("单位建造按钮信号已连接");
 	}
 }
