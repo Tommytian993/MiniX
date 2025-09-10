@@ -155,5 +155,7 @@ public partial class UIManager : Node2D
 	{
 		if (cityUi is not null)
 			cityUi.Refresh();
+		if (unitUi is not null)
+			unitUi.Refresh();
 	}
 }
