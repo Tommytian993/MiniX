@@ -570,7 +570,7 @@ public partial class HexTileMap : Node2D
 		// check not near existing cities within 12 (reduced from 20)
 		foreach (Vector2I l in locations)
 		{
-			if (Math.Abs(coord.X - l.X) < 12 || Math.Abs(coord.Y - l.Y) < 12)
+			if (Math.Abs(coord.X - l.X) < 9 || Math.Abs(coord.Y - l.Y) < 9)
 				return false;
 		}
 
