@@ -31,6 +31,8 @@ public partial class Unit : Node2D
 	
 	// 单位场景资源映射
 	public static Dictionary<Type, PackedScene> unitSceneResources;
+	// 单位UI图片资源映射
+	public static Dictionary<Type, Texture2D> uiImages;
 	
 	protected Sprite2D sprite;
 	protected Area2D area2D;
@@ -76,6 +78,17 @@ public partial class Unit : Node2D
 			{ typeof(Warrior), ResourceLoader.Load<PackedScene>("res://Warrior.tscn") }
 		};
 		GD.Print("单位场景资源已加载");
+	}
+	
+	// 加载单位UI图片资源
+	public static void LoadTextures()
+	{
+		uiImages = new Dictionary<Type, Texture2D>
+		{
+			{ typeof(Settler), (Texture2D)ResourceLoader.Load("res://textures/settler_image.png") },
+			{ typeof(Warrior), (Texture2D)ResourceLoader.Load("res://textures/warrior_image.jpg") }
+		};
+		GD.Print("单位UI图片资源已加载");
 	}
 	
 	// 设置单位所属文明
