@@ -28,12 +28,11 @@ public partial class City : Node2D
 	// Static dictionary to prevent cities from expanding into the same tiles
 	public static Dictionary<Hex, City> invalidTiles = new Dictionary<Hex, City>();
 
-	// 单位建造系统
-	/// <summary>单位建造队列</summary>
+	// 单位建造队列
 	public List<Unit> unitBuildQueue;
-	/// <summary>当前正在建造的单位</summary>
+	// 当前正在建造的单位
 	public Unit currentUnitBeingBuilt;
-	/// <summary>单位建造进度</summary>
+	// 单位建造进度
 	public int unitBuildTracker = 0;
 
 	Label label;
@@ -169,7 +168,7 @@ public partial class City : Node2D
 		}
 	}
 
-	/// <summary>添加单位到建造队列</summary>
+	// 添加单位到建造队列
 	public void AddUnitToBuildQueue(Unit u)
 	{
 		unitBuildQueue.Add(u);
@@ -181,5 +180,15 @@ public partial class City : Node2D
 			currentUnitBeingBuilt = u;
 			GD.Print($"开始建造单位: {u.unitName}");
 		}
+	}
+	
+	// 在地图上生成单位
+	public void SpawnUnit(Unit u)
+	{
+		Unit unitToSpawn = (Unit)Unit.unitSceneResources[u.GetType()].Instantiate();
+		unitToSpawn.Position = map.MapToLocal(this.centerCoordinates);
+		unitToSpawn.SetCiv(this.civ);
+		map.AddChild(unitToSpawn);
+		GD.Print($"城市 {name} 生成单位: {u.unitName} 在坐标 {centerCoordinates}");
 	}
 }
