@@ -28,6 +28,7 @@ public partial class UnitUI : Panel
 	{
 		if (u != null)
 		{
+			unitImage.Texture = Unit.uiImages[u.GetType()];
 			unitType.Text = $"Unit Type: {u.unitName}";
 			moves.Text = $"Moves: {u.movePoints}/{u.maxMovePoints}";
 			hp.Text = $"HP: {u.hp}/{u.maxHp}";
