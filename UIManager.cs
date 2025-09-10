@@ -82,6 +82,11 @@ public partial class UIManager : Node2D
 			cityUi.QueueFree();
 			cityUi = null;
 		}
+		if (unitUi is not null)
+		{
+			unitUi.QueueFree();
+			unitUi = null;
+		}
 	}
 
 	public void SetCityUi(City city)
