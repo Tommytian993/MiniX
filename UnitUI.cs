@@ -28,9 +28,9 @@ public partial class UnitUI : Panel
 	{
 		if (u != null)
 		{
-			unitType.Text = u.unitName;
-			hp.Text = "Health: 100"; // 暂时硬编码
-			moves.Text = $"Moves: {u.movementPoints}/{u.maxMovementPoints}";
+			unitType.Text = $"Unit Type: {u.unitName}";
+			moves.Text = $"Moves: {u.movePoints}/{u.maxMovePoints}";
+			hp.Text = $"HP: {u.hp}/{u.maxHp}";
 		}
 	}
 }
