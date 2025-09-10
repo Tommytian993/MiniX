@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0z9m4o1p6q7t"]
+[gd_scene load_steps=3 format=3 uid="uid://d01am4o1p6q7t"]
 
 [ext_resource type="PackedScene" uid="uid://b8x7k2m9n4p5q" path="res://Unit.tscn" id="1_unit"]
 [ext_resource type="Script" path="res://Settler.cs" id="2_script"]

@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://vwrjyxo57rpq"]
+[gd_scene load_steps=5 format=3 uid="uid://vwrjyxo57rpq"]
 
 [ext_resource type="Texture2D" uid="uid://shwg1a4xwon2" path="res://textures/city_painting.jpg" id="1_0u0k0"]
 [ext_resource type="Script" uid="uid://vgwcxd73qjs7" path="res://CityUI.cs" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://e1a2b3c4d5e6f" path="res://UnitBuildButton.tscn" id="2_settler_button"]
-[ext_resource type="PackedScene" uid="uid://e1a2b3c4d5e6f" path="res://UnitBuildButton.tscn" id="3_warrior_button"]
+[ext_resource type="PackedScene" path="res://UnitBuildButton.tscn" id="3_warrior_button"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_d8my7"]
 font_size = 24
@@ -74,10 +73,12 @@ offset_bottom = 400.0
 [node name="BuildVBox" type="VBoxContainer" parent="BuildScrollContainer"]
 layout_mode = 2
 
-[node name="SettlerButton" parent="BuildScrollContainer/BuildVBox" instance=ExtResource("2_settler_button")]
+[node name="SettlerButton" parent="BuildScrollContainer/BuildVBox" instance=ExtResource("3_warrior_button")]
+layout_mode = 2
 text = "Settler"
 
 [node name="WarriorButton" parent="BuildScrollContainer/BuildVBox" instance=ExtResource("3_warrior_button")]
+layout_mode = 2
 text = "Warrior"
 
 [node name="Queue" type="Label" parent="."]
