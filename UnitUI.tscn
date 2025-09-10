@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1c2d3e4f5g6"]
+
+[ext_resource type="Script" path="res://UnitUI.cs" id="1_script"]
+
+[node name="UnitUI" type="Panel"]
+offset_right = 250.0
+offset_bottom = 400.0
+script = ExtResource("1_script")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 250.0
+offset_bottom = 160.0
+expand_mode = 1
+
+[node name="UnitTypeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 170.0
+offset_right = 128.0
+offset_bottom = 190.0
+text = "Unit Type"
+
+[node name="HealthLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 200.0
+offset_right = 100.0
+offset_bottom = 220.0
+text = "Health:"
+
+[node name="MovesLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 230.0
+offset_right = 100.0
+offset_bottom = 250.0
+text = "Moves:"
+
+[node name="ActionsTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 270.0
+offset_right = 100.0
+offset_bottom = 300.0
+text = "Actions"
+label_settings = SubResource("LabelSettings_1")
+
+[node name="ActionsVBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 310.0
+offset_right = 242.0
+offset_bottom = 390.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font_size = 18
