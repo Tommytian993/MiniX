@@ -4,7 +4,7 @@ using System;
 public partial class Camera : Camera2D
 {
 	// 相机移动速度
-	private float velocity = 8.0f;
+	private float velocity = 10.0f;
 	
 	// 相机移动边界（动态计算）
 	private float leftBound, rightBound, topBound, bottomBound;
