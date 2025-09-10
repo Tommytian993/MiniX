@@ -6,10 +6,12 @@ public partial class UIManager : Node2D
 	// 地形UI场景的打包场景引用，用于动态加载地形信息面板
 	PackedScene terrainUiScene;
 	PackedScene cityUiScene;
+	PackedScene unitUiScene;
 
 	// 当前活跃的地形UI面板实例，用于管理UI生命周期
 	TerrainTileUi terrainUi;
 	CityUI cityUi;
+	UnitUI unitUi;
 	
 	// 通用UI引用
 	GeneralUI generalUI;
