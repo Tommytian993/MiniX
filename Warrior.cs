@@ -12,7 +12,7 @@ public partial class Warrior : Unit
 	{
 		base._Ready();
 		
-		// 设置战士单位属性
+		// Set warrior unit properties
 		unitName = "Warrior";
 		productionRequired = 50;
 		maxHp = 3;
@@ -38,6 +38,7 @@ public partial class Warrior : Unit
 		}
 	}
 	
+	// Attack another unit
 	public void Attack(Unit target)
 	{
 		GD.Print($"Warrior attacking with {attackPower} attack power");

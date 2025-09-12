@@ -141,6 +141,15 @@ public partial class HexTileMap : Node2D
 		}
 	}
 
+	/// <summary>
+	/// Deselect the current cell when a unit is clicked
+	/// </summary>
+	/// <param name="u">The unit that was clicked (optional parameter)</param>
+	public void DeselectCurrentCell(Unit u = null)
+	{
+		overlayLayer.SetCell(currentSelectedCell, -1);
+	}
+
 	/// 处理未处理的输入事件，用于调试和交互
 	public override void _UnhandledInput(InputEvent @event)
 	{

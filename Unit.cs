@@ -10,36 +10,41 @@ public partial class Unit : Node2D
 	[Export]
 	public int maxMovementPoints = 2;
 	
-	// 生命值属性
+	// Health properties
 	public int maxHp;
 	public int hp;
-	// 移动点数属性
+	// Movement point properties
 	public int maxMovePoints;
 	public int movePoints;
 	
-	// 单位名称
+	// Unit name
 	public string unitName = "DEFAULT";
-	// 建造所需生产值
+	// Production cost required to build this unit
 	public int productionRequired;
 	
-	// 单位所属文明
+	// Civilization that owns this unit
 	public Civilization civ;
 	public Civilization owner;
 	public Vector2I currentPosition;
-	// 单位在地图上的坐标
+	// Unit coordinates on the map
 	public Vector2I coords = new Vector2I();
 	
-	// 单位选择状态
+	// Unit selection state
 	public bool selected = false;
 	
-	// 单位场景资源映射
+	// Signal emitted when unit is clicked
+	[Signal]
+	public delegate void UnitClickedEventHandler(Unit u);
+	
+	// Unit scene resource mapping
 	public static Dictionary<Type, PackedScene> unitSceneResources;
-	// 单位UI图片资源映射
+	// Unit UI image resource mapping
 	public static Dictionary<Type, Texture2D> uiImages;
 	
 	protected Sprite2D sprite;
 	protected Area2D area2D;
 	public Area2D collider;
+	public HexTileMap map;
 	
 	public override void _Ready()
 	{
@@ -49,6 +54,14 @@ public partial class Unit : Node2D
 		
 		// Connect mouse input signal
 		area2D.InputEvent += OnInputEvent;
+		
+		// Connect UnitClicked signal to UIManager
+		UIManager manager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
+		this.UnitClicked += manager.SetUnitUI;
+		
+		// Get reference to HexTileMap for tile deselection
+		map = GetNode<HexTileMap>("/root/Game/HexTileMap");
+		this.UnitClicked += map.DeselectCurrentCell;
 	}
 	
 	public virtual void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
@@ -64,11 +77,14 @@ public partial class Unit : Node2D
 	
 	public void SetSelected()
 	{
-		selected = true;
-		Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
-		Color c = new Color(sprite.Modulate);
-		c.V = c.V - 0.25f;
-		sprite.Modulate = c;
+		if (!selected)
+		{
+			selected = true;
+			Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
+			Color c = new Color(sprite.Modulate);
+			c.V = c.V - 0.25f;
+			sprite.Modulate = c;
+		}
 	}
 	
 	public void SetDeselected()
@@ -88,6 +104,7 @@ public partial class Unit : Node2D
 			var result = spaceState.IntersectPoint(point);
 			if (result.Count > 0 && (Area2D)result[0]["collider"] == collider)
 			{
+				EmitSignal(SignalName.UnitClicked, this);
 				SetSelected();
 				GetViewport().SetInputAsHandled();
 			}
@@ -110,7 +127,7 @@ public partial class Unit : Node2D
 		movementPoints = maxMovementPoints;
 	}
 	
-	// 加载单位场景资源
+	// Load unit scene resources
 	public static void LoadUnitScenes()
 	{
 		unitSceneResources = new Dictionary<Type, PackedScene>
@@ -118,10 +135,10 @@ public partial class Unit : Node2D
 			{ typeof(Settler), ResourceLoader.Load<PackedScene>("res://Settler.tscn") },
 			{ typeof(Warrior), ResourceLoader.Load<PackedScene>("res://Warrior.tscn") }
 		};
-		GD.Print("单位场景资源已加载");
+		GD.Print("Unit scene resources loaded");
 	}
 	
-	// 加载单位UI图片资源
+	// Load unit UI image resources
 	public static void LoadTextures()
 	{
 		uiImages = new Dictionary<Type, Texture2D>
@@ -129,15 +146,15 @@ public partial class Unit : Node2D
 			{ typeof(Settler), (Texture2D)ResourceLoader.Load("res://textures/settler_image.png") },
 			{ typeof(Warrior), (Texture2D)ResourceLoader.Load("res://textures/warrior_image.jpg") }
 		};
-		GD.Print("单位UI图片资源已加载");
+		GD.Print("Unit UI image resources loaded");
 	}
 	
-	// 设置单位所属文明
+	// Set the civilization that owns this unit
 	public void SetCiv(Civilization civ)
 	{
 		this.civ = civ;
 		GetNode<Sprite2D>("Sprite2D").Modulate = civ.territoryColor;
 		this.civ.units.Add(this);
-		GD.Print($"单位 {unitName} 已分配给文明 {civ.name}");
+		GD.Print($"Unit {unitName} assigned to civilization {civ.name}");
 	}
 }

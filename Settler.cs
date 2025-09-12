@@ -9,7 +9,7 @@ public partial class Settler : Unit
 	{
 		base._Ready();
 		
-		// 设置殖民者单位属性
+		// Set settler unit properties
 		unitName = "Settler";
 		productionRequired = 100;
 		maxHp = 1;
@@ -35,6 +35,7 @@ public partial class Settler : Unit
 		}
 	}
 	
+	// Found a new city at the specified position
 	public void FoundCity(Vector2I position)
 	{
 		if (canFoundCity)
