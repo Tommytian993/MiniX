@@ -29,6 +29,9 @@ public partial class Unit : Node2D
 	// 单位在地图上的坐标
 	public Vector2I coords = new Vector2I();
 	
+	// 单位选择状态
+	public bool selected = false;
+	
 	// 单位场景资源映射
 	public static Dictionary<Type, PackedScene> unitSceneResources;
 	// 单位UI图片资源映射
@@ -36,11 +39,13 @@ public partial class Unit : Node2D
 	
 	protected Sprite2D sprite;
 	protected Area2D area2D;
+	public Area2D collider;
 	
 	public override void _Ready()
 	{
 		sprite = GetNode<Sprite2D>("Sprite2D");
 		area2D = GetNode<Area2D>("Sprite2D/Area2D");
+		collider = GetNode<Area2D>("Sprite2D/Area2D");
 		
 		// Connect mouse input signal
 		area2D.InputEvent += OnInputEvent;
@@ -53,6 +58,42 @@ public partial class Unit : Node2D
 			if (mouseEvent.ButtonIndex == MouseButton.Left)
 			{
 				GD.Print($"Unit clicked: {GetType().Name}");
+			}
+		}
+	}
+	
+	public void SetSelected()
+	{
+		selected = true;
+		Sprite2D sprite = GetNode<Sprite2D>("Sprite2D");
+		Color c = new Color(sprite.Modulate);
+		c.V = c.V - 0.25f;
+		sprite.Modulate = c;
+	}
+	
+	public void SetDeselected()
+	{
+		selected = false;
+		GetNode<Sprite2D>("Sprite2D").Modulate = civ.territoryColor;
+	}
+	
+	public override void _UnhandledInput(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton mouse && mouse.ButtonMask == MouseButtonMask.Left)
+		{
+			var spaceState = GetWorld2D().DirectSpaceState;
+			var point = new PhysicsPointQueryParameters2D();
+			point.CollideWithAreas = true;
+			point.Position = GetGlobalMousePosition();
+			var result = spaceState.IntersectPoint(point);
+			if (result.Count > 0 && (Area2D)result[0]["collider"] == collider)
+			{
+				SetSelected();
+				GetViewport().SetInputAsHandled();
+			}
+			else
+			{
+				SetDeselected();
 			}
 		}
 	}
