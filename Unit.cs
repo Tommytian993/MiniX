@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Unit : Node2D
 {
@@ -32,6 +33,18 @@ public partial class Unit : Node2D
 	// Unit selection state
 	public bool selected = false;
 	
+	// Valid movement hexes for this unit
+	public List<Hex> validMovementHexes = new List<Hex>();
+	
+	// Impassable terrain types that units cannot move into
+	public HashSet<TerrainType> impassible = new HashSet<TerrainType>
+	{
+		TerrainType.WATER,
+		TerrainType.SHALLOW_WATER,
+		TerrainType.ICE,
+		TerrainType.MOUNTAIN
+	};
+	
 	// Signal emitted when unit is clicked
 	[Signal]
 	public delegate void UnitClickedEventHandler(Unit u);
@@ -62,6 +75,9 @@ public partial class Unit : Node2D
 		// Get reference to HexTileMap for tile deselection
 		map = GetNode<HexTileMap>("/root/Game/HexTileMap");
 		this.UnitClicked += map.DeselectCurrentCell;
+		
+		// Calculate valid movement hexes when unit is ready
+		validMovementHexes = CalculateValidAdjacentMovementHexes();
 	}
 	
 	public virtual void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
@@ -84,12 +100,14 @@ public partial class Unit : Node2D
 			Color c = new Color(sprite.Modulate);
 			c.V = c.V - 0.25f;
 			sprite.Modulate = c;
+			validMovementHexes = CalculateValidAdjacentMovementHexes();
 		}
 	}
 	
 	public void SetDeselected()
 	{
 		selected = false;
+		validMovementHexes.Clear();
 		GetNode<Sprite2D>("Sprite2D").Modulate = civ.territoryColor;
 	}
 	
@@ -125,6 +143,15 @@ public partial class Unit : Node2D
 	public virtual void ResetMovement()
 	{
 		movementPoints = maxMovementPoints;
+	}
+	
+	// Calculate valid adjacent movement hexes for this unit
+	public List<Hex> CalculateValidAdjacentMovementHexes()
+	{
+		List<Hex> hexes = new List<Hex>();
+		hexes.AddRange(map.GetSurroundingHexes(this.coords));
+		hexes = hexes.Where(h => !impassible.Contains(h.terrainType)).ToList();
+		return hexes;
 	}
 	
 	// Load unit scene resources
