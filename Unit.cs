@@ -49,6 +49,9 @@ public partial class Unit : Node2D
 	[Signal]
 	public delegate void UnitClickedEventHandler(Unit u);
 	
+	// Static dictionary to track all unit positions on the map
+	public static Dictionary<Hex, List<Unit>> unitLocations = new Dictionary<Hex, List<Unit>>();
+	
 	// Unit scene resource mapping
 	public static Dictionary<Type, PackedScene> unitSceneResources;
 	// Unit UI image resource mapping
@@ -78,6 +81,16 @@ public partial class Unit : Node2D
 		
 		// Calculate valid movement hexes when unit is ready
 		validMovementHexes = CalculateValidAdjacentMovementHexes();
+		
+		// Register unit position in the static dictionary
+		if (unitLocations.ContainsKey(map.GetHex(this.coords)))
+		{
+			unitLocations[map.GetHex(this.coords)].Add(this);
+		}
+		else
+		{
+			unitLocations[map.GetHex(this.coords)] = new List<Unit> { this };
+		}
 	}
 	
 	public virtual void OnInputEvent(Node viewport, InputEvent @event, long shapeIdx)
@@ -152,6 +165,30 @@ public partial class Unit : Node2D
 		hexes.AddRange(map.GetSurroundingHexes(this.coords));
 		hexes = hexes.Where(h => !impassible.Contains(h.terrainType)).ToList();
 		return hexes;
+	}
+	
+	// Move function with validation checks
+	public void Move(Hex h)
+	{
+		if (selected && movePoints > 0)
+		{
+			if (validMovementHexes.Contains(h))
+			{
+				MoveToHex(h);
+				EmitSignal(SignalName.UnitClicked, this);
+			}
+		}
+	}
+	
+	// Move to hex function for actual movement logic
+	public void MoveToHex(Hex h)
+	{
+		if (!unitLocations.ContainsKey(h) || (unitLocations.ContainsKey(h) && unitLocations[h].Count == 0))
+		{
+			unitLocations[map.GetHex(this.coords)].Remove(this);
+			Position = map.MapToLocal(h.coordinates);
+			coords = h.coordinates;
+		}
 	}
 	
 	// Load unit scene resources

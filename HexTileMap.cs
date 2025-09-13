@@ -142,6 +142,16 @@ public partial class HexTileMap : Node2D
 	}
 
 	/// <summary>
+	/// Get hex data for a particular coordinate
+	/// </summary>
+	/// <param name="coords">The coordinates to get hex data for</param>
+	/// <returns>The hex data at the specified coordinates</returns>
+	public Hex GetHex(Vector2I coords)
+	{
+		return mapData[coords];
+	}
+
+	/// <summary>
 	/// Deselect the current cell when a unit is clicked
 	/// </summary>
 	/// <param name="u">The unit that was clicked (optional parameter)</param>
