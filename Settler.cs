@@ -35,18 +35,21 @@ public partial class Settler : Unit
 		}
 	}
 	
-	// Found a new city at the specified position
-	public void FoundCity(Vector2I position)
+	// Found a new city at the current position
+	public void FoundCity()
 	{
-		if (canFoundCity)
+		if (map.GetHex(this.coords).ownerCity is null && !City.invalidTiles.ContainsKey(map.GetHex(this.coords)))
 		{
-			GD.Print($"Settler founding city at position: {position}");
-			// City founding logic will be implemented later
-			canFoundCity = false; // Settler can only found one city
-		}
-		else
-		{
-			GD.Print("This settler has already founded a city");
+			bool valid = true;
+			foreach (Hex h in map.GetSurroundingHexes(this.coords))
+			{
+				valid = h.ownerCity is null && !City.invalidTiles.ContainsKey(h);
+			}
+			if (valid)
+			{
+				map.CreateCity(this.civ, this.coords, $"Settled City {coords.X}");
+				this.DestroyUnit();
+			}
 		}
 	}
 }

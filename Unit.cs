@@ -49,6 +49,10 @@ public partial class Unit : Node2D
 	[Signal]
 	public delegate void UnitClickedEventHandler(Unit u);
 	
+	// Signal emitted when selected unit is destroyed
+	public delegate void SelectedUnitDestroyedEventHandler();
+	public event SelectedUnitDestroyedEventHandler SelectedUnitDestroyed;
+	
 	// Static dictionary to track all unit positions on the map
 	public static Dictionary<Hex, List<Unit>> unitLocations = new Dictionary<Hex, List<Unit>>();
 	
@@ -75,6 +79,7 @@ public partial class Unit : Node2D
 		UIManager manager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 		this.UnitClicked += manager.SetUnitUI;
 		manager.EndTurn += this.ProcessTurn;
+		this.SelectedUnitDestroyed += manager.HideAllPopups;
 		
 		// Get reference to HexTileMap for tile deselection
 		map = GetNode<HexTileMap>("/root/Game/HexTileMap");
@@ -164,6 +169,19 @@ public partial class Unit : Node2D
 	public void ProcessTurn()
 	{
 		movePoints = maxMovePoints;
+	}
+	
+	// Destroy unit and clean up resources
+	public void DestroyUnit()
+	{
+		map.RightClickOnMap -= Move;
+		if (selected)
+		{
+			SelectedUnitDestroyed?.Invoke();
+		}
+		this.civ.units.Remove(this);
+		unitLocations[map.GetHex(this.coords)].Remove(this);
+		this.QueueFree();
 	}
 	
 	// Calculate valid adjacent movement hexes for this unit
