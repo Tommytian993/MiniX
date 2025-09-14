@@ -56,6 +56,10 @@ public partial class HexTileMap : Node2D
 	[Signal]
 	public delegate void SendCityUIInfoEventHandler(City city);
 
+	// Right-click on map event delegate for unit movement
+	public delegate void RightClickOnMapEventHandler(Hex h);
+	public event RightClickOnMapEventHandler RightClickOnMap;
+
 	public override void _Ready()
 	{
 		cityScene = ResourceLoader.Load<PackedScene>("res://City.tscn");
@@ -186,6 +190,10 @@ public partial class HexTileMap : Node2D
 					if (mapCoords != currentSelectedCell) overlayLayer.SetCell(currentSelectedCell, -1);
 					overlayLayer.SetCell(mapCoords, 0, new Vector2I(0, 1));
 					currentSelectedCell = mapCoords;
+				}
+				if (mouse.ButtonMask == MouseButtonMask.Right)
+				{
+					RightClickOnMap?.Invoke(h);
 				}
 			}
 			else

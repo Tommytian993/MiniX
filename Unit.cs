@@ -74,10 +74,12 @@ public partial class Unit : Node2D
 		// Connect UnitClicked signal to UIManager
 		UIManager manager = GetNode<UIManager>("/root/Game/CanvasLayer/UiManager");
 		this.UnitClicked += manager.SetUnitUI;
+		manager.EndTurn += this.ProcessTurn;
 		
 		// Get reference to HexTileMap for tile deselection
 		map = GetNode<HexTileMap>("/root/Game/HexTileMap");
 		this.UnitClicked += map.DeselectCurrentCell;
+		map.RightClickOnMap += Move;
 		
 		// Calculate valid movement hexes when unit is ready
 		validMovementHexes = CalculateValidAdjacentMovementHexes();
@@ -158,6 +160,12 @@ public partial class Unit : Node2D
 		movementPoints = maxMovementPoints;
 	}
 	
+	// Process turn to replenish move points
+	public void ProcessTurn()
+	{
+		movePoints = maxMovePoints;
+	}
+	
 	// Calculate valid adjacent movement hexes for this unit
 	public List<Hex> CalculateValidAdjacentMovementHexes()
 	{
@@ -188,6 +196,20 @@ public partial class Unit : Node2D
 			unitLocations[map.GetHex(this.coords)].Remove(this);
 			Position = map.MapToLocal(h.coordinates);
 			coords = h.coordinates;
+			
+			// Update unit to new position in unitLocations dictionary
+			if (!unitLocations.ContainsKey(h))
+			{
+				unitLocations[h] = new List<Unit> { this };
+			}
+			else
+			{
+				unitLocations[h].Add(this);
+			}
+			
+			// Recalculate valid movement hexes and subtract move points
+			validMovementHexes = CalculateValidAdjacentMovementHexes();
+			movePoints -= 1;
 		}
 	}
 	
