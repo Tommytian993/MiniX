@@ -20,6 +20,15 @@ public partial class UnitUI : Panel
 	public void SetUnit(Unit u)
 	{
 		this.u = u;
+		if (this.u.GetType() == typeof(Settler))
+		{
+			VBoxContainer actionsContainer = GetNode<VBoxContainer>("VBoxContainer");
+			Button foundCityButton = new Button();
+			foundCityButton.Text = "Found City";
+			actionsContainer.AddChild(foundCityButton);
+			Settler settler = this.u as Settler;
+			foundCityButton.Pressed += settler.FoundCity;
+		}
 		Refresh();
 		GD.Print($"UnitUI 设置单位: {u?.unitName}");
 	}
