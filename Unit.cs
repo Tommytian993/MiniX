@@ -193,6 +193,18 @@ public partial class Unit : Node2D
 		return hexes;
 	}
 	
+	// Random move for AI units
+	public void RandomMove()
+	{
+		Random r = new Random();
+		validMovementHexes = CalculateValidAdjacentMovementHexes();
+		if (validMovementHexes.Count > 0)
+		{
+			Hex h = validMovementHexes.ElementAt(r.Next(validMovementHexes.Count));
+			MoveToHex(h);
+		}
+	}
+	
 	// Move function with validation checks
 	public void Move(Hex h)
 	{

@@ -172,14 +172,21 @@ public partial class City : Node2D
 	// 添加单位到建造队列
 	public void AddUnitToBuildQueue(Unit u)
 	{
-		unitBuildQueue.Add(u);
-		GD.Print($"城市 {name} 添加单位到建造队列: {u.unitName}, 队列长度: {unitBuildQueue.Count}");
-		
-		// 如果是队列中第一个单位，设为当前建造单位
-		if (unitBuildQueue.Count == 1)
+		if (this.civ.maxUnits > this.civ.units.Count)
 		{
-			currentUnitBeingBuilt = u;
-			GD.Print($"开始建造单位: {u.unitName}");
+			unitBuildQueue.Add(u);
+			GD.Print($"城市 {name} 添加单位到建造队列: {u.unitName}, 队列长度: {unitBuildQueue.Count}");
+			
+			// 如果是队列中第一个单位，设为当前建造单位
+			if (unitBuildQueue.Count == 1)
+			{
+				currentUnitBeingBuilt = u;
+				GD.Print($"开始建造单位: {u.unitName}");
+			}
+		}
+		else
+		{
+			GD.Print($"城市 {name} 无法添加单位 {u.unitName}: 已达到单位上限 ({this.civ.units.Count}/{this.civ.maxUnits})");
 		}
 	}
 	
